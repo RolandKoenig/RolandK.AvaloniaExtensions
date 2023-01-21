@@ -17,7 +17,6 @@
         <RepositoryType>Git</RepositoryType>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Product>RolandK.AvaloniaExtensions</Product>
-        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <PackageReleaseNotes>https://github.com/RolandKoenig/RolandK.AvaloniaExtensions/releases</PackageReleaseNotes>
     </PropertyGroup>
 
@@ -27,6 +26,14 @@
     </PropertyGroup>
     <ItemGroup>
         <None Include="$(SolutionDir)../assets/Logo_128.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <!-- Package license -->
+    <PropertyGroup>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="..\..\LICENSE.md" Link="LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
     </ItemGroup>
 
     <!-- Commn configuration-->
