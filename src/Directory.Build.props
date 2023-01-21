@@ -1,0 +1,41 @@
+<Project>
+
+    <!-- Version -->
+    <PropertyGroup>
+        <Version>1.0.0</Version>
+        <PackageVersion>1.0.0</PackageVersion>
+    </PropertyGroup>
+
+    <!-- Nuget -->
+    <PropertyGroup>
+        <Authors>Roland König</Authors>
+        <Company>Roland König</Company>
+        <Description>A .NET Standard library containing classes and interfaces for the Mvvm pattern</Description>
+        <Copyright>©2023 by Roland König</Copyright>
+        <PackageProjectUrl>https://github.com/RolandKoenig/RolandK.AvaloniaExtensions</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/RolandKoenig/RolandK.AvaloniaExtensions</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Product>RolandK.AvaloniaExtensions</Product>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageReleaseNotes>https://github.com/RolandKoenig/RolandK.AvaloniaExtensions/releases</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <!-- Package logo -->
+    <PropertyGroup>
+        <PackageIcon>Logo_128.png</PackageIcon>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="$(SolutionDir)../assets/Logo_128.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <!-- Commn configuration-->
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <LangVersion>10.0</LangVersion>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningsAsErrors />
+        <NoWarn>1591,1712</NoWarn>
+    </PropertyGroup>
+
+</Project>

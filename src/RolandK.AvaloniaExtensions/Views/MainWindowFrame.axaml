@@ -1,0 +1,59 @@
+<mvvm:MvvmUserControl xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:mvvm="clr-namespace:RolandK.AvaloniaExtensions.Mvvm"
+                      xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.Views"
+                      mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                      x:Class="RolandK.AvaloniaExtensions.Views.MainWindowFrame">
+    <Grid x:Name="CtrlFullWindowGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title row -->
+        <Grid Grid.Row="0"
+              Background="{DynamicResource ThemeCustomAlternateBackgroundBrush}"
+              IsHitTestVisible="False">
+            <StackPanel x:Name="CtrlCustomTitleArea"
+                        Orientation="Horizontal" />
+        </Grid>
+
+        <Grid Grid.Row="1" x:Name="CtrlMainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Header row (normally a menu) -->
+            <Panel Grid.Row="0" x:Name="CtrlHeaderArea">
+
+            </Panel>
+
+            <!-- Main content -->
+            <Panel Grid.Row="1" x:Name="CtrlMainContentArea"
+                   Margin="5">
+
+            </Panel>
+
+
+            <!-- Footer panel-->
+            <Panel Grid.Row="2" x:Name="CtrlFooterArea">
+
+            </Panel>
+
+            <!-- Colored status bar -->
+            <Panel x:Name="CtrlStatusBar" 
+                   Grid.Row="3"
+                   Height="7"
+                   IsHitTestVisible="False"
+                   Background="#0975C6"/>
+        </Grid>
+
+        <local:DialogHostControl x:Name="CtrlOverlay" 
+                                 Grid.Row="1" />
+    </Grid>
+</mvvm:MvvmUserControl>
