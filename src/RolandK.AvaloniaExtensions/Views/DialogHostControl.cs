@@ -39,15 +39,13 @@ public class DialogHostControl : Grid
         var currentChild = controlToShow;
         var currentChildInitialSize = new Size(currentChild.Width, currentChild.Height);
 
-        var borderControl = new HeaderedContentControl();
-        borderControl.Classes.Add("DialogHostControlBorder");
+        var borderControl = new DialogBoxControl();
         borderControl.BorderThickness = new Thickness(1.0);
-        borderControl.Content = currentChild;
+        borderControl.ContentArea.Add(currentChild);
         borderControl.HorizontalAlignment = HorizontalAlignment.Center;
         borderControl.VerticalAlignment = VerticalAlignment.Center;
         borderControl.Padding = new Thickness(5.0);
         borderControl.Header = headerText;
-        borderControl.Classes.Add("DialogBox");
         var currentChildBorder = borderControl;
 
         var currentBackground = new Grid();

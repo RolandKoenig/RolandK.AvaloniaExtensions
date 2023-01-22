@@ -1,11 +1,10 @@
-<mvvm:MvvmUserControl xmlns="https://github.com/avaloniaui"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      xmlns:mvvm="clr-namespace:RolandK.AvaloniaExtensions.Mvvm"
-                      xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.Views"
-                      mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-                      x:Class="RolandK.AvaloniaExtensions.Views.MainWindowFrame">
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="RolandK.AvaloniaExtensions.Views.MainWindowFrame">
     <Grid x:Name="CtrlFullWindowGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -14,7 +13,7 @@
 
         <!-- Title row -->
         <Grid Grid.Row="0"
-              Background="{DynamicResource ThemeCustomAlternateBackgroundBrush}"
+              Background="{DynamicResource MainWindowFrameBackgroundBrush}"
               IsHitTestVisible="False">
             <StackPanel x:Name="CtrlCustomTitleArea"
                         Orientation="Horizontal" />
@@ -56,4 +55,4 @@
         <local:DialogHostControl x:Name="CtrlOverlay" 
                                  Grid.Row="1" />
     </Grid>
-</mvvm:MvvmUserControl>
+</UserControl>

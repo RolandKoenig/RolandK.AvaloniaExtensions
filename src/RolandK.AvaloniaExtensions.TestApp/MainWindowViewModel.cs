@@ -51,6 +51,17 @@ public partial class MainWindowViewModel : OwnViewModelBase
             $"File {selectedFile} selected", MessageBoxButtons.Ok);
     }
 
+    [RelayCommand]
+    public async Task ShowDummyMessageBoxAsync()
+    {
+        var srvMessageBox = base.GetViewService<IMessageBoxService>();
+
+        await srvMessageBox.ShowAsync(
+            "Show dummy MessageBox",
+            "Dummy message",
+            MessageBoxButtons.Ok);
+    }
+
     public static MainWindowViewModel DesignViewModel => new(
         NSubstitute.Substitute.For<ITestDataGenerator>());
 }

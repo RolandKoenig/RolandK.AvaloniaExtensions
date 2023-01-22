@@ -1,0 +1,19 @@
+<Styles xmlns="https://github.com/avaloniaui" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        
+        <!-- DialogBoxControl -->
+        <SolidColorBrush x:Key="DialogBoxControlBackgroundBrush"
+                         Color="{DynamicResource SystemAltHighColor}" />
+        <SolidColorBrush x:Key="DialogBoxControlHeaderBackgroundBrush"
+                         Color="{DynamicResource SystemChromeMediumLowColor}" />
+        <SolidColorBrush x:Key="DialogBoxControlBorderBrush"
+                         Opacity="0.4"
+                         Color="{DynamicResource SystemBaseMediumLowColor}" />
+        
+        <!-- MainWindowFrame -->
+        <SolidColorBrush x:Key="MainWindowFrameBackgroundBrush"
+                         Color="{DynamicResource SystemAltHighColor}" />
+        
+    </Styles.Resources>
+</Styles>

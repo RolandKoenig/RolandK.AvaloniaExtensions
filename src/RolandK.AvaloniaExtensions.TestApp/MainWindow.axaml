@@ -22,8 +22,12 @@
                         <MenuItem Header="Open"
                                   Command="{Binding OpenFileCommand}" />
                     </MenuItem>
-                    <MenuItem Header="Recreate test data"
-                              Command="{Binding Path=RecreateTestDataCommand}"/>
+                    <MenuItem Header="Tests">
+                        <MenuItem Header="Recreate test data"
+                                  Command="{Binding Path=RecreateTestDataCommand}"/>
+                        <MenuItem Header="Show dummy MessageBox"
+                                  Command="{Binding Path=ShowDummyMessageBoxCommand}" />
+                    </MenuItem>
                 </Menu>
         
                 <Grid>
