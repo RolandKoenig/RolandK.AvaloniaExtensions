@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.InteropServices;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Logging;
 using Avalonia.Themes.Fluent;
 using RolandK.AvaloniaExtensions.FluentThemeDetection.Windows;
@@ -21,6 +22,7 @@ public static class AppBuilderExtensions
         this AppBuilder appBuilder, 
         Action<FluentThemeMode>? setThemeAction = null)
     {
+        if (Design.IsDesignMode) { return appBuilder; }
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) { return appBuilder; }
 
         appBuilder.AfterSetup(_ =>

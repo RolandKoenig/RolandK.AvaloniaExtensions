@@ -8,8 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2"/>
-        <PackageReference Include="xunit" Version="2.4.2"/>
+        <PackageReference Include="Avalonia.Headless" Version="0.10.18" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+        <PackageReference Include="NSubstitute" Version="4.4.0" />
+        <PackageReference Include="xunit" Version="2.4.2" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -18,6 +20,13 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RolandK.AvaloniaExtensions.DependencyInjection\RolandK.AvaloniaExtensions.DependencyInjection.csproj" />
+      <ProjectReference Include="..\RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj" />
+      <ProjectReference Include="..\RolandK.AvaloniaExtensions\RolandK.AvaloniaExtensions.csproj" />
     </ItemGroup>
 
 </Project>

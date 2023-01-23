@@ -9,7 +9,7 @@
    id="svg5"
    inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
    sodipodi:docname="Logo.svg"
-   inkscape:export-filename="Logo.png"
+   inkscape:export-filename="Logo_128.png"
    inkscape:export-xdpi="24"
    inkscape:export-ydpi="24"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -27,12 +27,12 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="0.61826046"
-     inkscape:cx="551.54748"
-     inkscape:cy="311.35745"
-     inkscape:window-width="2560"
-     inkscape:window-height="1325"
-     inkscape:window-x="1512"
-     inkscape:window-y="25"
+     inkscape:cx="435.90043"
+     inkscape:cy="312.97489"
+     inkscape:window-width="1800"
+     inkscape:window-height="1033"
+     inkscape:window-x="1920"
+     inkscape:window-y="44"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      showguides="true"
@@ -374,15 +374,16 @@
          id="tspan499"
          x="74.058411"
          y="301.93045" /></text>
-    <g
-       aria-label="⚙"
-       id="text188"
-       style="font-size:400px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#f9f9f9">
-      <path
-         d="m 194.28125,296.82031 q -6.44531,-10.15625 -9.76563,-21.875 H 146.82031 V 238.22656 H 184.125 q 1.5625,-6.05469 3.90625,-11.52344 2.34375,-5.66406 5.66406,-10.74218 l -25.58594,-25.58594 25.97657,-25.97656 25.97656,26.17187 q 4.88281,-2.73437 10.15625,-4.88281 5.27344,-2.14844 10.9375,-3.32031 V 146.82031 H 277.875 v 36.32813 q 5.66406,1.5625 10.74219,4.10156 5.07812,2.34375 9.76562,5.46875 l 26.17188,-26.17188 25.97656,25.97657 -26.95313,26.95312 q 2.34375,4.49219 4.10157,9.17969 1.95312,4.49219 3.125,9.57031 h 34.375 v 36.71875 h -34.76563 q -1.17187,5.07813 -3.125,9.57031 -1.95312,4.49219 -4.49219,8.78907 l 25.78125,25.58593 -25.97656,25.97657 -25.19531,-25.19532 q -9.17969,5.85938 -19.53125,8.78907 v 36.71875 H 241.15625 V 329.4375 q -10.9375,-2.53906 -19.92188,-7.61719 l -25.19531,25.19531 -25.97656,-25.97656 z m 35.54687,-40.23437 q 0,6.25 2.34375,11.71875 2.34375,5.27343 6.25,9.375 4.10157,3.90625 9.375,6.25 5.46875,2.34375 11.71875,2.34375 6.05469,0 11.52344,-2.34375 5.46875,-2.34375 9.375,-6.25 4.10156,-4.10157 6.44531,-9.375 2.34375,-5.46875 2.34375,-11.71875 0,-6.05469 -2.34375,-11.52344 -2.34375,-5.46875 -6.44531,-9.375 -3.90625,-4.10156 -9.375,-6.44531 -5.46875,-2.34375 -11.52344,-2.34375 -6.25,0 -11.71875,2.34375 -5.27343,2.34375 -9.375,6.44531 -3.90625,3.90625 -6.25,9.375 -2.34375,5.46875 -2.34375,11.52344 z"
-         style="font-family:'Open Sans';-inkscape-font-specification:'Open Sans'"
-         id="path348" />
-    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:400px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#f9f9f9"
+       x="114.83833"
+       y="215.11969"
+       id="text298"><tspan
+         sodipodi:role="line"
+         id="tspan296"
+         x="114.83833"
+         y="215.11969" /></text>
   </g>
   <script
      id="mesh_polyfill"

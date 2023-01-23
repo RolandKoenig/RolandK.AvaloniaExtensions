@@ -1,9 +1,10 @@
 namespace RolandK.AvaloniaExtensions.Tests;
 
-public class UnitTest1
+public class DummyTests
 {
     [Fact]
-    public void Test1()
+    public void DummyTest()
     {
+        
     }
 }
