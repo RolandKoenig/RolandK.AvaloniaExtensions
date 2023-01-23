@@ -2,15 +2,18 @@
 
     <!-- Version -->
     <PropertyGroup>
-        <Version>1.0.0-alpha1</Version>
-        <PackageVersion>1.0.0-alpha1</PackageVersion>
+        <Version>1.0.0-alpha2</Version>
+        <PackageVersion>1.0.0-alpha2</PackageVersion>
     </PropertyGroup>
 
     <!-- Nuget -->
     <PropertyGroup>
         <Authors>Roland König</Authors>
         <Company>Roland König</Company>
-        <Description>A .NET Standard library containing classes and interfaces for the Mvvm pattern</Description>
+        <Description>
+            A .NET library which extends Avalonia with commonly used features like ViewServices, 
+            DependencyInjection and some Mvvm sugar
+        </Description>
         <Copyright>©2023 by Roland König</Copyright>
         <PackageProjectUrl>https://github.com/RolandKoenig/RolandK.AvaloniaExtensions</PackageProjectUrl>
         <RepositoryUrl>https://github.com/RolandKoenig/RolandK.AvaloniaExtensions</RepositoryUrl>
