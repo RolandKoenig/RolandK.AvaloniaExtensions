@@ -29,6 +29,7 @@
     
     <ItemGroup>
       <ProjectReference Include="..\RolandK.AvaloniaExtensions.DependencyInjection\RolandK.AvaloniaExtensions.DependencyInjection.csproj" />
+      <ProjectReference Include="..\RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj" />
       <ProjectReference Include="..\RolandK.AvaloniaExtensions\RolandK.AvaloniaExtensions.csproj" />
     </ItemGroup>
     

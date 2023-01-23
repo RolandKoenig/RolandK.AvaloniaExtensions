@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.Tests", "RolandK.AvaloniaExtensions.Tests\RolandK.AvaloniaExtensions.Tests.csproj", "{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.FluentThemeDetection", "RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj", "{F78873DB-5864-4C50-93A2-C6371D0D26EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78873DB-5864-4C50-93A2-C6371D0D26EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78873DB-5864-4C50-93A2-C6371D0D26EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78873DB-5864-4C50-93A2-C6371D0D26EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78873DB-5864-4C50-93A2-C6371D0D26EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -2,6 +2,7 @@
 using Avalonia;
 using Microsoft.Extensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.DependencyInjection;
+using RolandK.AvaloniaExtensions.FluentThemeDetection;
 using RolandK.AvaloniaExtensions.TestApp.Services;
 
 namespace RolandK.AvaloniaExtensions.TestApp;
@@ -18,8 +19,9 @@ public static class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
-            .UsePlatformDetect()
             .LogToTrace()
+            .UsePlatformDetect()
+            .UseFluentThemeDetection()
             .UseDependencyInjection(services =>
             {
                 // Services
