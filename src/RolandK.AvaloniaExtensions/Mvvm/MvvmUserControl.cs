@@ -66,8 +66,16 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         this.DetachFromDataContext();
         if (this.DataContext is IAttachableViewModel dataContextAttachable)
         {
-            dataContextAttachable.AssociatedView = this;
             dataContextAttachable.ViewServiceRequest += this.OnDataContextAttachable_ViewServiceRequest;
+            try
+            {
+                dataContextAttachable.AssociatedView = this;
+            }
+            catch
+            {
+                dataContextAttachable.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
+                throw;
+            }
             _currentlyAttachedViewModel = dataContextAttachable;
         }
     }
@@ -76,8 +84,8 @@ public class MvvmUserControl : UserControl, IViewServiceHost
     {
         if (_currentlyAttachedViewModel != null)
         {
-            _currentlyAttachedViewModel.AssociatedView = null;
             _currentlyAttachedViewModel.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
+            _currentlyAttachedViewModel.AssociatedView = null;
         }
         _currentlyAttachedViewModel = null;
     }

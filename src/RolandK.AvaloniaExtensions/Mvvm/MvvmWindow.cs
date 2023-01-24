@@ -62,7 +62,18 @@ public class MvvmWindow : Window, IViewServiceHost
         this.DetachFromDataContext();
         if (this.DataContext is IAttachableViewModel dataContextAttachable)
         {
-            dataContextAttachable.AssociatedView = this;
+            dataContextAttachable.ViewServiceRequest += this.OnDataContextAttachable_ViewServiceRequest;
+            dataContextAttachable.CloseWindowRequest += this.OnDataContextAttachable_CloseWindowRequest;
+            try
+            {
+                dataContextAttachable.AssociatedView = this;
+            }
+            catch
+            {
+                dataContextAttachable.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
+                dataContextAttachable.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
+                throw;
+            }
             _currentlyAttachedViewModel = dataContextAttachable;
         }
     }
@@ -72,6 +83,8 @@ public class MvvmWindow : Window, IViewServiceHost
         if (_currentlyAttachedViewModel != null)
         {
             _currentlyAttachedViewModel.AssociatedView = null;
+            _currentlyAttachedViewModel.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
+            _currentlyAttachedViewModel.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
         }
         _currentlyAttachedViewModel = null;
     }
@@ -80,5 +93,26 @@ public class MvvmWindow : Window, IViewServiceHost
     public object? TryGetDefaultViewService(Type viewServiceType)
     {
         return DefaultViewServices.TryGetDefaultViewService(this, viewServiceType);
+    }
+    
+    private void OnDataContextAttachable_ViewServiceRequest(object? sender, ViewServiceRequestEventArgs e)
+    {
+        var viewService = this.TryFindViewService(e.ViewServiceType);
+        if (viewService != null)
+        {
+            e.ViewService = viewService;
+        }
+    }
+    
+    private void OnDataContextAttachable_CloseWindowRequest(object sender, CloseWindowRequestEventArgs e)
+    {
+        if (e.DialogResult != null)
+        {
+            this.Close(e.DialogResult);
+        }
+        else
+        {
+            this.Close();
+        }
     }
 }

@@ -21,6 +21,11 @@
                     <MenuItem Header="File">
                         <MenuItem Header="Open"
                                   Command="{Binding OpenFileCommand}" />
+                        
+                        <Separator />
+                        
+                        <MenuItem Header="Exit"
+                                  Command="{Binding ExitCommand}" />
                     </MenuItem>
                     <MenuItem Header="Theme">
                         <MenuItem Header="Light"

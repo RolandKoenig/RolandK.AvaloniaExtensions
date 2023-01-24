@@ -47,6 +47,18 @@ public class OwnViewModelBase : ObservableObject, IAttachableViewModel
 
         return viewService;
     }
+
+    protected void CloseHostWindow(object? dialogResult = null)
+    {
+        if (this.CloseWindowRequest == null)
+        {
+            throw new InvalidOperationException("Unable to call Close on host window!");
+        }
+        
+        this.CloseWindowRequest.Invoke(
+            this, 
+            new CloseWindowRequestEventArgs(dialogResult));
+    }
     
     protected void OnAssociatedViewChanged(object? associatedView)
     {

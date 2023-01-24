@@ -41,8 +41,8 @@ public partial class MainWindowViewModel : OwnViewModelBase
     [RelayCommand]
     public async Task OpenFileAsync()
     {
-        var srvOpenFile = base.GetViewService<IOpenFileViewService>();
-        var srvMessageBox = base.GetViewService<IMessageBoxService>();
+        var srvOpenFile = this.GetViewService<IOpenFileViewService>();
+        var srvMessageBox = this.GetViewService<IMessageBoxService>();
         
         var selectedFile =  await srvOpenFile.ShowOpenFileDialogAsync(
             Array.Empty<FileDialogFilter>(),
@@ -57,7 +57,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
     [RelayCommand]
     public async Task ShowDummyMessageBoxAsync()
     {
-        var srvMessageBox = base.GetViewService<IMessageBoxService>();
+        var srvMessageBox = this.GetViewService<IMessageBoxService>();
 
         await srvMessageBox.ShowAsync(
             "Show dummy MessageBox",
@@ -70,6 +70,12 @@ public partial class MainWindowViewModel : OwnViewModelBase
     {
         Application.Current.TrySetFluentThemeMode(
             Enum.Parse<FluentThemeMode>(themeModeName));
+    }
+
+    [RelayCommand]
+    public void Exit()
+    {
+        this.CloseHostWindow();
     }
 
     public static MainWindowViewModel DesignViewModel => new(
