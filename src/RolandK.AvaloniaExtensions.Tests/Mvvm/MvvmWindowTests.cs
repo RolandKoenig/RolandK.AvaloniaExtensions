@@ -1,55 +1,51 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using RolandK.AvaloniaExtensions.Mvvm;
 using RolandK.AvaloniaExtensions.Tests.Util;
-using RolandK.AvaloniaExtensions.Views;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
 namespace RolandK.AvaloniaExtensions.Tests.Views;
 
 [Collection(nameof(ApplicationTestCollection))]
-public class MvvmUserControlTests
+public class MvvmWindowTests 
 {
     [Fact]
-    public Task Attach_MvvmUserControl_To_ViewModel()
+    public async Task Attach_MvvmWindow_To_ViewModel()
     {
-        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
         {
             // Arrange
-            var testMvvmControl = new MvvmUserControl();
             var testViewModel = new TestViewModel();
-
+            
             // Act
-            testMvvmControl.DataContext = testViewModel;
-            var testRoot = new TestRoot(testMvvmControl);
-
+            var mvvmWindow = new MvvmWindow();
+            mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.Show();
+            
             // Assert
-            Assert.Equal(testMvvmControl, testViewModel.AssociatedView);
-
-            GC.KeepAlive(testRoot);
+            Assert.True(mvvmWindow.IsVisible);
+            Assert.Equal(testViewModel.AssociatedView, mvvmWindow);
         });
     }
-
+    
     [Fact]
-    public Task Attach_MvvmUserControl_To_ViewModel_Get_ViewService_MessageBox()
+    public async Task Attach_MvvmUserControl_To_ViewModel_Get_ViewService_OpenFileDialog()
     {
-        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
         {
             // Arrange
-            var testMvvmControl = new MvvmUserControl();
             var testViewModel = new TestViewModel();
-
+            
             // Act
-            testMvvmControl.DataContext = testViewModel;
-            var mainWindowFrame = new MainWindowFrame(testMvvmControl);
-            var testRoot = new TestRoot(mainWindowFrame);
-            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxService>();
-
+            var mvvmWindow = new MvvmWindow();
+            mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.Show();
+            
+            var messageBoxService = testViewModel.TryGetViewService<IOpenFileViewService>();
+            
             // Assert
             Assert.NotNull(messageBoxService);
-            Assert.IsAssignableFrom<IMessageBoxService>(messageBoxService);
-
-            GC.KeepAlive(testRoot);
+            Assert.IsAssignableFrom<IOpenFileViewService>(messageBoxService);
         });
     }
 

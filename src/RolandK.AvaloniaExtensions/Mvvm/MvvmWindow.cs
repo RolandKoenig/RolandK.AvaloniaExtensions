@@ -10,7 +10,7 @@ namespace RolandK.AvaloniaExtensions.Mvvm;
 public class MvvmWindow : Window, IViewServiceHost
 {
     private IAttachableViewModel? _currentlyAttachedViewModel;
-    private bool _isActivated;
+    private bool _isOpened;
     private ViewServiceContainer _viewServiceContainer;
 
     /// <inheritdoc />
@@ -22,36 +22,36 @@ public class MvvmWindow : Window, IViewServiceHost
     public MvvmWindow()
     {
         _viewServiceContainer = new ViewServiceContainer(this);
-        
-        this.Activated += this.OnActivated;
-        this.Deactivated += this.OnDeactivated;
     }
 
     public MvvmWindow(IWindowImpl windowImpl)
         : base(windowImpl)
     {
         _viewServiceContainer = new ViewServiceContainer(this);
-        
-        this.Activated += this.OnActivated;
-        this.Deactivated += this.OnDeactivated;
     }
 
-    private void OnActivated(object? sender, EventArgs e)
+    /// <inheritdoc />
+    protected override void OnOpened(EventArgs e)
     {
-        _isActivated = true;
+        base.OnOpened(e);
+        
+        _isOpened = true;
         this.AttachToDataContext();
     }
-    
-    private void OnDeactivated(object? sender, EventArgs e)
+
+    /// <inheritdoc />
+    protected override void OnClosed(EventArgs e)
     {
-        _isActivated = false;
+        base.OnClosed(e);
+        
+        _isOpened = false;
         this.DetachFromDataContext();
     }
-    
+
     /// <inheritdoc />
     protected override void OnDataContextChanged(EventArgs e)
     {
-        if (!_isActivated)
+        if (!_isOpened)
         {
             base.OnDataContextChanged(e);
         }

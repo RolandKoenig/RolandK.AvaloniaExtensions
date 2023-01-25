@@ -14,7 +14,7 @@ internal static class DefaultViewServices
     {
         if (viewServiceType == typeof(IOpenFileViewService))
         {
-            var parentWindow = host.FindLogicalAncestorOfType<Window>();
+            var parentWindow = host.FindLogicalAncestorOfType<Window>(true);
             if (parentWindow == null) { return null; }
             
             return new OpenFileDialogService(parentWindow);
@@ -22,7 +22,7 @@ internal static class DefaultViewServices
         
         if (viewServiceType == typeof(ISaveFileViewService))
         {
-            var parentWindow = host.FindLogicalAncestorOfType<Window>();
+            var parentWindow = host.FindLogicalAncestorOfType<Window>(true);
             if (parentWindow == null) { return null; }
 
             return new SaveFileDialogService(parentWindow);
@@ -42,22 +42,22 @@ internal static class DefaultViewServices
     private static DialogHostControl? TryFindDialogHostControl(IControl host)
     {
         // Method 1: Find ancestor
-        var dlgHostControl = host.FindLogicalAncestorOfType<DialogHostControl>();
+        var dlgHostControl = host.FindLogicalAncestorOfType<DialogHostControl>(true);
         
         // Method 2: Find over MainWindowFrame as ancestor
         if (dlgHostControl == null)
         {
-            var mainWindowFrame = host.FindLogicalAncestorOfType<MainWindowFrame>();
+            var mainWindowFrame = host.FindLogicalAncestorOfType<MainWindowFrame>(true);
             dlgHostControl = mainWindowFrame?.Overlay;
         }
         
         // Method 3: Find over Window as ancestor
         if (dlgHostControl == null)
         {
-            var mainWindow = host.FindLogicalAncestorOfType<Window>();
+            var mainWindow = host.FindLogicalAncestorOfType<Window>(true);
             if (mainWindow != null)
             {
-                dlgHostControl = mainWindow?.FindLogicalDescendantOfType<DialogHostControl>();
+                dlgHostControl = mainWindow?.FindLogicalDescendantOfType<DialogHostControl>(true);
             }
         }
         
@@ -66,7 +66,7 @@ internal static class DefaultViewServices
         {
             if (FindTopLevelLogicalParent(host) is IControl topLevel)
             {
-                dlgHostControl = topLevel?.FindLogicalDescendantOfType<DialogHostControl>();
+                dlgHostControl = topLevel?.FindLogicalDescendantOfType<DialogHostControl>(true);
             }
         }
 
