@@ -23,6 +23,12 @@ public class MvvmUserControl : UserControl, IViewServiceHost
     {
         _viewServiceContainer = new ViewServiceContainer(this);
     }
+
+    public MvvmUserControl(IControl initialChild)
+        : this()
+    {
+        this.Content = initialChild;
+    }
     
     /// <inheritdoc />
     protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)

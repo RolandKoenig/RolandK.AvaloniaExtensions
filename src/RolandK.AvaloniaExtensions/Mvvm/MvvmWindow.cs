@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Avalonia.Controls;
+using Avalonia.Platform;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
@@ -19,6 +20,15 @@ public class MvvmWindow : Window, IViewServiceHost
     public IViewServiceHost? ParentViewServiceHost => this.TryGetParentViewServiceHost();
     
     public MvvmWindow()
+    {
+        _viewServiceContainer = new ViewServiceContainer(this);
+        
+        this.Activated += this.OnActivated;
+        this.Deactivated += this.OnDeactivated;
+    }
+
+    public MvvmWindow(IWindowImpl windowImpl)
+        : base(windowImpl)
     {
         _viewServiceContainer = new ViewServiceContainer(this);
         

@@ -1,5 +1,6 @@
 using System;
 using Avalonia.Controls;
+using Avalonia.LogicalTree;
 using Avalonia.VisualTree;
 using RolandK.AvaloniaExtensions.Views;
 using RolandK.AvaloniaExtensions.ViewServices.FileDialogs;
@@ -13,7 +14,7 @@ internal static class DefaultViewServices
     {
         if (viewServiceType == typeof(IOpenFileViewService))
         {
-            var parentWindow = host.FindAncestorOfType<Window>();
+            var parentWindow = host.FindLogicalAncestorOfType<Window>();
             if (parentWindow == null) { return null; }
             
             return new OpenFileDialogService(parentWindow);
@@ -21,7 +22,7 @@ internal static class DefaultViewServices
         
         if (viewServiceType == typeof(ISaveFileViewService))
         {
-            var parentWindow = host.FindAncestorOfType<Window>();
+            var parentWindow = host.FindLogicalAncestorOfType<Window>();
             if (parentWindow == null) { return null; }
 
             return new SaveFileDialogService(parentWindow);
@@ -40,18 +41,42 @@ internal static class DefaultViewServices
 
     private static DialogHostControl? TryFindDialogHostControl(IControl host)
     {
-        var dlgHostControl = host.FindAncestorOfType<DialogHostControl>();
+        // Method 1: Find ancestor
+        var dlgHostControl = host.FindLogicalAncestorOfType<DialogHostControl>();
+        
+        // Method 2: Find over MainWindowFrame as ancestor
         if (dlgHostControl == null)
         {
-            var mainWindowFrame = host.FindAncestorOfType<MainWindowFrame>();
+            var mainWindowFrame = host.FindLogicalAncestorOfType<MainWindowFrame>();
             dlgHostControl = mainWindowFrame?.Overlay;
         }
+        
+        // Method 3: Find over Window as ancestor
         if (dlgHostControl == null)
         {
-            var mainWindow = host.FindAncestorOfType<Window>();
-            dlgHostControl = mainWindow?.FindDescendantOfType<DialogHostControl>();
+            var mainWindow = host.FindLogicalAncestorOfType<Window>();
+            if (mainWindow != null)
+            {
+                dlgHostControl = mainWindow?.FindLogicalDescendantOfType<DialogHostControl>();
+            }
+        }
+        
+        // Method 4: Find over top level control
+        if(dlgHostControl == null)
+        {
+            if (FindTopLevelLogicalParent(host) is IControl topLevel)
+            {
+                dlgHostControl = topLevel?.FindLogicalDescendantOfType<DialogHostControl>();
+            }
         }
 
         return dlgHostControl;
+    }
+
+    private static ILogical FindTopLevelLogicalParent(ILogical currentControl)
+    {
+        if (currentControl.LogicalParent == null) { return currentControl; }
+        
+        return FindTopLevelLogicalParent(currentControl.LogicalParent);
     }
 }

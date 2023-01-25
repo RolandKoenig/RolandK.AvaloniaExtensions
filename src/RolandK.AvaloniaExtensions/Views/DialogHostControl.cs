@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.Media;
 
@@ -15,7 +14,7 @@ public class DialogHostControl : Grid
             o => o.OccludedControl,
             (o, v) => o.OccludedControl = v);
 
-    private Stack<ChildInfo> _children;
+    private Stack<ChildInfo> _childDialogs;
     private Control? _occludedControl;
     private readonly IBrush _backgroundDialog;
 
@@ -27,11 +26,10 @@ public class DialogHostControl : Grid
 
     public DialogHostControl()
     {
-        _children = new Stack<ChildInfo>();
+        _childDialogs = new Stack<ChildInfo>();
         _backgroundDialog = new SolidColorBrush(Color.FromArgb(128, 128, 128, 128));
 
         this.IsHitTestVisible = false;
-
     }
 
     public void ShowDialog(Control controlToShow, string headerText)
@@ -51,7 +49,7 @@ public class DialogHostControl : Grid
         var currentBackground = new Grid();
         currentBackground.Background = _backgroundDialog;
 
-        _children.Push(new ChildInfo(
+        _childDialogs.Push(new ChildInfo(
             currentChild, currentChildBorder,
             currentChildInitialSize, currentBackground));
 
@@ -69,13 +67,13 @@ public class DialogHostControl : Grid
 
     public void CloseDialog()
     {
-        if (_children.Count == 0) { return; }
+        if (_childDialogs.Count == 0) { return; }
 
-        var removedChild = _children.Pop();
+        var removedChild = _childDialogs.Pop();
         this.Children.Remove(removedChild.ChildBorder);
         this.Children.Remove(removedChild.ChildBackground);
 
-        if (_children.Count == 0)
+        if (_childDialogs.Count == 0)
         {
             this.IsHitTestVisible = false;
 
@@ -90,7 +88,7 @@ public class DialogHostControl : Grid
     {
         const double BORDER_PADDING = 50.0;
 
-        foreach (var actChildInfo in _children)
+        foreach (var actChildInfo in _childDialogs)
         {
             var currentChild = actChildInfo.Child;
             var currentChildInitialSize = actChildInfo.InitialSize;

@@ -45,7 +45,7 @@ public class MainWindowFrame : MvvmUserControl
 
     public MainWindowFrame()
     {
-        this.InitializeComponent();
+        AvaloniaXamlLoader.Load(this);
 
         _ctrlFullWindowGrid = this.Find<Grid>("CtrlFullWindowGrid");
         _ctrlMainGrid = this.Find<Grid>("CtrlMainGrid");
@@ -57,9 +57,10 @@ public class MainWindowFrame : MvvmUserControl
         this.Overlay = this.Find<DialogHostControl>("CtrlOverlay");
     }
 
-    private void InitializeComponent()
+    public MainWindowFrame(IControl initialChild)
+        : this()
     {
-        AvaloniaXamlLoader.Load(this);
+        _ctrlMainContentArea.Children.Add(initialChild);
     }
 
     private static void OnStatusChanged(IAvaloniaObject sender, bool beforeChanging)
