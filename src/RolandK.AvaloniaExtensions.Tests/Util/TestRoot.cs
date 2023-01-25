@@ -40,11 +40,7 @@ public class TestRoot : Decorator, IFocusScope, ILayoutRoot, IInputRoot, IRender
 
     /// <inheritdoc />
     public IMouseDevice? MouseDevice { get; } = null;
-
-    public IStyleHost? StylingParent { get; set; }
-
-    IStyleHost? IStyleHost.StylingParent => this.StylingParent;
-
+    
     public TestRoot()
     {
         this.Renderer = Substitute.For<IRenderer>();

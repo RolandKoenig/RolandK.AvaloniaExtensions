@@ -62,7 +62,7 @@ public class CreateUsingDependencyInjectionExtension : MarkupExtension
         }
         else
         {
-            return appServiceProvider?.GetRequiredService(this.Type);   
+            return appServiceProvider.GetRequiredService(this.Type);   
         }
 
         return null;

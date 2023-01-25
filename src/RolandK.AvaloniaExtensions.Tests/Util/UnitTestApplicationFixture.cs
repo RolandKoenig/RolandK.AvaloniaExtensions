@@ -1,5 +1,6 @@
 namespace RolandK.AvaloniaExtensions.Tests.Util;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public class UnitTestApplicationFixture : IDisposable
 {
     /// <inheritdoc />

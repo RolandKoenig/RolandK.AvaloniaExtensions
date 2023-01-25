@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Bogus;
-using Bogus.DataSets;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace RolandK.AvaloniaExtensions.TestApp.Data;

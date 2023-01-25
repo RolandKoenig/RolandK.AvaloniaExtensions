@@ -10,6 +10,7 @@ public static class ApplicationExtensions
     /// Tries to set the given <see cref="FluentThemeMode"/> on the current <see cref="Application"/> object.
     /// Returns false, if it was not possible to change it.
     /// </summary>
+    /// <param name="application">Current <see cref="Application"/>, may be null.</param>
     /// <param name="themeMode">The <see cref="FluentThemeMode"/> to set.</param>
     public static bool TrySetFluentThemeMode(this Application? application, FluentThemeMode themeMode)
     {
