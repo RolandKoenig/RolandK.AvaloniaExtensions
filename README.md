@@ -14,6 +14,10 @@ DependencyInjection and some Mvvm sugar
  - Automatically set FluentThemeMode at startup to OS theme (on Windows)
 
 # Samples
+Here you find examples to most of the features of RolandK.AvaloniaExtensions. All of
+these features work for themselves and are self-contained. They have no dependencies to
+other features of RolandK.AvaloniaExtensions.
+
 ## DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection
 First, add nuget package [RolandK.AvaloniaExtensions.DependencyInjection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection)
 
