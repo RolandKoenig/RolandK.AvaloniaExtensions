@@ -14,7 +14,54 @@ DependencyInjection and some Mvvm sugar
  - Automatically set FluentThemeMode at startup to OS theme (on Windows)
 
 # Samples
-## Automatically set FluentThemeMode to OS theme at startup
+## DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection
+First, add nuget package [RolandK.AvaloniaExtensions.DependencyInjection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection)
+
+Then enable DependencyInjection by calling UseDependencyInjection on AppBuilder during
+startup of your Avalonia application. This method registers the ServiceProvider as
+a globally available resource on your Application object.
+
+```csharp
+using RolandK.AvaloniaExtensions.DependencyInjection;
+
+public static class Program
+{
+    // Avalonia configuration, don't remove; also used by visual designer.
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            //...
+            .UseDependencyInjection(services =>
+            {
+                // Services
+                services.AddSingleton<ITestDataGenerator, BogusTestDataGenerator>();
+                
+                // ViewModels
+                services.AddTransient<MainWindowViewModel>();
+            });
+}
+```
+
+Now you can inject ViewModels via the MarkupExtension CreateUsingDependencyInjection
+in xaml namespace 'https://github.com/RolandK.AvaloniaExtensions'
+
+```xml
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+        xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.TestApp"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="RolandK.AvaloniaExtensions.TestApp.MainWindow"
+        Title="{Binding Path=Title}"
+        ExtendClientAreaToDecorationsHint="True"
+        DataContext="{ext:CreateUsingDependencyInjection {x:Type local:MainWindowViewModel}}"
+        d:DataContext="{x:Static local:MainWindowViewModel.DesignViewModel}">
+    <!-- ... -->
+</Window>
+```
+
+## Automatically set FluentThemeMode at startup to OS theme (on Windows)
 First, add nuget package [RolandK.AvaloniaExtensions.FluentThemeDetection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.FluentThemeDetection).
 
 Then ensure that you use a FluentTheme in App.axaml.
