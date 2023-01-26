@@ -11,3 +11,34 @@ DependencyInjection and some Mvvm sugar
  - Some default ViewServices (FileDialogs, MessageBox)
  - DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection
  - Notification on ViewModels when view is attaching and detaching
+ - Automatically set FluentThemeMode at startup to OS theme (on Windows)
+
+# Samples
+## Automatically set FluentThemeMode to OS theme at startup
+First, add nuget package [RolandK.AvaloniaExtensions.FluentThemeDetection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.FluentThemeDetection).
+
+Then ensure that you use a FluentTheme in App.axaml.
+```xml
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="RolandK.AvaloniaExtensions.TestApp.App">
+    <Application.Styles>
+        <FluentTheme Mode="Dark"/>
+    </Application.Styles>
+</Application>
+```
+
+Now you can call UseFluentThemeDetection from within your Program.cs.
+This method will automatically search for FluentTheme in die Application's styles
+and updates the Mode property.
+```csharp
+using RolandK.AvaloniaExtensions.FluentThemeDetection;
+
+public static class Program
+{
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            //...
+            .UseFluentThemeDetection();
+}
+```
