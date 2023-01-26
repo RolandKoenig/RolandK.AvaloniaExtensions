@@ -1,3 +1,4 @@
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using RolandK.AvaloniaExtensions.Mvvm;
 using RolandK.AvaloniaExtensions.Tests.Util;
@@ -11,7 +12,27 @@ namespace RolandK.AvaloniaExtensions.Tests.Views;
 public class MvvmUserControlTests
 {
     [Fact]
-    public Task Attach_MvvmUserControl_To_ViewModel()
+    public Task Attach_MvvmUserControl_to_ViewModel()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testMvvmControl = new MvvmUserControl();
+            var testViewModel = new TestViewModel();
+
+            // Act
+            testMvvmControl.DataContext = testViewModel;
+            var testRoot = new TestRoot(testMvvmControl);
+            
+            // Assert
+            Assert.Equal(testMvvmControl, testViewModel.AssociatedView);
+
+            GC.KeepAlive(testRoot);
+        });
+    }
+    
+    [Fact]
+    public Task Attach_MvvmUserControl_to_ViewModel_then_detach()
     {
         return UnitTestApplication.RunInApplicationContextAsync(() =>
         {
@@ -23,15 +44,68 @@ public class MvvmUserControlTests
             testMvvmControl.DataContext = testViewModel;
             var testRoot = new TestRoot(testMvvmControl);
 
+            testRoot.Child = null;
+
             // Assert
-            Assert.Equal(testMvvmControl, testViewModel.AssociatedView);
+            Assert.Null(testViewModel.AssociatedView);
 
             GC.KeepAlive(testRoot);
         });
     }
+    
+    [Fact]
+    public Task Attach_MvvmUserControl_to_ViewModel_then_detach_with_Grid_in_control_hierarchy()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testMvvmControl = new MvvmUserControl();
+            var testViewModel = new TestViewModel();
+
+            // Act
+            testMvvmControl.DataContext = testViewModel;
+            
+            var mvvmControlContainer = new Grid();
+            mvvmControlContainer.Children.Add(testMvvmControl);
+            
+            var testRoot = new TestRoot(mvvmControlContainer);
+
+            testRoot.Child = null;
+
+            // Assert
+            Assert.Null(testViewModel.AssociatedView);
+
+            GC.KeepAlive(testRoot);
+        });
+    }
+    
+    [Fact]
+    public Task Attach_MvvmUserControl_to_ViewModel_then_close_parent_Window_using_ViewModel()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testMvvmControl = new MvvmUserControl();
+            var testViewModel = new TestViewModel();
+            
+            var parentWindow = new Window();
+            parentWindow.Content = testMvvmControl;
+            parentWindow.Show();
+
+            // Act
+            testMvvmControl.DataContext = testViewModel;
+            testViewModel.TriggerCloseWindowRequest();
+
+            parentWindow.Content = null;
+
+            // Assert
+            Assert.Null(testViewModel.AssociatedView);
+            Assert.False(parentWindow.IsVisible);
+        });
+    }
 
     [Fact]
-    public Task Attach_MvvmUserControl_To_ViewModel_Get_ViewService_MessageBox()
+    public Task Attach_MvvmUserControl_to_ViewModel_get_ViewService_MessageBox()
     {
         return UnitTestApplication.RunInApplicationContextAsync(() =>
         {
@@ -44,7 +118,7 @@ public class MvvmUserControlTests
             var mainWindowFrame = new MainWindowFrame(testMvvmControl);
             var testRoot = new TestRoot(mainWindowFrame);
             var messageBoxService = testViewModel.TryGetViewService<IMessageBoxService>();
-
+            
             // Assert
             Assert.NotNull(messageBoxService);
             Assert.IsAssignableFrom<IMessageBoxService>(messageBoxService);
@@ -58,14 +132,12 @@ public class MvvmUserControlTests
     //*************************************************************************
     private class TestViewModel : ObservableObject, IAttachableViewModel
     {
-#pragma warning disable CS0067
         /// <inheritdoc />
         public event EventHandler<CloseWindowRequestEventArgs>? CloseWindowRequest;
         
         /// <inheritdoc />
         public event EventHandler<ViewServiceRequestEventArgs>? ViewServiceRequest;
-#pragma  warning restore
-        
+
         /// <inheritdoc />
         public object? AssociatedView { get; set; }
 
@@ -75,6 +147,11 @@ public class MvvmUserControlTests
             var request = new ViewServiceRequestEventArgs(typeof(TViewService));
             this.ViewServiceRequest?.Invoke(this, request);
             return request.ViewService as TViewService;
+        }
+        
+        public void TriggerCloseWindowRequest(object? dialogResult = null)
+        {
+            this.CloseWindowRequest?.Invoke(this, new CloseWindowRequestEventArgs(dialogResult));
         }
     }
 }

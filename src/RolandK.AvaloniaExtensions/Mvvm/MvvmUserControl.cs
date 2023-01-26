@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
 using RolandK.AvaloniaExtensions.ViewServices;
@@ -29,7 +30,7 @@ public class MvvmUserControl : UserControl, IViewServiceHost
     {
         this.Content = initialChild;
     }
-    
+
     /// <inheritdoc />
     protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
     {
@@ -73,6 +74,7 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         if (this.DataContext is IAttachableViewModel dataContextAttachable)
         {
             dataContextAttachable.ViewServiceRequest += this.OnDataContextAttachable_ViewServiceRequest;
+            dataContextAttachable.CloseWindowRequest += this.OnDataContextAttachable_CloseWindowRequest;
             try
             {
                 dataContextAttachable.AssociatedView = this;
@@ -80,6 +82,7 @@ public class MvvmUserControl : UserControl, IViewServiceHost
             catch
             {
                 dataContextAttachable.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
+                dataContextAttachable.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
                 throw;
             }
             _currentlyAttachedViewModel = dataContextAttachable;
@@ -91,6 +94,7 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         if (_currentlyAttachedViewModel != null)
         {
             _currentlyAttachedViewModel.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
+            _currentlyAttachedViewModel.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
             _currentlyAttachedViewModel.AssociatedView = null;
         }
         _currentlyAttachedViewModel = null;
@@ -108,6 +112,21 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         if (viewService != null)
         {
             e.ViewService = viewService;
+        }
+    }
+    
+    private void OnDataContextAttachable_CloseWindowRequest(object sender, CloseWindowRequestEventArgs e)
+    {
+        var parentWindow = this.FindLogicalAncestorOfType<Window>();
+        if (parentWindow == null) { return; }
+        
+        if (e.DialogResult != null)
+        {
+            parentWindow.Close(e.DialogResult);
+        }
+        else
+        {
+            parentWindow.Close();
         }
     }
 }
