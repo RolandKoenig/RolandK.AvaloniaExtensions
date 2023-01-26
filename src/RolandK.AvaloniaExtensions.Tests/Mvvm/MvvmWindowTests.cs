@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using RolandK.AvaloniaExtensions.Mvvm;
 using RolandK.AvaloniaExtensions.Tests.Util;
+using RolandK.AvaloniaExtensions.Views;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
@@ -10,15 +11,15 @@ namespace RolandK.AvaloniaExtensions.Tests.Views;
 public class MvvmWindowTests 
 {
     [Fact]
-    public async Task Attach_MvvmWindow_To_ViewModel()
+    public async Task Attach_MvvmWindow_to_ViewModel()
     {
         await UnitTestApplication.RunInApplicationContextAsync(() =>
         {
             // Arrange
             var testViewModel = new TestViewModel();
+            var mvvmWindow = new MvvmWindow();
             
             // Act
-            var mvvmWindow = new MvvmWindow();
             mvvmWindow.DataContext = testViewModel;
             mvvmWindow.Show();
             
@@ -29,15 +30,39 @@ public class MvvmWindowTests
     }
     
     [Fact]
-    public async Task Attach_MvvmUserControl_To_ViewModel_Get_ViewService_OpenFileDialog()
+    public async Task Attach_MvvmWindow_to_ViewModel_then_close_using_ViewModel()
     {
         await UnitTestApplication.RunInApplicationContextAsync(() =>
         {
             // Arrange
             var testViewModel = new TestViewModel();
+            var mvvmWindow = new MvvmWindow();
             
             // Act
+            mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.Show();
+            
+            testViewModel.TriggerCloseWindowRequest();
+            
+            // Assert
+            Assert.False(mvvmWindow.IsVisible);
+            Assert.Null(testViewModel.AssociatedView);
+            
+            // Cleanup
+            mvvmWindow.Close();
+        });
+    }
+    
+    [Fact]
+    public async Task Attach_MvvmWindow_to_ViewModel_get_ViewService_OpenFileDialog()
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testViewModel = new TestViewModel();
             var mvvmWindow = new MvvmWindow();
+            
+            // Act
             mvvmWindow.DataContext = testViewModel;
             mvvmWindow.Show();
             
@@ -49,19 +74,95 @@ public class MvvmWindowTests
         });
     }
 
+    [Fact]
+    public async Task Attach_MvvmWindow_to_ViewModel_get_ViewService_SaveFileDialog()
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testViewModel = new TestViewModel();
+            var mvvmWindow = new MvvmWindow();
+            
+            // Act
+            mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.Show();
+            
+            var messageBoxService = testViewModel.TryGetViewService<ISaveFileViewService>();
+            
+            // Assert
+            Assert.NotNull(messageBoxService);
+            Assert.IsAssignableFrom<ISaveFileViewService>(messageBoxService);
+            
+            // Cleanup
+            mvvmWindow.Close();
+        });
+    }
+    
+    [Fact]
+    public async Task Attach_MvvmWindow_with_MainWindowFrame_to_ViewModel_get_ViewService_MessageBox()
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testViewModel = new TestViewModel();
+            var mvvmWindow = new MvvmWindow();
+            
+            var mainWindowFrame = new MainWindowFrame();
+            mvvmWindow.Content = mainWindowFrame;
+            
+            // Act
+            mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.Show();
+            
+            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxService>();
+            
+            // Assert
+            Assert.NotNull(messageBoxService);
+            Assert.IsAssignableFrom<IMessageBoxService>(messageBoxService);
+            
+            // Cleanup
+            mvvmWindow.Close();
+        });
+    }
+    
+    [Fact]
+    public async Task Attach_MvvmWindow_with_DialogHostControl_to_ViewModel_get_ViewService_MessageBox()
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testViewModel = new TestViewModel();
+            var mvvmWindow = new MvvmWindow();
+            
+            var dialogHostControl = new DialogHostControl();
+            mvvmWindow.Content = dialogHostControl;
+            
+            // Act
+            mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.Show();
+            
+            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxService>();
+            
+            // Assert
+            Assert.NotNull(messageBoxService);
+            Assert.IsAssignableFrom<IMessageBoxService>(messageBoxService);
+            
+            // Cleanup
+            mvvmWindow.Close();
+        });
+    }
+    
     //*************************************************************************
     //*************************************************************************
     //*************************************************************************
     private class TestViewModel : ObservableObject, IAttachableViewModel
     {
-#pragma warning disable CS0067
         /// <inheritdoc />
         public event EventHandler<CloseWindowRequestEventArgs>? CloseWindowRequest;
         
         /// <inheritdoc />
         public event EventHandler<ViewServiceRequestEventArgs>? ViewServiceRequest;
-#pragma  warning restore
-        
+
         /// <inheritdoc />
         public object? AssociatedView { get; set; }
 
@@ -71,6 +172,11 @@ public class MvvmWindowTests
             var request = new ViewServiceRequestEventArgs(typeof(TViewService));
             this.ViewServiceRequest?.Invoke(this, request);
             return request.ViewService as TViewService;
+        }
+
+        public void TriggerCloseWindowRequest(object? dialogResult = null)
+        {
+            this.CloseWindowRequest?.Invoke(this, new CloseWindowRequestEventArgs(dialogResult));
         }
     }
 }
