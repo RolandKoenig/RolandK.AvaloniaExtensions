@@ -1,3 +1,4 @@
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using RolandK.AvaloniaExtensions.Mvvm;
 using RolandK.AvaloniaExtensions.Tests.Util;
@@ -26,6 +27,9 @@ public class MvvmWindowTests
             // Assert
             Assert.True(mvvmWindow.IsVisible);
             Assert.Equal(testViewModel.AssociatedView, mvvmWindow);
+            
+            // Cleanup
+            mvvmWindow.Close();
         });
     }
     
@@ -54,6 +58,35 @@ public class MvvmWindowTests
     }
     
     [Fact]
+    public async Task Attach_MvvmWindow_to_ViewModel_then_close_using_ViewModel_with_dialog_result()
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testViewModel = new TestViewModel();
+            var mvvmWindow = new MvvmWindow();
+            var topLevelWindow = new Window();
+            topLevelWindow.Show();
+            
+            // Act
+            mvvmWindow.DataContext = testViewModel;
+            var showDialogTask = mvvmWindow.ShowDialog<object>(topLevelWindow);
+
+            var dialogResult = new object();
+            testViewModel.TriggerCloseWindowRequest(dialogResult);
+
+            // Assert
+            Assert.Equal(TaskStatus.RanToCompletion, showDialogTask.Status);
+            Assert.Equal(dialogResult, showDialogTask.Result);
+            Assert.False(mvvmWindow.IsVisible);
+            Assert.Null(testViewModel.AssociatedView);
+            
+            // Cleanup
+            topLevelWindow.Close();
+        });
+    }
+    
+    [Fact]
     public async Task Attach_MvvmWindow_to_ViewModel_get_ViewService_OpenFileDialog()
     {
         await UnitTestApplication.RunInApplicationContextAsync(() =>
@@ -71,6 +104,9 @@ public class MvvmWindowTests
             // Assert
             Assert.NotNull(messageBoxService);
             Assert.IsAssignableFrom<IOpenFileViewService>(messageBoxService);
+            
+            // Cleanup
+            mvvmWindow.Close();
         });
     }
 
