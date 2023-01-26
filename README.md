@@ -14,7 +14,7 @@ DependencyInjection and some Mvvm sugar
  - Automatically set FluentThemeMode at startup to OS theme (on Windows)
 
 # Samples
-Here you find examples to most of the features of RolandK.AvaloniaExtensions. All of
+Here you find examples to the features of RolandK.AvaloniaExtensions. Most of
 these features work for themselves and are self-contained. They have no dependencies to
 other features of RolandK.AvaloniaExtensions.
 
