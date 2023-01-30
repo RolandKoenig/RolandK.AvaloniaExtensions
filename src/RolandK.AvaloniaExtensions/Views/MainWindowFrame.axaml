@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
 
             <!-- Header row (normally a menu) -->
-            <Panel Grid.Row="0" x:Name="CtrlHeaderArea">
+            <Panel Grid.Row="0" x:Name="CtrlHeaderMenuArea">
 
             </Panel>
 

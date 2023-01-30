@@ -22,14 +22,14 @@ public class MainWindowFrame : MvvmUserControl
     private Grid _ctrlFullWindowGrid;
     private Grid _ctrlMainGrid;
     private StackPanel _ctrlCustomTitleArea;
-    private Panel _ctrlHeaderArea;
+    private Panel _ctrlHeaderMenuArea;
     private Panel _ctrlMainContentArea;
     private Panel _ctrlFooterArea;
     private Panel _ctrlStatusBar;
 
     public Controls CustomTitleArea => _ctrlCustomTitleArea.Children;
 
-    public Controls HeaderArea => _ctrlHeaderArea.Children;
+    public Controls HeaderMenuArea => _ctrlHeaderMenuArea.Children;
 
     public Controls MainContentArea => _ctrlMainContentArea.Children;
 
@@ -50,7 +50,7 @@ public class MainWindowFrame : MvvmUserControl
         _ctrlFullWindowGrid = this.Find<Grid>("CtrlFullWindowGrid");
         _ctrlMainGrid = this.Find<Grid>("CtrlMainGrid");
         _ctrlCustomTitleArea = this.Find<StackPanel>("CtrlCustomTitleArea");
-        _ctrlHeaderArea = this.Find<Panel>("CtrlHeaderArea");
+        _ctrlHeaderMenuArea = this.Find<Panel>("CtrlHeaderMenuArea");
         _ctrlMainContentArea = this.Find<Panel>("CtrlMainContentArea");
         _ctrlFooterArea = this.Find<Panel>("CtrlFooterArea");
         _ctrlStatusBar = this.Find<Panel>("CtrlStatusBar");

@@ -15,7 +15,7 @@ public class DialogBoxControlTests
         {
             // Arrange
             var dialogBoxControl = new DialogBoxControl();
-            
+
             // Act
             dialogBoxControl.Header = "My dummy header";
             dialogBoxControl.ContentArea.Add(new TestDialogControl());
@@ -24,9 +24,14 @@ public class DialogBoxControlTests
             // Assert
             var ancestor = testRoot.FindLogicalDescendantOfType<TestDialogControl>();
             Assert.NotNull(ancestor);
+
+            var textBoxes =
+                TestUtil.FindLogicalDescendantsOfType<TextBlock>(testRoot);
+            var headerTextBox = textBoxes.FirstOrDefault(x => x.Text == "My dummy header");
+            Assert.NotNull(headerTextBox);
         });
     }
-    
+
     //*************************************************************************
     //*************************************************************************
     //*************************************************************************
