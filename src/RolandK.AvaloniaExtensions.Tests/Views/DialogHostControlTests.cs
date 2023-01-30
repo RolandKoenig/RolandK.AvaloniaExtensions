@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
-using Avalonia.Shared.PlatformSupport;
 using RolandK.AvaloniaExtensions.Tests.Util;
 using RolandK.AvaloniaExtensions.Views;
 
@@ -19,7 +18,6 @@ public class DialogHostControlTests
             
             // Act
             var testRoot = new TestRoot(dialogHostControl);
-            testRoot.Child = dialogHostControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             
@@ -39,7 +37,6 @@ public class DialogHostControlTests
             
             // Act
             var testRoot = new TestRoot(dialogHostControl);
-            testRoot.Child = dialogHostControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.CloseDialog();
@@ -60,7 +57,6 @@ public class DialogHostControlTests
             
             // Act
             var testRoot = new TestRoot(dialogHostControl);
-            testRoot.Child = dialogHostControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.ShowDialog(new AnotherTestDialogControl(), "Another dialog");
@@ -83,7 +79,6 @@ public class DialogHostControlTests
             
             // Act
             var testRoot = new TestRoot(dialogHostControl);
-            testRoot.Child = dialogHostControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.ShowDialog(new AnotherTestDialogControl(), "Another dialog");
@@ -107,7 +102,6 @@ public class DialogHostControlTests
             
             // Act
             var testRoot = new TestRoot(dialogHostControl);
-            testRoot.Child = dialogHostControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.ShowDialog(new AnotherTestDialogControl(), "Another dialog");
@@ -134,7 +128,6 @@ public class DialogHostControlTests
             // Act
             var testRoot = new TestRoot(dialogHostControl);
             dialogHostControl.OccludedControl = occludedControl;
-            testRoot.Child = dialogHostControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             
@@ -155,7 +148,6 @@ public class DialogHostControlTests
             // Act
             var testRoot = new TestRoot(dialogHostControl);
             dialogHostControl.OccludedControl = occludedControl;
-            testRoot.Child = dialogHostControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.CloseDialog();

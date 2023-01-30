@@ -4,7 +4,7 @@ using NSubstitute;
 
 namespace RolandK.AvaloniaExtensions.Tests.Util;
 
-public class TestRootWindow : Window
+internal class TestRootWindow : Window
 {
     public TestRootWindow()
         : base(Substitute.For<IWindowImpl>())

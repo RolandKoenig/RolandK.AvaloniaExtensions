@@ -6,7 +6,7 @@ using Avalonia.Threading;
 
 namespace RolandK.AvaloniaExtensions.Tests.Util;
 
-public class UnitTestApplication : Application
+internal class UnitTestApplication : Application
 {
     public static async Task RunInApplicationContextAsync(Action? action = null)
     {
