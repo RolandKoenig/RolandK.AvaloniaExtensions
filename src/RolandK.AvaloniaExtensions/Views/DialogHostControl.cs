@@ -18,6 +18,9 @@ public class DialogHostControl : Grid
     private Control? _occludedControl;
     private readonly IBrush _backgroundDialog;
 
+    /// <summary>
+    /// Another control which is to be disabled when this <see cref="DialogHostControl"/> shows a dialog.
+    /// </summary>
     public Control? OccludedControl
     {
         get { return _occludedControl; }
@@ -32,6 +35,12 @@ public class DialogHostControl : Grid
         this.IsHitTestVisible = false;
     }
 
+    /// <summary>
+    /// Shows the given Control as a dialog.
+    /// If there is already a dialog shown, then this dialog stacks on top of the current one. 
+    /// </summary>
+    /// <param name="controlToShow">The control to be showed as a dialog.</param>
+    /// <param name="headerText">The header text.</param>
     public void ShowDialog(Control controlToShow, string headerText)
     {
         var currentChild = controlToShow;
@@ -65,6 +74,11 @@ public class DialogHostControl : Grid
         this.UpdateBorderSize();
     }
 
+    /// <summary>
+    /// Closes the currently displayed dialog.
+    /// If there are more dialogs displayed, then this method only closes the youngest one.
+    /// You need to call <see cref="CloseDialog"/> for each call of <see cref="ShowDialog"/>.
+    /// </summary>
     public void CloseDialog()
     {
         if (_childDialogs.Count == 0) { return; }
@@ -129,7 +143,7 @@ public class DialogHostControl : Grid
     //*********************************************************************
     //*********************************************************************
     //*********************************************************************
-    public class ChildInfo
+    private class ChildInfo
     {
         public Control Child { get; }
 

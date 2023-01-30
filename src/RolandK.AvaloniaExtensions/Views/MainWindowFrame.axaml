@@ -53,6 +53,7 @@
         </Grid>
 
         <local:DialogHostControl x:Name="CtrlOverlay" 
+                                 OccludedControl="{Binding ElementName=CtrlMainGrid}"
                                  Grid.Row="1" />
     </Grid>
 </UserControl>
