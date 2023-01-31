@@ -16,7 +16,7 @@ public static class ApplicationExtensions
     {
         if (application == null) { return false; }
 
-        var fluentTheme = application.Styles.FirstOrDefault(x => x.GetType() == typeof(FluentTheme));
+        var fluentTheme = application.TryGetFluentTheme();
         if (fluentTheme == null)
         {
             Logger.Sink?.Log(
@@ -29,5 +29,11 @@ public static class ApplicationExtensions
 
         ((FluentTheme) fluentTheme).Mode = themeMode;
         return true;
+    }
+
+    public static FluentTheme? TryGetFluentTheme(this Application? application)
+    {
+        return application?.Styles.FirstOrDefault(x => x.GetType() == typeof(FluentTheme))
+            as FluentTheme;
     }
 }
