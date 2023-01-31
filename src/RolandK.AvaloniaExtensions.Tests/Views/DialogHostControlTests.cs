@@ -133,6 +133,8 @@ public class DialogHostControlTests
             
             // Assert
             Assert.False(occludedControl.IsEnabled);
+            
+            GC.KeepAlive(testRoot);
         });
     }
     
@@ -151,9 +153,11 @@ public class DialogHostControlTests
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.CloseDialog();
-            
+
             // Assert
             Assert.True(occludedControl.IsEnabled);
+
+            GC.KeepAlive(testRoot);
         });
     }
     

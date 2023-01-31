@@ -152,6 +152,37 @@ public class MainWindowFrameTests
         });
     }
     
+    [Theory]
+    [InlineData(MainWindowFrameStatus.Hidden, false)]
+    [InlineData(MainWindowFrameStatus.NeutralGray, true)]
+    [InlineData(MainWindowFrameStatus.NeutralBlue, true)]
+    [InlineData(MainWindowFrameStatus.Green, true)]
+    [InlineData(MainWindowFrameStatus.Red, true)]
+    [InlineData(MainWindowFrameStatus.Yellow, true)]
+    public async Task Set_Status(MainWindowFrameStatus statusToSet, bool expectedVisibility)
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
+            
+            // Act
+            mainWindowFrame.Status = statusToSet;
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
+            
+            // Assert
+            var statusControl = TestUtil.TryFindLogicalDescendantWithName<IControl>(
+                mainWindow, "CtrlStatusBar");
+            Assert.NotNull(statusControl);
+            Assert.Equal(expectedVisibility, statusControl.IsVisible);
+            
+            // Cleanup
+            mainWindow.Close();
+        });
+    }
+    
     //*************************************************************************
     //*************************************************************************
     //*************************************************************************
