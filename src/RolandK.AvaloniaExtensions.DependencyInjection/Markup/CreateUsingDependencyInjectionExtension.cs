@@ -5,7 +5,7 @@ using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace RolandK.AvaloniaExtensions.DependencyInjection;
+namespace RolandK.AvaloniaExtensions.DependencyInjection.Markup;
 
 public class CreateUsingDependencyInjectionExtension : MarkupExtension
 {

@@ -6,6 +6,6 @@ using Avalonia.Metadata;
     "RolandK.AvaloniaExtensions.Views")]
 [assembly: XmlnsDefinition(
     "https://github.com/RolandK.AvaloniaExtensions", 
-    "RolandK.AvaloniaExtensions.Mvvm")]
+    "RolandK.AvaloniaExtensions.Mvvm.Markup")]
 
 [assembly: InternalsVisibleTo("RolandK.AvaloniaExtensions.Tests")]    

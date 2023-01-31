@@ -5,7 +5,7 @@ using Avalonia.Platform;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
-namespace RolandK.AvaloniaExtensions.Mvvm;
+namespace RolandK.AvaloniaExtensions.Mvvm.Markup;
 
 public class MvvmWindow : Window, IViewServiceHost
 {

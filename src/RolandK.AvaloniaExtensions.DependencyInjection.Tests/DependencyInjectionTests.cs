@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
+using RolandK.AvaloniaExtensions.DependencyInjection.Markup;
 using RolandK.AvaloniaExtensions.DependencyInjection.Tests.Util;
 
 namespace RolandK.AvaloniaExtensions.DependencyInjection.Tests;

@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using RolandK.AvaloniaExtensions.Mvvm;
+using RolandK.AvaloniaExtensions.Mvvm.Markup;
 using RolandK.AvaloniaExtensions.Tests.Util;
 using RolandK.AvaloniaExtensions.Views;
 using RolandK.AvaloniaExtensions.ViewServices;
