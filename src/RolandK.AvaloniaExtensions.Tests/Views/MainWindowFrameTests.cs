@@ -15,13 +15,18 @@ public class MainWindowFrameTests
         {
             // Arrange
             var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
             
             // Act
             mainWindowFrame.HeaderMenuArea.Add(new TestControl());
-            var testRoot = new TestRoot(mainWindowFrame);
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
 
             // Assert
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<TestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<TestControl>());
+            
+            // Cleanup
+            mainWindow.Close();
         });
     }
     
@@ -32,15 +37,20 @@ public class MainWindowFrameTests
         {
             // Arrange
             var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
             
             // Act
             mainWindowFrame.HeaderMenuArea.Add(new TestControl());
             mainWindowFrame.HeaderMenuArea.Add(new AnotherTestControl());
-            var testRoot = new TestRoot(mainWindowFrame);
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
 
             // Assert
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<TestControl>());
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<AnotherTestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<TestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<AnotherTestControl>());
+            
+            // Cleanup
+            mainWindow.Close();
         });
     }
     
@@ -51,13 +61,18 @@ public class MainWindowFrameTests
         {
             // Arrange
             var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
             
             // Act
             mainWindowFrame.CustomTitleArea.Add(new TestControl());
-            var testRoot = new TestRoot(mainWindowFrame);
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
 
             // Assert
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<TestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<TestControl>());
+            
+            // Cleanup
+            mainWindow.Close();
         });
     }
     
@@ -68,15 +83,20 @@ public class MainWindowFrameTests
         {
             // Arrange
             var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
             
             // Act
             mainWindowFrame.CustomTitleArea.Add(new TestControl());
             mainWindowFrame.CustomTitleArea.Add(new AnotherTestControl());
-            var testRoot = new TestRoot(mainWindowFrame);
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
 
             // Assert
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<TestControl>());
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<AnotherTestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<TestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<AnotherTestControl>());
+            
+            // Cleanup
+            mainWindow.Close();
         });
     }
     
@@ -87,13 +107,18 @@ public class MainWindowFrameTests
         {
             // Arrange
             var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
             
             // Act
             mainWindowFrame.MainContentArea.Add(new TestControl());
-            var testRoot = new TestRoot(mainWindowFrame);
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
 
             // Assert
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<TestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<TestControl>());
+            
+            // Cleanup
+            mainWindow.Close();
         });
     }
     
@@ -104,15 +129,20 @@ public class MainWindowFrameTests
         {
             // Arrange
             var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
             
             // Act
             mainWindowFrame.MainContentArea.Add(new TestControl());
             mainWindowFrame.MainContentArea.Add(new AnotherTestControl());
-            var testRoot = new TestRoot(mainWindowFrame);
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
 
             // Assert
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<TestControl>());
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<AnotherTestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<TestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<AnotherTestControl>());
+            
+            // Cleanup
+            mainWindow.Close();
         });
     }
     
@@ -123,13 +153,18 @@ public class MainWindowFrameTests
         {
             // Arrange
             var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
             
             // Act
             mainWindowFrame.FooterArea.Add(new TestControl());
-            var testRoot = new TestRoot(mainWindowFrame);
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
 
             // Assert
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<TestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<TestControl>());
+            
+            // Cleanup
+            mainWindow.Close();
         });
     }
     
@@ -140,15 +175,20 @@ public class MainWindowFrameTests
         {
             // Arrange
             var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
             
             // Act
             mainWindowFrame.FooterArea.Add(new TestControl());
             mainWindowFrame.FooterArea.Add(new AnotherTestControl());
-            var testRoot = new TestRoot(mainWindowFrame);
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
 
             // Assert
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<TestControl>());
-            Assert.NotNull(testRoot.FindLogicalDescendantOfType<AnotherTestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<TestControl>());
+            Assert.NotNull(mainWindow.FindLogicalDescendantOfType<AnotherTestControl>());
+            
+            // Cleanup
+            mainWindow.Close();
         });
     }
     
@@ -180,6 +220,45 @@ public class MainWindowFrameTests
             
             // Cleanup
             mainWindow.Close();
+        });
+    }
+
+    [Fact]
+    public async Task Attaching_to_Windows_sets_IsAttachedToWindow_to_true()
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var mainWindowFrame = new MainWindowFrame();
+            var mainWindow = new Window();
+            
+            // Act
+            mainWindow.Content = mainWindowFrame;
+            mainWindow.Show();
+            
+            // Assert
+            Assert.True(mainWindowFrame.IsAttachedToWindow);
+            
+            // Cleanup
+            mainWindow.Close();
+        });
+    }
+    
+    [Fact]
+    public async Task Attaching_to_Control_sets_IsAttachedToWindow_to_false()
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var mainWindowFrame = new MainWindowFrame();
+
+            // Act
+            var testRoot = new TestRoot(mainWindowFrame);
+            
+            // Assert
+            Assert.False(mainWindowFrame.IsAttachedToWindow);
+
+            GC.KeepAlive(testRoot);
         });
     }
     

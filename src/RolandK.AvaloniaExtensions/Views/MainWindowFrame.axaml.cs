@@ -43,6 +43,8 @@ public class MainWindowFrame : MvvmUserControl
         set => this.SetValue(StatusProperty, value);
     }
 
+    public bool IsAttachedToWindow => _mainWindow != null;
+
     public MainWindowFrame()
     {
         AvaloniaXamlLoader.Load(this);
