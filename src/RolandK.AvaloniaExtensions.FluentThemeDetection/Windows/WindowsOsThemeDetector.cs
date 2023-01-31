@@ -13,13 +13,15 @@ namespace RolandK.AvaloniaExtensions.FluentThemeDetection.Windows;
 /// Checks for currently configured theme in windows.
 /// See: https://engy.us/blog/2018/10/20/dark-theme-in-wpf/
 /// </summary>
-internal static class WindowsThemeDetector
+internal class WindowsOsThemeDetector : IOsThemeDetector
 {
     private const string REGISTRY_KEY_PATH = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
     private const string REGISTRY_VALUE_NAME = "AppsUseLightTheme";
 
     [SupportedOSPlatform("windows")]
-    public static void ListenForThemeChangeEvent(Action<FluentThemeMode> setWindowsThemeAction)
+    public void ListenForThemeChange(
+        FluentThemeMode defaultThemeMode,
+        Action<FluentThemeMode> setWindowsThemeAction)
     {
         var currentUser = WindowsIdentity.GetCurrent();
         if (currentUser.User == null) { return; }
@@ -33,7 +35,7 @@ internal static class WindowsThemeDetector
         try
         {
             var watcher = new ManagementEventWatcher(query);
-            watcher.EventArrived += (_, _) => setWindowsThemeAction(GetFluentThemeByCurrentWindowsTheme());
+            watcher.EventArrived += (_, _) => setWindowsThemeAction(GetFluentThemeByCurrentTheme(defaultThemeMode));
 
             // Start listening for events
             watcher.Start();
@@ -45,14 +47,14 @@ internal static class WindowsThemeDetector
     }
 
     [SupportedOSPlatform("windows")]
-    public static FluentThemeMode GetFluentThemeByCurrentWindowsTheme(FluentThemeMode defaultTheme = FluentThemeMode.Light)
+    public FluentThemeMode GetFluentThemeByCurrentTheme(FluentThemeMode defaultTheme)
     {
         var subKey = Registry.CurrentUser.OpenSubKey(REGISTRY_KEY_PATH);
         if (subKey == null)
         {
             Logger.Sink?.Log(
                 LogEventLevel.Error,
-                nameof(WindowsThemeDetector),
+                nameof(WindowsOsThemeDetector),
                 null,
                 "Unable to get registry key {RegistryKey}. Returning default theme {Theme}",
                 REGISTRY_KEY_PATH, defaultTheme);
@@ -65,7 +67,7 @@ internal static class WindowsThemeDetector
             {
                 Logger.Sink?.Log(
                     LogEventLevel.Error,
-                    nameof(WindowsThemeDetector),
+                    nameof(WindowsOsThemeDetector),
                     null,
                     "Unable to get registry key value (key: {RegistryKey}, value: {RegistryValueName}). Returning default theme {Theme}",
                     REGISTRY_KEY_PATH, REGISTRY_VALUE_NAME, defaultTheme);

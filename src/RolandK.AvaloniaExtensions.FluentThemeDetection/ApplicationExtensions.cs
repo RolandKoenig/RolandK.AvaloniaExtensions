@@ -31,6 +31,10 @@ public static class ApplicationExtensions
         return true;
     }
 
+    /// <summary>
+    /// Gets the current <see cref="FluentTheme"/> object form the application's styles.
+    /// </summary>
+    /// <param name="application">The current <see cref="Application"/> object.</param>
     public static FluentTheme? TryGetFluentTheme(this Application? application)
     {
         return application?.Styles.FirstOrDefault(x => x.GetType() == typeof(FluentTheme))

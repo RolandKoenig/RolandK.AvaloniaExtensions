@@ -17,21 +17,30 @@ public static class AppBuilderExtensions
     /// </summary>
     /// <param name="appBuilder"></param>
     /// <param name="setThemeAction">A custom action to set <see cref="FluentThemeMode"/> on the <see cref="FluentTheme"/> of this application.</param>
+    /// <param name="themeDetector">The object responsible for detecting current theme.</param>
     /// <returns></returns>
     public static AppBuilder UseFluentThemeDetection(
-        this AppBuilder appBuilder, 
-        Action<FluentThemeMode>? setThemeAction = null)
+        this AppBuilder appBuilder,
+        Action<FluentThemeMode>? setThemeAction = null,
+        IOsThemeDetector? themeDetector = null)
     {
         if (Design.IsDesignMode) { return appBuilder; }
-        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) { return appBuilder; }
+
+        if (themeDetector == null)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) { themeDetector = new WindowsOsThemeDetector(); }
+            else
+            {
+                return appBuilder;
+            }
+        }
 
         appBuilder.AfterSetup(_ =>
         {
-            // This call prevents warnings from the compiler
-            // Currently only windows is supported
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) { return; }
-
-            var initialThemeMode = WindowsThemeDetector.GetFluentThemeByCurrentWindowsTheme();
+            var fluentTheme = appBuilder.Instance.TryGetFluentTheme();
+            var defaultFluentTheme = fluentTheme?.Mode ?? FluentThemeMode.Light;
+            
+            var initialThemeMode = themeDetector.GetFluentThemeByCurrentTheme(defaultFluentTheme);
             if (setThemeAction != null) { setThemeAction(initialThemeMode); }
             else { Application.Current.TrySetFluentThemeMode(initialThemeMode); }
 
@@ -46,7 +55,7 @@ public static class AppBuilderExtensions
                 return;
             }
 
-            WindowsThemeDetector.ListenForThemeChangeEvent(fluentThemeMode =>
+            themeDetector.ListenForThemeChange(defaultFluentTheme, fluentThemeMode =>
             {
                 syncContext.Post(
                     _ =>

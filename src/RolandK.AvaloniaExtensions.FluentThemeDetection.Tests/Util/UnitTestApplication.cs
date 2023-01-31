@@ -16,7 +16,7 @@ internal class UnitTestApplication : Application
         {
             if (action != null)
             {
-                await Dispatcher.UIThread.InvokeAsync(action);
+                await Dispatcher.UIThread.InvokeAsync(action, DispatcherPriority.MinValue);
             }
             return;
         }
@@ -30,9 +30,13 @@ internal class UnitTestApplication : Application
                 .AfterSetup(appBuilder =>
                 {
                     appBuilder.Instance.Styles.Add(
-                        new FluentTheme(new Uri("https://github.com/RolandK.AvaloniaExtensions")));
+                        new FluentTheme(new Uri("https://github.com/RolandK.AvaloniaExtensions"))
+                        {
+                            Mode = FluentThemeMode.Light
+                        });
                     taskComplSource.SetResult();
                 })
+                .UseFluentThemeDetection(null, TestThemeDetector.Current)
                 .StartWithClassicDesktopLifetime(Array.Empty<string>(), ShutdownMode.OnExplicitShutdown);
         });
         uiThread.Start();
