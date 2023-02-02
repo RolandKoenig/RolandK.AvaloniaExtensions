@@ -19,11 +19,12 @@ these features work for themselves and are self-contained. They have no dependen
 other features of RolandK.AvaloniaExtensions.
 
 ## DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection
-First, add nuget package [RolandK.AvaloniaExtensions.DependencyInjection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection)
+Add nuget package [RolandK.AvaloniaExtensions.DependencyInjection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection)
 
-Then enable DependencyInjection by calling UseDependencyInjection on AppBuilder during
+Enable DependencyInjection by calling UseDependencyInjection on AppBuilder during
 startup of your Avalonia application. This method registers the ServiceProvider as
-a globally available resource on your Application object.
+a globally available resource on your Application object. You can find the key
+of the resource within the constant DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY.
 
 ```csharp
 using RolandK.AvaloniaExtensions.DependencyInjection;
@@ -66,9 +67,9 @@ in xaml namespace 'https://github.com/RolandK.AvaloniaExtensions'
 ```
 
 ## Automatically set FluentThemeMode at startup to OS theme (on Windows)
-First, add nuget package [RolandK.AvaloniaExtensions.FluentThemeDetection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.FluentThemeDetection).
+Add nuget package [RolandK.AvaloniaExtensions.FluentThemeDetection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.FluentThemeDetection).
 
-Then ensure that you use a FluentTheme in App.axaml.
+Ensure that you use a FluentTheme in App.axaml.
 ```xml
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -80,7 +81,7 @@ Then ensure that you use a FluentTheme in App.axaml.
 ```
 
 Now you can call UseFluentThemeDetection from within your Program.cs.
-This method will automatically search for FluentTheme in die Application's styles
+This method will automatically search for FluentTheme in the Application's styles
 and updates the Mode property.
 ```csharp
 using RolandK.AvaloniaExtensions.FluentThemeDetection;
@@ -92,4 +93,11 @@ public static class Program
             //...
             .UseFluentThemeDetection();
 }
+```
+
+You can also call the extension method TrySetFluentThemeMode on your Application object
+to set the currently active theme manually. This method doesn't need a call to UseFluentThemeDetection 
+during startup.
+```csharp
+Application.Current.TrySetFluentThemeMode(FluentThemeMode.Light);
 ```
