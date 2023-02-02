@@ -23,22 +23,25 @@
      borderopacity="1"
      inkscape:pageshadow="0"
      inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
+     inkscape:pagecheckerboard="true"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="0.61826046"
-     inkscape:cx="435.90043"
-     inkscape:cy="312.97489"
+     inkscape:zoom="0.61826045"
+     inkscape:cx="115.64705"
+     inkscape:cy="287.09583"
      inkscape:window-width="1800"
      inkscape:window-height="1033"
      inkscape:window-x="1920"
      inkscape:window-y="44"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:showpageshadow="0"
-     inkscape:deskcolor="#d1d1d1">
+     inkscape:showpageshadow="true"
+     inkscape:deskcolor="#d1d1d1"
+     showborder="true"
+     shape-rendering="auto"
+     borderlayer="true">
     <sodipodi:guide
        position="402,449.05865"
        orientation="-1,0"
@@ -322,11 +325,13 @@
     </clipPath>
   </defs>
   <g
-     inkscape:label="Layer 1"
+     inkscape:label="Background"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     style="display:inline"
+     sodipodi:insensitive="true">
     <rect
-       style="fill:url(#meshgradient994);fill-rule:evenodd;stroke-width:0.996938;fill-opacity:1"
+       style="fill:url(#meshgradient994);fill-opacity:1;fill-rule:evenodd;stroke-width:0.996938"
        id="rect858"
        width="512"
        height="512"
@@ -336,7 +341,7 @@
        clip-path="url(#clipPath888)" />
     <text
        xml:space="preserve"
-       style="font-size:200px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#ffffff;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:200px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#ffffff"
        x="75.482613"
        y="287.68845"
        id="text180"><tspan
@@ -346,7 +351,7 @@
          y="287.68845" /></text>
     <text
        xml:space="preserve"
-       style="font-size:200px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#ffffff;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:200px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#ffffff"
        x="103.96662"
        y="330.41446"
        id="text184"><tspan
@@ -356,7 +361,7 @@
          y="330.41446" /></text>
     <text
        xml:space="preserve"
-       style="font-size:200px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#f9f9f9;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:200px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#f9f9f9"
        x="116.78442"
        y="276.29486"
        id="text238"><tspan
@@ -366,7 +371,7 @@
          y="276.29486" /></text>
     <text
        xml:space="preserve"
-       style="font-size:333.333px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#f9f9f9;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:333.333px;font-family:AppleGothic;-inkscape-font-specification:AppleGothic;fill:#f9f9f9"
        x="74.058411"
        y="301.93045"
        id="text501"><tspan
@@ -384,6 +389,64 @@
          id="tspan296"
          x="114.83833"
          y="215.11969" /></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Icon">
+    <g
+       id="g1254"
+       transform="translate(-6.5763092,7.091301)"
+       style="fill:#165281;fill-opacity:0.51851851">
+      <rect
+         style="fill:#165281;fill-opacity:0.51851851;stroke:#ffffff;stroke-width:1.51554;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect978"
+         width="219.06894"
+         height="35.794762"
+         x="153.04184"
+         y="139.44101"
+         ry="0" />
+      <rect
+         style="fill:#165281;fill-opacity:0.51851851;stroke:#ffffff;stroke-width:1.51554;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect978-3"
+         width="219.06889"
+         height="182.85876"
+         x="153.04185"
+         y="175.51762"
+         ry="0" />
+      <path
+         style="fill:#165281;fill-opacity:0.51851851;stroke:#ffffff;stroke-width:5.12499;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 168.44255,206.32584 104.7633,0.98492"
+         id="path1240" />
+      <path
+         style="fill:#165281;fill-opacity:0.51851851;stroke:#ffffff;stroke-width:5.12499;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 168.42785,245.23015 125.10571,0.49246"
+         id="path1242" />
+      <path
+         style="fill:#165281;fill-opacity:0.51851851;stroke:#ffffff;stroke-width:5.12499;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 168.41726,286.59677 H 276.23193"
+         id="path1244" />
+      <path
+         style="fill:#165281;fill-opacity:0.51851851;stroke:#ffffff;stroke-width:5.12499;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 168.41726,322.05386 h 54.92447"
+         id="path1246" />
+      <path
+         sodipodi:type="star"
+         style="fill:#165281;fill-opacity:0.51851851;stroke:#ffffff;stroke-width:1.78874;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1360"
+         inkscape:flatsided="false"
+         sodipodi:sides="4"
+         sodipodi:cx="156.68741"
+         sodipodi:cy="156.11555"
+         sodipodi:r1="16.113646"
+         sodipodi:r2="8.0568228"
+         sodipodi:arg1="1.091277"
+         sodipodi:arg2="1.8766752"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 164.12148,170.41185 -9.86023,-6.61345 -11.87014,-0.24877 6.61345,-9.86024 0.24877,-11.87013 9.86024,6.61345 11.87014,0.24877 -6.61346,9.86024 z"
+         transform="matrix(0.69430936,0,0,0.71430936,62.766036,46.08723)" />
+    </g>
   </g>
   <script
      id="mesh_polyfill"
