@@ -10,7 +10,7 @@ DependencyInjection and some Mvvm sugar
  - [ViewServices over the popular Mvvm pattern by **not** providing an own Mvvm implementation](#viewservices-over-the-popular-mvvm-pattern)
  - [Some default ViewServices (FileDialogs, MessageBox)](#some-default-viewservices)
  - [DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection](#dependencyinjection-for-avalonia-based-on-microsftextensionsdependencyinjection)
- - Notification on ViewModels when view is attaching and detaching
+ - [Notification on ViewModels when view is attaching and detaching](#notification-on-viewmodels-when-view-is-attaching-and-detaching)
  - [Automatically set FluentThemeMode at startup to OS theme (on Windows)](#automatically-set-fluentthememode-at-startup-to-os-theme-on-windows)
 
 # Samples
@@ -55,8 +55,11 @@ public class OwnViewModelBase : ObservableObject, IAttachableViewModel
         get => _associatedView;
         set
         {
-            _associatedView = value;
-            this.OnAssociatedViewChanged(_associatedView);
+            if(_associatedView != value)
+            {
+                _associatedView = value;
+                this.OnAssociatedViewChanged(_associatedView);
+            }
         }
     }
 
@@ -198,6 +201,51 @@ in xaml namespace 'https://github.com/RolandK.AvaloniaExtensions'
         d:DataContext="{x:Static local:MainWindowViewModel.DesignViewModel}">
     <!-- ... -->
 </Window>
+```
+
+## Notification on ViewModels when view is attaching and detaching
+As some kind of extension to the provided ViewService feature, the IAttachableViewModel 
+interface can be used to react on attaching / detaching of the view from within the view model.
+You can use this for example to start and stop a timer in the view model.
+
+The following code snipped shows how to write a OnAssociatedViewChanged method
+on a view model base class. 
+
+```csharp
+using System;
+using CommunityToolkit.Mvvm.ComponentModel;
+using RolandK.AvaloniaExtensions.Mvvm;
+using RolandK.AvaloniaExtensions.ViewServices.Base;
+
+namespace RolandK.AvaloniaExtensions.TestApp;
+
+public class OwnViewModelBase : ObservableObject, IAttachableViewModel
+{
+    private object? _associatedView;
+    
+    //. ..
+    
+    /// <inheritdoc />
+    public object? AssociatedView
+    {
+        get => _associatedView;
+        set
+        {
+            if(_associatedView != value)
+            {
+                _associatedView = value;
+                this.OnAssociatedViewChanged(_associatedView);
+            }
+        }
+    }
+    
+    // ...
+    
+    protected void OnAssociatedViewChanged(object? associatedView)
+    {
+        
+    }
+}
 ```
 
 ## Automatically set FluentThemeMode at startup to OS theme (on Windows)
