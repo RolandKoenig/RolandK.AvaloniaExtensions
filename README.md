@@ -9,9 +9,9 @@ DependencyInjection and some Mvvm sugar
 ## Feature overview
  - ViewServices over the popular Mvvm pattern by **not** providing an own Mvvm implementation
  - Some default ViewServices (FileDialogs, MessageBox)
- - DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection
+ - [DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection](#dependencyinjection-for-avalonia-based-on-microsftextensionsdependencyinjection)
  - Notification on ViewModels when view is attaching and detaching
- - Automatically set FluentThemeMode at startup to OS theme (on Windows)
+ - [Automatically set FluentThemeMode at startup to OS theme (on Windows)](#automatically-set-fluentthememode-at-startup-to-os-theme-on-windows)
 
 # Samples
 Here you find examples to the features of RolandK.AvaloniaExtensions. Most of
