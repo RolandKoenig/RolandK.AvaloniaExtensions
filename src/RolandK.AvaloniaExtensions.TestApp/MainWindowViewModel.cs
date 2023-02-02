@@ -42,7 +42,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
     public async Task OpenFileAsync()
     {
         var srvOpenFile = this.GetViewService<IOpenFileViewService>();
-        var srvMessageBox = this.GetViewService<IMessageBoxService>();
+        var srvMessageBox = this.GetViewService<IMessageBoxViewService>();
         
         var selectedFile =  await srvOpenFile.ShowOpenFileDialogAsync(
             Array.Empty<FileDialogFilter>(),
@@ -57,7 +57,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
     [RelayCommand]
     public async Task ShowDummyMessageBoxAsync()
     {
-        var srvMessageBox = this.GetViewService<IMessageBoxService>();
+        var srvMessageBox = this.GetViewService<IMessageBoxViewService>();
 
         await srvMessageBox.ShowAsync(
             "Show dummy MessageBox",

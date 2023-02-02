@@ -28,12 +28,12 @@ internal static class DefaultViewServices
             return new SaveFileDialogService(parentWindow);
         }
         
-        if (viewServiceType == typeof(IMessageBoxService))
+        if (viewServiceType == typeof(IMessageBoxViewService))
         {
             var dlgHostControl = TryFindDialogHostControl(host);
             if (dlgHostControl == null) { return null; }
             
-            return new MessageBoxControlService(dlgHostControl);
+            return new MessageBoxViewControlService(dlgHostControl);
         }
         
         return null;

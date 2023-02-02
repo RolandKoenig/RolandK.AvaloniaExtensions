@@ -4,11 +4,11 @@ using RolandK.AvaloniaExtensions.ViewServices.Base;
 
 namespace RolandK.AvaloniaExtensions.ViewServices.MessageBox;
 
-public class MessageBoxControlService : ViewServiceBase, IMessageBoxService
+public class MessageBoxViewControlService : ViewServiceBase, IMessageBoxViewService
 {
     private DialogHostControl _host;
 
-    public MessageBoxControlService(DialogHostControl host)
+    public MessageBoxViewControlService(DialogHostControl host)
     {
         _host = host;
     }

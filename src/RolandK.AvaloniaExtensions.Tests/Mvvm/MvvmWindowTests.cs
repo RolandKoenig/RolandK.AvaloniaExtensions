@@ -151,11 +151,11 @@ public class MvvmWindowTests
             mvvmWindow.DataContext = testViewModel;
             mvvmWindow.Show();
             
-            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxService>();
+            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxViewService>();
             
             // Assert
             Assert.NotNull(messageBoxService);
-            Assert.IsAssignableFrom<IMessageBoxService>(messageBoxService);
+            Assert.IsAssignableFrom<IMessageBoxViewService>(messageBoxService);
             
             // Cleanup
             mvvmWindow.Close();
@@ -178,11 +178,11 @@ public class MvvmWindowTests
             mvvmWindow.DataContext = testViewModel;
             mvvmWindow.Show();
             
-            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxService>();
+            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxViewService>();
             
             // Assert
             Assert.NotNull(messageBoxService);
-            Assert.IsAssignableFrom<IMessageBoxService>(messageBoxService);
+            Assert.IsAssignableFrom<IMessageBoxViewService>(messageBoxService);
             
             // Cleanup
             mvvmWindow.Close();

@@ -118,11 +118,11 @@ public class MvvmUserControlTests
             testMvvmControl.DataContext = testViewModel;
             var mainWindowFrame = new MainWindowFrame(testMvvmControl);
             var testRoot = new TestRoot(mainWindowFrame);
-            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxService>();
+            var messageBoxService = testViewModel.TryGetViewService<IMessageBoxViewService>();
             
             // Assert
             Assert.NotNull(messageBoxService);
-            Assert.IsAssignableFrom<IMessageBoxService>(messageBoxService);
+            Assert.IsAssignableFrom<IMessageBoxViewService>(messageBoxService);
 
             GC.KeepAlive(testRoot);
         });

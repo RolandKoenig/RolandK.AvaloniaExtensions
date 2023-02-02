@@ -6,7 +6,7 @@ using RolandK.AvaloniaExtensions.ViewServices.Base;
 
 namespace RolandK.AvaloniaExtensions.ViewServices;
 
-public interface IMessageBoxService : IViewService
+public interface IMessageBoxViewService : IViewService
 {
     Task<MessageBoxResult> ShowAsync(string title, string message, MessageBoxButtons buttons);
 }

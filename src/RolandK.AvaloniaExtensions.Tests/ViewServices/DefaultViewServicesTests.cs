@@ -24,11 +24,11 @@ public class DefaultViewServicesTests
             // Act
             var testRoot = new TestRoot(rootGrid);
             var viewService =
-                DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxService));
+                DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxViewService));
 
             // Assert
             Assert.NotNull(viewService);
-            Assert.IsAssignableFrom<IMessageBoxService>(viewService);
+            Assert.IsAssignableFrom<IMessageBoxViewService>(viewService);
 
             GC.KeepAlive(testRoot);
         });
@@ -46,11 +46,11 @@ public class DefaultViewServicesTests
             // Act
             var testRoot = new TestRoot(mainWindowFrame);
             var viewService =
-                DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxService));
+                DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxViewService));
 
             // Assert
             Assert.NotNull(viewService);
-            Assert.IsAssignableFrom<IMessageBoxService>(viewService);
+            Assert.IsAssignableFrom<IMessageBoxViewService>(viewService);
 
             GC.KeepAlive(testRoot);
         });
@@ -69,11 +69,11 @@ public class DefaultViewServicesTests
             // Act
             var testRoot = new TestRoot(dialogHostControl);
             var viewService =
-                DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxService));
+                DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxViewService));
 
             // Assert
             Assert.NotNull(viewService);
-            Assert.IsAssignableFrom<IMessageBoxService>(viewService);
+            Assert.IsAssignableFrom<IMessageBoxViewService>(viewService);
 
             GC.KeepAlive(testRoot);
         });
@@ -92,11 +92,11 @@ public class DefaultViewServicesTests
             // Act
             var testRoot = new TestRootWindow(dialogHostControl);
             var viewService =
-                DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxService));
+                DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxViewService));
 
             // Assert
             Assert.NotNull(viewService);
-            Assert.IsAssignableFrom<IMessageBoxService>(viewService);
+            Assert.IsAssignableFrom<IMessageBoxViewService>(viewService);
 
             GC.KeepAlive(testRoot);
         });
