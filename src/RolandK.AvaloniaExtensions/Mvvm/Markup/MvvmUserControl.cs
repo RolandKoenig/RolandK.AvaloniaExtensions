@@ -114,7 +114,7 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         }
     }
     
-    private void OnDataContextAttachable_CloseWindowRequest(object sender, CloseWindowRequestEventArgs e)
+    private void OnDataContextAttachable_CloseWindowRequest(object? sender, CloseWindowRequestEventArgs e)
     {
         var parentWindow = this.FindLogicalAncestorOfType<Window>();
         if (parentWindow == null) { return; }

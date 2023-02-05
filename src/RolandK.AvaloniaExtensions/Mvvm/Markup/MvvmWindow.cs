@@ -114,7 +114,7 @@ public class MvvmWindow : Window, IViewServiceHost
         }
     }
     
-    private void OnDataContextAttachable_CloseWindowRequest(object sender, CloseWindowRequestEventArgs e)
+    private void OnDataContextAttachable_CloseWindowRequest(object? sender, CloseWindowRequestEventArgs e)
     {
         if (e.DialogResult != null)
         {
