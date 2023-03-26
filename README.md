@@ -6,6 +6,14 @@ DependencyInjection and some Mvvm sugar
 ## Build
 [![Continuous integration](https://github.com/RolandKoenig/RolandK.AvaloniaExtensions/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/RolandKoenig/RolandK.AvaloniaExtensions/actions/workflows/continuous-integration.yml)
 
+
+## Nuget
+| Package                                         | Link                                                                           |
+|-------------------------------------------------|--------------------------------------------------------------------------------|
+| RolandK.AvaloniaExtensions                      | https://www.nuget.org/packages/RolandK.AvaloniaExtensions                      |
+| RolandK.AvaloniaExtensions.FluentThemeDetection | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.FluentThemeDetection |
+| RolandK.AvaloniaExtensions.DependencyInjection  | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection  |
+
 ## Feature overview
  - [ViewServices over the popular Mvvm pattern by **not** providing an own Mvvm implementation](#viewservices-over-the-popular-mvvm-pattern)
  - [Some default ViewServices (FileDialogs, MessageBox)](#some-default-viewservices)
