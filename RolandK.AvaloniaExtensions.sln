@@ -8,11 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.Tests", "src\RolandK.AvaloniaExtensions.Tests\RolandK.AvaloniaExtensions.Tests.csproj", "{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.FluentThemeDetection", "src\RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj", "{F78873DB-5864-4C50-93A2-C6371D0D26EF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.DependencyInjection.Tests", "src\RolandK.AvaloniaExtensions.DependencyInjection.Tests\RolandK.AvaloniaExtensions.DependencyInjection.Tests.csproj", "{03D69FBA-0153-4CF3-AC81-07E8CC0BB526}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.FluentThemeDetection.Tests", "src\RolandK.AvaloniaExtensions.FluentThemeDetection.Tests\RolandK.AvaloniaExtensions.FluentThemeDetection.Tests.csproj", "{22806B2B-89D8-4B3F-886E-2B54D734E9BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,17 +32,9 @@ Global
 		{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F78873DB-5864-4C50-93A2-C6371D0D26EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F78873DB-5864-4C50-93A2-C6371D0D26EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F78873DB-5864-4C50-93A2-C6371D0D26EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F78873DB-5864-4C50-93A2-C6371D0D26EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03D69FBA-0153-4CF3-AC81-07E8CC0BB526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03D69FBA-0153-4CF3-AC81-07E8CC0BB526}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D69FBA-0153-4CF3-AC81-07E8CC0BB526}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03D69FBA-0153-4CF3-AC81-07E8CC0BB526}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22806B2B-89D8-4B3F-886E-2B54D734E9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22806B2B-89D8-4B3F-886E-2B54D734E9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22806B2B-89D8-4B3F-886E-2B54D734E9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22806B2B-89D8-4B3F-886E-2B54D734E9BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

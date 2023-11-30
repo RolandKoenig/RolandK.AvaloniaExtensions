@@ -9,7 +9,7 @@ using RolandK.AvaloniaExtensions.FluentThemeDetection.Windows;
 
 namespace RolandK.AvaloniaExtensions.FluentThemeDetection;
 
-public static class AppBuilderExtensions
+public static class ppBuilderExtensions
 {
     /// <summary>
     /// Attaches to system events to detect theme changes.

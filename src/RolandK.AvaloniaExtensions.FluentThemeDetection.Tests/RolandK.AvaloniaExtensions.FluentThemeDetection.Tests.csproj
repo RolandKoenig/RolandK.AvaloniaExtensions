@@ -22,8 +22,4 @@
         <PackageReference Include="Avalonia.Headless" Version="0.10.21" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj" />
-    </ItemGroup>
-
 </Project>
