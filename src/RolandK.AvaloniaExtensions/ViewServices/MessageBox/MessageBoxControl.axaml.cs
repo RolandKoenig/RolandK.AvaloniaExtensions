@@ -8,7 +8,7 @@ using RolandK.AvaloniaExtensions.Views;
 
 namespace RolandK.AvaloniaExtensions.ViewServices.MessageBox;
 
-public class MessageBoxControl : UserControl
+public partial class MessageBoxControl : UserControl
 {
     public MessageBoxControl()
     {
@@ -20,8 +20,8 @@ public class MessageBoxControl : UserControl
         var tcs = new TaskCompletionSource<MessageBoxResult>();
 
         var msgbox = new MessageBoxControl();
-        msgbox.FindControl<TextBlock>("Text").Text = text;
-        var buttonPanel = msgbox.FindControl<StackPanel>("Buttons");
+        msgbox.FindControl<TextBlock>("Text")!.Text = text;
+        var buttonPanel = msgbox.FindControl<StackPanel>("Buttons")!;
 
         var res = MessageBoxResult.Ok;
 

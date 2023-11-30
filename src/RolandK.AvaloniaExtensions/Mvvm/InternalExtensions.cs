@@ -5,7 +5,7 @@ namespace RolandK.AvaloniaExtensions.Mvvm;
 
 internal static class InternalExtensions
 {
-    public static IViewServiceHost? TryGetParentViewServiceHost(this IControl control)
+    public static IViewServiceHost? TryGetParentViewServiceHost(this Control control)
     {
         var actParent = control.Parent;
         while (actParent != null)

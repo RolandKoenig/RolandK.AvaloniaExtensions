@@ -19,7 +19,7 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="NSubstitute" Version="5.0.0" />
-        <PackageReference Include="Avalonia.Headless" Version="0.10.21" />
+        <PackageReference Include="Avalonia.Headless" Version="11.0.5" />
     </ItemGroup>
 
     <ItemGroup>

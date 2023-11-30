@@ -23,7 +23,7 @@ public class MvvmUserControlTests
 
             // Act
             testMvvmControl.DataContext = testViewModel;
-            var testRoot = new TestRoot(testMvvmControl);
+            var testRoot = new TestRootWindow(testMvvmControl);
             
             // Assert
             Assert.Equal(testMvvmControl, testViewModel.AssociatedView);
@@ -43,9 +43,9 @@ public class MvvmUserControlTests
 
             // Act
             testMvvmControl.DataContext = testViewModel;
-            var testRoot = new TestRoot(testMvvmControl);
+            var testRoot = new TestRootWindow(testMvvmControl);
 
-            testRoot.Child = null;
+            testRoot.Content = new Grid();
 
             // Assert
             Assert.Null(testViewModel.AssociatedView);
@@ -69,9 +69,9 @@ public class MvvmUserControlTests
             var mvvmControlContainer = new Grid();
             mvvmControlContainer.Children.Add(testMvvmControl);
             
-            var testRoot = new TestRoot(mvvmControlContainer);
+            var testRoot = new TestRootWindow(mvvmControlContainer);
 
-            testRoot.Child = null;
+            testRoot.Content = new Grid();
 
             // Assert
             Assert.Null(testViewModel.AssociatedView);
@@ -117,7 +117,7 @@ public class MvvmUserControlTests
             // Act
             testMvvmControl.DataContext = testViewModel;
             var mainWindowFrame = new MainWindowFrame(testMvvmControl);
-            var testRoot = new TestRoot(mainWindowFrame);
+            var testRoot = new TestRootWindow(mainWindowFrame);
             var messageBoxService = testViewModel.TryGetViewService<IMessageBoxViewService>();
             
             // Assert

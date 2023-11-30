@@ -24,7 +24,7 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         _viewServiceContainer = new ViewServiceContainer(this);
     }
 
-    public MvvmUserControl(IControl initialChild)
+    public MvvmUserControl(Control initialChild)
         : this()
     {
         this.Content = initialChild;

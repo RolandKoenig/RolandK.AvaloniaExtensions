@@ -44,7 +44,7 @@
                 </Menu>
         
                 <Grid>
-                    <DataGrid Items="{Binding Path=DataRows}"
+                    <DataGrid ItemsSource="{Binding Path=DataRows}"
                               IsReadOnly="True"
                               AutoGenerateColumns="True"
                               CanUserResizeColumns="True" />

@@ -19,7 +19,7 @@ public class DialogBoxControlTests
             // Act
             dialogBoxControl.Header = "My dummy header";
             dialogBoxControl.ContentArea.Add(new TestDialogControl());
-            var testRoot = new TestRoot(dialogBoxControl);
+            var testRoot = new TestRootWindow(dialogBoxControl);
 
             // Assert
             var ancestor = testRoot.FindLogicalDescendantOfType<TestDialogControl>();

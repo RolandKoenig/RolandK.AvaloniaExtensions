@@ -7,6 +7,6 @@ public partial class MainWindow : MvvmWindow
 {
     public MainWindow()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 }

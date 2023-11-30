@@ -11,12 +11,11 @@ using RolandK.AvaloniaExtensions.Mvvm.Markup;
 
 namespace RolandK.AvaloniaExtensions.Views;
 
-public class MainWindowFrame : MvvmUserControl
+public partial class MainWindowFrame : MvvmUserControl
 {
     public static readonly StyledProperty<MainWindowFrameStatus> StatusProperty =
         AvaloniaProperty.Register<MainWindowFrame, MainWindowFrameStatus>(
-            nameof(Status), MainWindowFrameStatus.Hidden,
-            notifying: OnStatusChanged);
+            nameof(Status), MainWindowFrameStatus.Hidden);
 
     private Window? _mainWindow;
     private Grid _ctrlFullWindowGrid;
@@ -49,28 +48,31 @@ public class MainWindowFrame : MvvmUserControl
     {
         AvaloniaXamlLoader.Load(this);
 
-        _ctrlFullWindowGrid = this.Find<Grid>("CtrlFullWindowGrid");
-        _ctrlMainGrid = this.Find<Grid>("CtrlMainGrid");
-        _ctrlCustomTitleArea = this.Find<StackPanel>("CtrlCustomTitleArea");
-        _ctrlHeaderMenuArea = this.Find<Panel>("CtrlHeaderMenuArea");
-        _ctrlMainContentArea = this.Find<Panel>("CtrlMainContentArea");
-        _ctrlFooterArea = this.Find<Panel>("CtrlFooterArea");
-        _ctrlStatusBar = this.Find<Panel>("CtrlStatusBar");
-        this.Overlay = this.Find<DialogHostControl>("CtrlOverlay");
+        _ctrlFullWindowGrid = this.Find<Grid>("CtrlFullWindowGrid") ?? throw new InvalidOperationException("Control CtrlFullWindowGrid not found!");
+        _ctrlMainGrid = this.Find<Grid>("CtrlMainGrid")?? throw new InvalidOperationException("Control CtrlMainGrid not found!");
+        _ctrlCustomTitleArea = this.Find<StackPanel>("CtrlCustomTitleArea") ?? throw new InvalidOperationException("Control CtrlCustomTitleArea not found!");
+        _ctrlHeaderMenuArea = this.Find<Panel>("CtrlHeaderMenuArea") ?? throw new InvalidOperationException("Control CtrlHeaderMenuArea not found!");
+        _ctrlMainContentArea = this.Find<Panel>("CtrlMainContentArea") ?? throw new InvalidOperationException("Control CtrlMainContentArea not found!");
+        _ctrlFooterArea = this.Find<Panel>("CtrlFooterArea") ?? throw new InvalidOperationException("Control CtrlFooterArea not found!");
+        _ctrlStatusBar = this.Find<Panel>("CtrlStatusBar") ?? throw new InvalidOperationException("Control CtrlStatusBar not found!");
+        this.Overlay = this.Find<DialogHostControl>("CtrlOverlay") ?? throw new InvalidOperationException("Control CtrlOverlay not found!");
     }
 
-    public MainWindowFrame(IControl initialChild)
+    public MainWindowFrame(Control initialChild)
         : this()
     {
         _ctrlMainContentArea.Children.Add(initialChild);
     }
 
-    private static void OnStatusChanged(IAvaloniaObject sender, bool beforeChanging)
+    /// <inheritdoc />
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
-        if (beforeChanging) { return; }
-        if (!(sender is MainWindowFrame windowFrame)) { return; }
+        base.OnPropertyChanged(change);
 
-        windowFrame.UpdateFrameState();
+        if (change.Property == StatusProperty)
+        {
+            this.UpdateFrameState();
+        }
     }
 
     private void UpdateFrameState()

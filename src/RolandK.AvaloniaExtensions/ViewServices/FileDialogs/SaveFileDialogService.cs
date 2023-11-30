@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
 namespace RolandK.AvaloniaExtensions.ViewServices.FileDialogs;
@@ -17,20 +14,24 @@ public class SaveFileDialogService : ViewServiceBase, ISaveFileViewService
     }
 
     /// <inheritdoc />
-    public Task<string?> ShowSaveFileDialogAsync(IEnumerable<FileDialogFilter> filters, string defaultExtension)
+    public async Task<string?> ShowSaveFileDialogAsync(IEnumerable<FileDialogFilter> filters, string defaultExtension)
     {
-        var dlgSaveFile = new SaveFileDialog();
-        dlgSaveFile.Filters ??= new List<Avalonia.Controls.FileDialogFilter>(filters.Count());
-        
+        var fileTypes = new List<FilePickerFileType>();
         foreach (var actFilter in filters)
         {
-            var actAvaloniaFilter = new global::Avalonia.Controls.FileDialogFilter();
-            actAvaloniaFilter.Name = actFilter.Name;
-            actAvaloniaFilter.Extensions = actFilter.Extensions;
-            dlgSaveFile.Filters.Add(actAvaloniaFilter);
+            var actAvaloniaFilter = new FilePickerFileType(actFilter.Name);
+            actAvaloniaFilter.Patterns = actFilter.Extensions
+                .Select(x => $"*{x}")
+                .ToList();
+            fileTypes.Add(actAvaloniaFilter);
         }
-        dlgSaveFile.DefaultExtension = defaultExtension;
 
-        return dlgSaveFile.ShowAsync(_parent);
+        var filePickerSaveOptions = new FilePickerSaveOptions();
+        filePickerSaveOptions.DefaultExtension = defaultExtension;
+        filePickerSaveOptions.FileTypeChoices = fileTypes;
+
+        var file = await _parent.StorageProvider.SaveFilePickerAsync(filePickerSaveOptions);
+
+        return file?.Path.ToString() ?? null;
     }
 }
