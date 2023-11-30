@@ -28,7 +28,7 @@
         <PackageIcon>Logo_128.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="$(SolutionDir)../assets/Logo_128.png" Pack="true" PackagePath="\" />
+        <None Include="$(SolutionDir)assets/Logo_128.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <!-- Package license -->

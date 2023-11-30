@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.TestApp", "RolandK.AvaloniaExtensions.TestApp\RolandK.AvaloniaExtensions.TestApp.csproj", "{AF09D6F7-A9B7-4FBD-A1B2-ACE25418E813}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.TestApp", "src\RolandK.AvaloniaExtensions.TestApp\RolandK.AvaloniaExtensions.TestApp.csproj", "{AF09D6F7-A9B7-4FBD-A1B2-ACE25418E813}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions", "RolandK.AvaloniaExtensions\RolandK.AvaloniaExtensions.csproj", "{779B4BE6-6030-4B49-87D4-9162F9E50FCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions", "src\RolandK.AvaloniaExtensions\RolandK.AvaloniaExtensions.csproj", "{779B4BE6-6030-4B49-87D4-9162F9E50FCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.DependencyInjection", "RolandK.AvaloniaExtensions.DependencyInjection\RolandK.AvaloniaExtensions.DependencyInjection.csproj", "{4D4CA940-68F9-4EE2-9030-921C0A1B163E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.DependencyInjection", "src\RolandK.AvaloniaExtensions.DependencyInjection\RolandK.AvaloniaExtensions.DependencyInjection.csproj", "{4D4CA940-68F9-4EE2-9030-921C0A1B163E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.Tests", "RolandK.AvaloniaExtensions.Tests\RolandK.AvaloniaExtensions.Tests.csproj", "{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.Tests", "src\RolandK.AvaloniaExtensions.Tests\RolandK.AvaloniaExtensions.Tests.csproj", "{270741C0-1A15-4C44-8A1C-0DD86DD8DF23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.FluentThemeDetection", "RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj", "{F78873DB-5864-4C50-93A2-C6371D0D26EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.FluentThemeDetection", "src\RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj", "{F78873DB-5864-4C50-93A2-C6371D0D26EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.DependencyInjection.Tests", "RolandK.AvaloniaExtensions.DependencyInjection.Tests\RolandK.AvaloniaExtensions.DependencyInjection.Tests.csproj", "{03D69FBA-0153-4CF3-AC81-07E8CC0BB526}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.DependencyInjection.Tests", "src\RolandK.AvaloniaExtensions.DependencyInjection.Tests\RolandK.AvaloniaExtensions.DependencyInjection.Tests.csproj", "{03D69FBA-0153-4CF3-AC81-07E8CC0BB526}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.FluentThemeDetection.Tests", "RolandK.AvaloniaExtensions.FluentThemeDetection.Tests\RolandK.AvaloniaExtensions.FluentThemeDetection.Tests.csproj", "{22806B2B-89D8-4B3F-886E-2B54D734E9BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.FluentThemeDetection.Tests", "src\RolandK.AvaloniaExtensions.FluentThemeDetection.Tests\RolandK.AvaloniaExtensions.FluentThemeDetection.Tests.csproj", "{22806B2B-89D8-4B3F-886E-2B54D734E9BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
