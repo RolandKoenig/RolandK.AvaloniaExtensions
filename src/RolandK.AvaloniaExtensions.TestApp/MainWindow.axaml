@@ -27,14 +27,6 @@
                         <MenuItem Header="Exit"
                                   Command="{Binding ExitCommand}" />
                     </MenuItem>
-                    <MenuItem Header="Theme">
-                        <MenuItem Header="Light"
-                                  Command="{Binding Path=SetThemeCommand}"
-                                  CommandParameter="Light" />
-                        <MenuItem Header="Dark"
-                                  Command="{Binding Path=SetThemeCommand}"
-                                  CommandParameter="Dark" />
-                    </MenuItem>
                     <MenuItem Header="Tests">
                         <MenuItem Header="Recreate test data"
                                   Command="{Binding Path=RecreateTestDataCommand}"/>

@@ -63,12 +63,6 @@ public partial class MainWindowViewModel : OwnViewModelBase
     }
 
     [RelayCommand]
-    public void SetTheme(string themeModeName)
-    {
-        throw new NotImplementedException();
-    }
-
-    [RelayCommand]
     public void Exit()
     {
         this.CloseHostWindow();

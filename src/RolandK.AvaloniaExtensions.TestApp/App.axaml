@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="RolandK.AvaloniaExtensions.TestApp.App"
              RequestedThemeVariant="Default">
-    
 
     <Application.Styles>
         <FluentTheme />
