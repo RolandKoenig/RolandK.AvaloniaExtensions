@@ -17,7 +17,7 @@ public class DialogHostControlTests
             var dialogHostControl = new DialogHostControl();
             
             // Act
-            var testRoot = new TestRoot(dialogHostControl);
+            var testRoot = new TestRootWindow(dialogHostControl);
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             
@@ -36,7 +36,7 @@ public class DialogHostControlTests
             var dialogHostControl = new DialogHostControl();
             
             // Act
-            var testRoot = new TestRoot(dialogHostControl);
+            var testRoot = new TestRootWindow(dialogHostControl);
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.CloseDialog();
@@ -56,7 +56,7 @@ public class DialogHostControlTests
             var dialogHostControl = new DialogHostControl();
             
             // Act
-            var testRoot = new TestRoot(dialogHostControl);
+            var testRoot = new TestRootWindow(dialogHostControl);
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.ShowDialog(new AnotherTestDialogControl(), "Another dialog");
@@ -78,7 +78,7 @@ public class DialogHostControlTests
             var dialogHostControl = new DialogHostControl();
             
             // Act
-            var testRoot = new TestRoot(dialogHostControl);
+            var testRoot = new TestRootWindow(dialogHostControl);
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.ShowDialog(new AnotherTestDialogControl(), "Another dialog");
@@ -101,7 +101,7 @@ public class DialogHostControlTests
             var dialogHostControl = new DialogHostControl();
             
             // Act
-            var testRoot = new TestRoot(dialogHostControl);
+            var testRoot = new TestRootWindow(dialogHostControl);
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
             dialogHostControl.ShowDialog(new AnotherTestDialogControl(), "Another dialog");
@@ -126,7 +126,7 @@ public class DialogHostControlTests
             var dialogHostControl = new DialogHostControl();
             
             // Act
-            var testRoot = new TestRoot(dialogHostControl);
+            var testRoot = new TestRootWindow(dialogHostControl);
             dialogHostControl.OccludedControl = occludedControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");
@@ -148,7 +148,7 @@ public class DialogHostControlTests
             var dialogHostControl = new DialogHostControl();
             
             // Act
-            var testRoot = new TestRoot(dialogHostControl);
+            var testRoot = new TestRootWindow(dialogHostControl);
             dialogHostControl.OccludedControl = occludedControl;
 
             dialogHostControl.ShowDialog(new TestDialogControl(), "My dummy header");

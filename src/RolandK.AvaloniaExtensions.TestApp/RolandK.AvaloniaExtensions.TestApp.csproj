@@ -17,19 +17,19 @@
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.10.21" />
-        <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.21" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.21" />
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.21" />
+        <PackageReference Include="Avalonia" Version="11.0.5" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.5" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.5" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.5" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5" />
         <PackageReference Include="Bogus" Version="34.0.2" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
         <PackageReference Include="NSubstitute" Version="5.0.0" />
-        <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
     </ItemGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\RolandK.AvaloniaExtensions.DependencyInjection\RolandK.AvaloniaExtensions.DependencyInjection.csproj" />
-      <ProjectReference Include="..\RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj" />
       <ProjectReference Include="..\RolandK.AvaloniaExtensions\RolandK.AvaloniaExtensions.csproj" />
     </ItemGroup>
     

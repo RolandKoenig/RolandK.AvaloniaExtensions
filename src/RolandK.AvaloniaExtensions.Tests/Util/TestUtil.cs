@@ -24,7 +24,7 @@ internal static class TestUtil
     }
 
     public static TControl? TryFindLogicalDescendantWithName<TControl>(ILogical root, string searchName, bool includeRoot = false)
-        where TControl : class, IControl
+        where TControl : Control
     {
         if ((includeRoot) &&
             (root is TControl foundControl))

@@ -10,7 +10,7 @@ namespace RolandK.AvaloniaExtensions.ViewServices;
 
 internal static class DefaultViewServices
 {
-    public static object? TryGetDefaultViewService(IControl host, Type viewServiceType)
+    public static object? TryGetDefaultViewService(Control host, Type viewServiceType)
     {
         if (viewServiceType == typeof(IOpenFileViewService))
         {
@@ -39,7 +39,7 @@ internal static class DefaultViewServices
         return null;
     }
 
-    private static DialogHostControl? TryFindDialogHostControl(IControl host)
+    private static DialogHostControl? TryFindDialogHostControl(Control host)
     {
         // Method 1: Find ancestor
         var dlgHostControl = host.FindLogicalAncestorOfType<DialogHostControl>(true);
@@ -64,7 +64,7 @@ internal static class DefaultViewServices
         // Method 4: Find over top level control
         if(dlgHostControl == null)
         {
-            if (FindTopLevelLogicalParent(host) is IControl topLevel)
+            if (FindTopLevelLogicalParent(host) is Control topLevel)
             {
                 dlgHostControl = topLevel?.FindLogicalDescendantOfType<DialogHostControl>(true);
             }

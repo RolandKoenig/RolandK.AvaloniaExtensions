@@ -14,6 +14,7 @@ namespace RolandK.AvaloniaExtensions.Tests.Util;
 // Original code from:
 // https://github.com/AvaloniaUI/Avalonia/blob/ec74057151e8f405bbc8a324325a9f957e84bf7b/tests/Avalonia.UnitTests/TestRoot.cs
 
+/* 
 internal class TestRoot : Decorator, IFocusScope, ILayoutRoot, IInputRoot, IRenderRoot, IStyleHost, ILogicalRoot
 {
     private readonly NameScope _nameScope = new NameScope();
@@ -63,8 +64,7 @@ internal class TestRoot : Decorator, IFocusScope, ILayoutRoot, IInputRoot, IRend
         {
             var layerDc = Substitute.For<IDrawingContextImpl>();
             var layer = Substitute.For<IDrawingContextLayerImpl>();
-            layer.CreateDrawingContext(Arg.Any<IVisualBrushRenderer>()).Returns(layerDc);
-            return layer;
+            layer.CreateDrawingContext(Arg.Any<IVisualBrushRenderer>()).Returns(layerDc); return layer;
         });
         
         var result = Substitute.For<IRenderTarget>();
@@ -109,3 +109,4 @@ internal class TestRoot : Decorator, IFocusScope, ILayoutRoot, IInputRoot, IRend
         return base.MeasureOverride(ClientSize);
     }
 }
+*/

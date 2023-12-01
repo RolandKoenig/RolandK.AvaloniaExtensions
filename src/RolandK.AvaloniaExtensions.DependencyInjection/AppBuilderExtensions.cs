@@ -19,6 +19,9 @@ public static class AppBuilderExtensions
         
         appBuilder.AfterSetup(x =>
         {
+            if (x == null) { return; }
+            if (x.Instance == null) { return; }
+            
             var services = new ServiceCollection();
 
             registerServicesAction(services);

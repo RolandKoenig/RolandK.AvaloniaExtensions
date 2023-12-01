@@ -24,7 +24,7 @@ internal class UnitTestApplication : Application
         {
             AppBuilder.Configure<UnitTestApplication>()
                 .LogToTrace()
-                .UseHeadless()
+                .UseHeadless(new AvaloniaHeadlessPlatformOptions())
                 .AfterSetup(_ => taskComplSource.SetResult())
                 .StartWithClassicDesktopLifetime(Array.Empty<string>(), ShutdownMode.OnExplicitShutdown);
         });

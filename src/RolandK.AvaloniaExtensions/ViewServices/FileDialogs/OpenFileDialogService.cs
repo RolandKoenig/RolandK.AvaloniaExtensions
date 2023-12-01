@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
 namespace RolandK.AvaloniaExtensions.ViewServices.FileDialogs;
@@ -20,54 +21,60 @@ public class OpenFileDialogService : ViewServiceBase, IOpenFileViewService
     /// <inheritdoc />
     public async Task<string?> ShowOpenFileDialogAsync(IEnumerable<FileDialogFilter> filters, string defaultExtension)
     {
-        var dlgOpenFile = new OpenFileDialog();
-        dlgOpenFile.Filters ??= new List<Avalonia.Controls.FileDialogFilter>(filters.Count());
-        
-        foreach (var actFilter in filters)
-        {
-            var actAvaloniaFilter = new global::Avalonia.Controls.FileDialogFilter();
-            actAvaloniaFilter.Name = actFilter.Name;
-            actAvaloniaFilter.Extensions = actFilter.Extensions;
-            dlgOpenFile.Filters.Add(actAvaloniaFilter);
-        }
-        dlgOpenFile.AllowMultiple = false;
+        var openOptions = new FilePickerOpenOptions();
+        openOptions.FileTypeFilter = filters
+            .Select(x =>
+            {
+                var result = new FilePickerFileType(x.Name);
+                result.Patterns = x.Extensions
+                    .Select(x => $"*{x}")
+                    .ToList();
+                return result;
+            })
+            .ToList();
 
-        var selectedFiles = await dlgOpenFile.ShowAsync(_parent);
+        openOptions.AllowMultiple = false;
+
+        var selectedFiles = await _parent.StorageProvider.OpenFilePickerAsync(openOptions);
         if ((selectedFiles == null) ||
-            (selectedFiles.Length == 0))
+            (selectedFiles.Count == 0))
         {
             return null;
         }
         else
         {
-            return selectedFiles[0];
+            return selectedFiles[0].Path.ToString();
         }
     }
 
     /// <inheritdoc />
     public async Task<string[]?> ShowOpenMultipleFilesDialogAsync(IEnumerable<FileDialogFilter> filters, string title)
     {
-        var dlgOpenFile = new OpenFileDialog();
-        dlgOpenFile.Filters ??= new List<Avalonia.Controls.FileDialogFilter>(filters.Count());
-        
-        foreach (var actFilter in filters)
-        {
-            var actAvaloniaFilter = new global::Avalonia.Controls.FileDialogFilter();
-            actAvaloniaFilter.Name = actFilter.Name;
-            actAvaloniaFilter.Extensions = actFilter.Extensions;
-            dlgOpenFile.Filters.Add(actAvaloniaFilter);
-        }
-        dlgOpenFile.AllowMultiple = true;
+        var openOptions = new FilePickerOpenOptions();
+        openOptions.FileTypeFilter = filters
+            .Select(x =>
+            {
+                var result = new FilePickerFileType(x.Name);
+                result.Patterns = x.Extensions
+                    .Select(x => $"*{x}")
+                    .ToList();
+                return result;
+            })
+            .ToList();
 
-        var selectedFiles = await dlgOpenFile.ShowAsync(_parent);
+        openOptions.AllowMultiple = true;
+
+        var selectedFiles = await _parent.StorageProvider.OpenFilePickerAsync(openOptions);
         if ((selectedFiles == null) ||
-            (selectedFiles.Length == 0))
+            (selectedFiles.Count == 0))
         {
             return null;
         }
         else
         {
-            return selectedFiles;
+            return selectedFiles
+                .Select(x => x.Path.ToString())
+                .ToArray();
         }
     }
 }

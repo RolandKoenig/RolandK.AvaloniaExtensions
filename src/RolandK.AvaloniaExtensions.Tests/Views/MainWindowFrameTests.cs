@@ -213,7 +213,7 @@ public class MainWindowFrameTests
             mainWindow.Show();
             
             // Assert
-            var statusControl = TestUtil.TryFindLogicalDescendantWithName<IControl>(
+            var statusControl = TestUtil.TryFindLogicalDescendantWithName<Control>(
                 mainWindow, "CtrlStatusBar");
             Assert.NotNull(statusControl);
             Assert.Equal(expectedVisibility, statusControl.IsVisible);
@@ -253,12 +253,13 @@ public class MainWindowFrameTests
             var mainWindowFrame = new MainWindowFrame();
 
             // Act
-            var testRoot = new TestRoot(mainWindowFrame);
+            var parentControl = new Panel();
+            parentControl.Children.Add(mainWindowFrame);
             
             // Assert
             Assert.False(mainWindowFrame.IsAttachedToWindow);
 
-            GC.KeepAlive(testRoot);
+            GC.KeepAlive(parentControl);
         });
     }
     

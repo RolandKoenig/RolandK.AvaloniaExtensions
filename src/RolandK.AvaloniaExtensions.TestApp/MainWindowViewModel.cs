@@ -1,11 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Themes.Fluent;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RolandK.AvaloniaExtensions.FluentThemeDetection;
 using RolandK.AvaloniaExtensions.TestApp.Data;
 using RolandK.AvaloniaExtensions.TestApp.Services;
 using RolandK.AvaloniaExtensions.ViewServices;
@@ -63,13 +60,6 @@ public partial class MainWindowViewModel : OwnViewModelBase
             "Show dummy MessageBox",
             "Dummy message",
             MessageBoxButtons.Ok);
-    }
-
-    [RelayCommand]
-    public void SetTheme(string themeModeName)
-    {
-        Application.Current.TrySetFluentThemeMode(
-            Enum.Parse<FluentThemeMode>(themeModeName));
     }
 
     [RelayCommand]

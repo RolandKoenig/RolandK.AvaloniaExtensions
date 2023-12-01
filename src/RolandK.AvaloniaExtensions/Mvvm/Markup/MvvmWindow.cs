@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Platform;
 using RolandK.AvaloniaExtensions.ViewServices;

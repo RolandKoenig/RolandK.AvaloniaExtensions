@@ -8,18 +8,17 @@ DependencyInjection and some Mvvm sugar
 
 
 ## Nuget
-| Package                                         | Link                                                                           |
-|-------------------------------------------------|--------------------------------------------------------------------------------|
-| RolandK.AvaloniaExtensions                      | https://www.nuget.org/packages/RolandK.AvaloniaExtensions                      |
-| RolandK.AvaloniaExtensions.FluentThemeDetection | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.FluentThemeDetection |
-| RolandK.AvaloniaExtensions.DependencyInjection  | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection  |
+| Package                                         | Link                                                                          |
+|-------------------------------------------------|-------------------------------------------------------------------------------|
+| RolandK.AvaloniaExtensions                      | https://www.nuget.org/packages/RolandK.AvaloniaExtensions                     |
+| RolandK.AvaloniaExtensions.FluentThemeDetection | (obsolete due to Avalonia 11)                                                 |
+| RolandK.AvaloniaExtensions.DependencyInjection  | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection |
 
 ## Feature overview
  - [ViewServices over the popular Mvvm pattern by **not** providing an own Mvvm implementation](#viewservices-over-the-popular-mvvm-pattern)
  - [Some default ViewServices (FileDialogs, MessageBox)](#some-default-viewservices)
  - [Notification on ViewModels when view is attaching and detaching](#notification-on-viewmodels-when-view-is-attaching-and-detaching)
  - [DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection](#dependencyinjection-for-avalonia-based-on-microsftextensionsdependencyinjection)
- - [Automatically set FluentThemeMode at startup to OS theme (on Windows)](#automatically-set-fluentthememode-at-startup-to-os-theme-on-windows)
 
 # Samples
 Here you find samples to the features of RolandK.AvaloniaExtensions. Most of
@@ -254,40 +253,4 @@ in xaml namespace 'https://github.com/RolandK.AvaloniaExtensions'
         d:DataContext="{x:Static local:MainWindowViewModel.DesignViewModel}">
     <!-- ... -->
 </Window>
-```
-
-## Automatically set FluentThemeMode at startup to OS theme (on Windows)
-Add nuget package [RolandK.AvaloniaExtensions.FluentThemeDetection](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.FluentThemeDetection).
-
-Ensure that you use a FluentTheme in App.axaml.
-```xml
-<Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="RolandK.AvaloniaExtensions.TestApp.App">
-    <Application.Styles>
-        <FluentTheme Mode="Dark"/>
-    </Application.Styles>
-</Application>
-```
-
-Now you can call UseFluentThemeDetection from within your Program.cs.
-This method will automatically search for FluentTheme in the Application's styles
-and updates the Mode property.
-```csharp
-using RolandK.AvaloniaExtensions.FluentThemeDetection;
-
-public static class Program
-{
-    public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
-            //...
-            .UseFluentThemeDetection();
-}
-```
-
-You can also call the extension method TrySetFluentThemeMode on your Application object
-to set the currently active theme manually. This method doesn't need a call to UseFluentThemeDetection 
-during startup.
-```csharp
-Application.Current.TrySetFluentThemeMode(FluentThemeMode.Light);
 ```

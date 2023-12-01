@@ -22,7 +22,7 @@ public class DefaultViewServicesTests
             rootGrid.Children.Add(dialogHostControl);
 
             // Act
-            var testRoot = new TestRoot(rootGrid);
+            var testRoot = new TestRootWindow(rootGrid);
             var viewService =
                 DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxViewService));
 
@@ -44,7 +44,7 @@ public class DefaultViewServicesTests
             var mainWindowFrame = new MainWindowFrame(localUserControl);
 
             // Act
-            var testRoot = new TestRoot(mainWindowFrame);
+            var testRoot = new TestRootWindow(mainWindowFrame);
             var viewService =
                 DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxViewService));
 
@@ -67,7 +67,7 @@ public class DefaultViewServicesTests
             dialogHostControl.Children.Add(localUserControl);
 
             // Act
-            var testRoot = new TestRoot(dialogHostControl);
+            var testRoot = new TestRootWindow(dialogHostControl);
             var viewService =
                 DefaultViewServices.TryGetDefaultViewService(localUserControl, typeof(IMessageBoxViewService));
 

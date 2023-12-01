@@ -22,28 +22,28 @@ public class CreateUsingDependencyInjectionExtension : MarkupExtension
     }
 
     /// <inheritdoc />
-    public override object? ProvideValue(IServiceProvider serviceProvider)
+    public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        if (this.Type == null) { return null; }
-        if (Design.IsDesignMode) { return null; }
+        if (this.Type == null) { return null!; }
+        if (Design.IsDesignMode) { return null!; }
 
         var rootObjProvider = serviceProvider.GetService<IRootObjectProvider>();
 
-        if (rootObjProvider?.RootObject is not IControl rootObj) { return null; }
+        if (rootObjProvider?.RootObject is not Control rootObj) { return null!; }
         
         var appServiceProvider = 
             rootObj.FindResource(DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY) as IServiceProvider;
         if (appServiceProvider == null)
         {
             var targetPropertyAccessor = serviceProvider.GetService<IProvideValueTarget>();
-            if (targetPropertyAccessor == null) { return null; }
+            if (targetPropertyAccessor == null) { return null!; }
             
             var targetProperty = targetPropertyAccessor.TargetProperty as AvaloniaProperty;
-            var targetControl = targetPropertyAccessor.TargetObject as IControl;
+            var targetControl = targetPropertyAccessor.TargetObject as Control;
             if ((targetControl == null) ||
                 (targetProperty == null))
             {
-                return null;
+                return null!;
             }
 
             EventHandler<LogicalTreeAttachmentEventArgs>? eventHandler = null;
@@ -65,6 +65,6 @@ public class CreateUsingDependencyInjectionExtension : MarkupExtension
             return appServiceProvider.GetRequiredService(this.Type);   
         }
 
-        return null;
+        return null!;
     }
 }

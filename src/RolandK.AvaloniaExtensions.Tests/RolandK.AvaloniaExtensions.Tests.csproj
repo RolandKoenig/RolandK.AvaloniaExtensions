@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.Headless" Version="0.10.21" />
+        <PackageReference Include="Avalonia.Headless" Version="11.0.5" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
         <PackageReference Include="NSubstitute" Version="5.0.0" />
@@ -26,7 +26,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\RolandK.AvaloniaExtensions.DependencyInjection\RolandK.AvaloniaExtensions.DependencyInjection.csproj" />
-      <ProjectReference Include="..\RolandK.AvaloniaExtensions.FluentThemeDetection\RolandK.AvaloniaExtensions.FluentThemeDetection.csproj" />
       <ProjectReference Include="..\RolandK.AvaloniaExtensions\RolandK.AvaloniaExtensions.csproj" />
     </ItemGroup>
 
