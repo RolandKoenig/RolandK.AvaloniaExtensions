@@ -1,7 +1,5 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
-using Avalonia.VisualTree;
 using RolandK.AvaloniaExtensions.Views;
 using RolandK.AvaloniaExtensions.ViewServices.FileDialogs;
 using RolandK.AvaloniaExtensions.ViewServices.MessageBox;
