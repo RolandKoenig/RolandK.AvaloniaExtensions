@@ -19,6 +19,40 @@ internal class UnitTestApplication : Application
             return;
         }
 
+        await StartApplicationAsync();
+        
+        if (action != null)
+        {
+            await Dispatcher.UIThread.InvokeAsync(action);
+        }
+    }
+    
+    public static async Task RunInApplicationContextAsync(Func<Task> asyncAction)
+    {
+        if (Application.Current != null)
+        {
+            await Dispatcher.UIThread.InvokeAsync(asyncAction);
+            return;
+        }
+
+        await StartApplicationAsync();
+        
+        await Dispatcher.UIThread.InvokeAsync(asyncAction);
+    }
+    
+    public static async Task StopAsync()
+    {
+        var application = Application.Current;
+        if (application == null) { return; }
+
+        var appLifetime = application.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+        if (appLifetime == null) { return; }
+
+        await Dispatcher.UIThread.InvokeAsync(() => appLifetime.Shutdown());
+    }
+    
+    private static async Task StartApplicationAsync()
+    {
         var taskComplSource = new TaskCompletionSource();
         var uiThread = new Thread(_ =>
         {
@@ -31,21 +65,5 @@ internal class UnitTestApplication : Application
         uiThread.Start();
 
         await taskComplSource.Task;
-
-        if (action != null)
-        {
-            await Dispatcher.UIThread.InvokeAsync(action);
-        }
-    }
-    
-    public static async Task StopAsync()
-    {
-        var application = Application.Current;
-        if (application == null) { return; }
-
-        var appLifetime = application.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-        if (appLifetime == null) { return; }
-
-        await Dispatcher.UIThread.InvokeAsync(() => appLifetime.Shutdown());
     }
 }

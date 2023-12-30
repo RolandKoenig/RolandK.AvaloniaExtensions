@@ -23,9 +23,9 @@
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.6" />
         <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.6" />
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.6" />
-        <PackageReference Include="Bogus" Version="34.0.2" />
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-        <PackageReference Include="NSubstitute" Version="5.0.0" />
+        <PackageReference Include="Bogus" Version="35.2.0" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="NSubstitute" Version="5.1.0" />
     </ItemGroup>
     
     <ItemGroup>

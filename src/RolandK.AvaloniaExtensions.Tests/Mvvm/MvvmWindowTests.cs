@@ -61,7 +61,7 @@ public class MvvmWindowTests
     [Fact]
     public async Task Attach_MvvmWindow_to_ViewModel_then_close_using_ViewModel_with_dialog_result()
     {
-        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        await UnitTestApplication.RunInApplicationContextAsync(async Task () =>
         {
             // Arrange
             var testViewModel = new TestViewModel();
@@ -76,9 +76,11 @@ public class MvvmWindowTests
             var dialogResult = new object();
             testViewModel.TriggerCloseWindowRequest(dialogResult);
 
+            var showDialogTaskResult = await showDialogTask;
+            
             // Assert
             Assert.Equal(TaskStatus.RanToCompletion, showDialogTask.Status);
-            Assert.Equal(dialogResult, showDialogTask.Result);
+            Assert.Equal(dialogResult, showDialogTaskResult);
             Assert.False(mvvmWindow.IsVisible);
             Assert.Null(testViewModel.AssociatedView);
             
