@@ -118,6 +118,29 @@ public class DependencyInjectionTests
             testWindow.Close();
         });
     }
+
+    [Fact]
+    public Task Create_Control_and_get_ServiceProvider_from_it()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var myUserControl = new UserControl();
+            
+            // Act
+            var testWindow = new TestRootWindow(myUserControl);
+            testWindow.Show();
+
+            var serviceProvider = myUserControl.GetServiceProvider();
+
+            // Assert
+            Assert.NotNull(serviceProvider);
+            Assert.NotNull(serviceProvider.GetService(typeof(IDummyService)));
+            
+            // Cleanup
+            testWindow.Close();
+        });
+    }
     
     //*************************************************************************
     //*************************************************************************
