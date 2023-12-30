@@ -7,7 +7,7 @@ using RolandK.AvaloniaExtensions.Views;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
-namespace RolandK.AvaloniaExtensions.Tests.Views;
+namespace RolandK.AvaloniaExtensions.Tests.Mvvm;
 
 [Collection(nameof(ApplicationTestCollection))]
 public class MvvmUserControlTests
