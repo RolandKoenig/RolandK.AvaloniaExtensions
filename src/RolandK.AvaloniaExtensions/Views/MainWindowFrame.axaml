@@ -11,9 +11,15 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!-- Full background -->
+        <Panel x:Name="CtrlFullBackgroundPanel" 
+               Grid.Row="0" 
+               Grid.RowSpan="2"
+               IsHitTestVisible="False"/>
+
         <!-- Title row -->
         <Grid Grid.Row="0"
-              Background="{DynamicResource MainWindowFrameBackgroundBrush}"
+              Background="{DynamicResource MainWindowFrameTitleBackgroundBrush}"
               IsHitTestVisible="False">
             <StackPanel x:Name="CtrlCustomTitleArea"
                         Orientation="Horizontal" />

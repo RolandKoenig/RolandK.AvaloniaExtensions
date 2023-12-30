@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
@@ -19,12 +18,15 @@ public partial class MainWindowFrame : MvvmUserControl
 
     private Window? _mainWindow;
     private Grid _ctrlFullWindowGrid;
+    private Panel _ctrlFullBackgroundPanel;
     private Grid _ctrlMainGrid;
     private StackPanel _ctrlCustomTitleArea;
     private Panel _ctrlHeaderMenuArea;
     private Panel _ctrlMainContentArea;
     private Panel _ctrlFooterArea;
     private Panel _ctrlStatusBar;
+
+    public Controls FullBackgroundArea => _ctrlFullBackgroundPanel.Children;
 
     public Controls CustomTitleArea => _ctrlCustomTitleArea.Children;
 
@@ -49,6 +51,7 @@ public partial class MainWindowFrame : MvvmUserControl
         AvaloniaXamlLoader.Load(this);
 
         _ctrlFullWindowGrid = this.Find<Grid>("CtrlFullWindowGrid") ?? throw new InvalidOperationException("Control CtrlFullWindowGrid not found!");
+        _ctrlFullBackgroundPanel = this.Find<Panel>("CtrlFullBackgroundPanel") ?? throw new InvalidOperationException("Control CtrlFullBackgroundPanel not found!");
         _ctrlMainGrid = this.Find<Grid>("CtrlMainGrid")?? throw new InvalidOperationException("Control CtrlMainGrid not found!");
         _ctrlCustomTitleArea = this.Find<StackPanel>("CtrlCustomTitleArea") ?? throw new InvalidOperationException("Control CtrlCustomTitleArea not found!");
         _ctrlHeaderMenuArea = this.Find<Panel>("CtrlHeaderMenuArea") ?? throw new InvalidOperationException("Control CtrlHeaderMenuArea not found!");
