@@ -3,7 +3,7 @@
     <!-- Version -->
     <PropertyGroup>
         <VersionPrefix>2.0.1</VersionPrefix>
-        <VersionSuffix>preview1</VersionSuffix>
+        <VersionSuffix>preview2</VersionSuffix>
     </PropertyGroup>
 
     <!-- Nuget -->
