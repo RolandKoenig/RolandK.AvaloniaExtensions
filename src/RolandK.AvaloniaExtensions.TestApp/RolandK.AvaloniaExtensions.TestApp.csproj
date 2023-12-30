@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
         <TrimMode>copyused</TrimMode>
@@ -17,12 +17,12 @@
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.5" />
-        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.5" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.5" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5" />
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.5" />
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5" />
+        <PackageReference Include="Avalonia" Version="11.0.6" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.6" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.6" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.6" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.6" />
         <PackageReference Include="Bogus" Version="34.0.2" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
         <PackageReference Include="NSubstitute" Version="5.0.0" />
