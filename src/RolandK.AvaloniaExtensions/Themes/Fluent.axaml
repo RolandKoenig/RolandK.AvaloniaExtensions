@@ -12,7 +12,7 @@
                          Color="{DynamicResource SystemBaseMediumLowColor}" />
         
         <!-- MainWindowFrame -->
-        <SolidColorBrush x:Key="MainWindowFrameBackgroundBrush"
+        <SolidColorBrush x:Key="MainWindowFrameTitleBackgroundBrush"
                          Color="{DynamicResource SystemAltHighColor}" />
         
     </Styles.Resources>
