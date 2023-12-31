@@ -6,11 +6,10 @@ using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
-using RolandK.AvaloniaExtensions.Mvvm.Markup;
 
 namespace RolandK.AvaloniaExtensions.Views;
 
-public partial class MainWindowFrame : MvvmUserControl
+public partial class MainWindowFrame : UserControl
 {
     public static readonly StyledProperty<MainWindowFrameStatus> StatusProperty =
         AvaloniaProperty.Register<MainWindowFrame, MainWindowFrameStatus>(
