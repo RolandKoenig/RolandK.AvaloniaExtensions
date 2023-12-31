@@ -116,7 +116,10 @@ when the ViewService can not be found.
 In order for that to work, you also have to use one of the base classes MvvmWindow or MvvmUserControl on the
 view side. They are responsible for attaching to the view model and detaching again, when
 the view is closed. Be sure that you also derive from the correct base class in
-the corresponding code behind.
+the corresponding code behind. Attention: You also have to set the 'ViewFor' property
+on MvvmWindow or MvvmUserControl. The reason behind this is that DataContext is also set
+on child elements automatically. If one of these would also derive from MvvmWindow oder
+MvvmUserControl, these one would attach to your ViewModel too.
 
 ```xml
 <ext:MvvmWindow xmlns="https://github.com/avaloniaui"
@@ -126,7 +129,8 @@ the corresponding code behind.
         xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
         xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.TestApp"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="RolandK.AvaloniaExtensions.TestApp.MainWindow">
+        x:Class="RolandK.AvaloniaExtensions.TestApp.MainWindow"
+        ViewFor="{x:Type [YourViewModelTypeHere]}">
 </ext:MvvmWindow>
 ```
 

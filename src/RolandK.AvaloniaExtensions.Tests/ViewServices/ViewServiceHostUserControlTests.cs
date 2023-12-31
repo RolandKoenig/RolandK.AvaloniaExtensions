@@ -1,4 +1,4 @@
-﻿using RolandK.AvaloniaExtensions.Mvvm.Markup;
+﻿using RolandK.AvaloniaExtensions.Mvvm.Controls;
 using RolandK.AvaloniaExtensions.Tests.Util;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;

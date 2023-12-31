@@ -1,4 +1,4 @@
-﻿namespace RolandK.AvaloniaExtensions.Views;
+﻿namespace RolandK.AvaloniaExtensions.Controls;
 
 public enum MainWindowFrameStatus
 {

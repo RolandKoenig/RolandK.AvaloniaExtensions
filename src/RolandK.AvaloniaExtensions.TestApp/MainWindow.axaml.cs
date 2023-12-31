@@ -1,4 +1,4 @@
-using RolandK.AvaloniaExtensions.Mvvm.Markup;
+using RolandK.AvaloniaExtensions.Mvvm.Controls;
 
 namespace RolandK.AvaloniaExtensions.TestApp;
 

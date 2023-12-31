@@ -1,7 +1,7 @@
 using Avalonia.Controls;
-using RolandK.AvaloniaExtensions.Mvvm.Markup;
+using RolandK.AvaloniaExtensions.Mvvm.Controls;
 using RolandK.AvaloniaExtensions.Tests.Util;
-using RolandK.AvaloniaExtensions.Views;
+using RolandK.AvaloniaExtensions.Controls;
 using RolandK.AvaloniaExtensions.ViewServices;
 
 namespace RolandK.AvaloniaExtensions.Tests.ViewServices;

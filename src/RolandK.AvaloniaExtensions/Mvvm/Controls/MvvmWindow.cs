@@ -1,57 +1,68 @@
-using System;
-using System.Collections.Generic;
 using Avalonia.Controls;
-using Avalonia.LogicalTree;
+using Avalonia.Platform;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
-namespace RolandK.AvaloniaExtensions.Mvvm.Markup;
+namespace RolandK.AvaloniaExtensions.Mvvm.Controls;
 
-public class MvvmUserControl : UserControl, IViewServiceHost
+public class MvvmWindow : Window, IViewServiceHost
 {
     private IAttachableViewModel? _currentlyAttachedViewModel;
-    private bool _isAttachedToLogicalTree;
+    private bool _isOpened;
     private ViewServiceContainer _viewServiceContainer;
+    private Type? _viewFor;
 
+    public Type? ViewFor
+    {
+        get => _viewFor;
+        set
+        {
+            if (_viewFor == value) { return; }
+
+            _viewFor = value;
+            this.OnViewForChanged();
+        }
+    }
+    
     /// <inheritdoc />
     public ICollection<IViewService> ViewServices => _viewServiceContainer.ViewServices;
 
     /// <inheritdoc />
     public IViewServiceHost? ParentViewServiceHost => this.TryGetParentViewServiceHost();
-
-    public MvvmUserControl()
+    
+    public MvvmWindow()
     {
         _viewServiceContainer = new ViewServiceContainer(this);
     }
 
-    public MvvmUserControl(Control initialChild)
-        : this()
+    public MvvmWindow(IWindowImpl windowImpl)
+        : base(windowImpl)
     {
-        this.Content = initialChild;
+        _viewServiceContainer = new ViewServiceContainer(this);
     }
 
     /// <inheritdoc />
-    protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
+    protected override void OnOpened(EventArgs e)
     {
-        _isAttachedToLogicalTree = true;
-        this.AttachToDataContext();
+        base.OnOpened(e);
         
-        base.OnAttachedToLogicalTree(e);
+        _isOpened = true;
+        this.TryAttachToDataContext();
     }
 
     /// <inheritdoc />
-    protected override void OnDetachedFromLogicalTree(LogicalTreeAttachmentEventArgs e)
+    protected override void OnClosed(EventArgs e)
     {
-        _isAttachedToLogicalTree = false;
+        base.OnClosed(e);
+        
+        _isOpened = false;
         this.DetachFromDataContext();
-        
-        base.OnDetachedFromLogicalTree(e);
     }
 
     /// <inheritdoc />
     protected override void OnDataContextChanged(EventArgs e)
     {
-        if (!_isAttachedToLogicalTree)
+        if (!_isOpened)
         {
             base.OnDataContextChanged(e);
         }
@@ -61,16 +72,25 @@ public class MvvmUserControl : UserControl, IViewServiceHost
 
             base.OnDataContextChanged(e);
 
-            this.AttachToDataContext();
+            this.TryAttachToDataContext();
         }
     }
 
-    private void AttachToDataContext()
+    private void OnViewForChanged()
+    {
+        if (!_isOpened) { return; }
+        
+        this.DetachFromDataContext();
+        this.TryAttachToDataContext();
+    }
+    
+    private void TryAttachToDataContext()
     {
         if (_currentlyAttachedViewModel == this.DataContext) { return; }
         
         this.DetachFromDataContext();
-        if (this.DataContext is IAttachableViewModel dataContextAttachable)
+        if ((this.DataContext is IAttachableViewModel dataContextAttachable) &&
+            (this.DataContext.GetType() == this.ViewFor))
         {
             dataContextAttachable.ViewServiceRequest += this.OnDataContextAttachable_ViewServiceRequest;
             dataContextAttachable.CloseWindowRequest += this.OnDataContextAttachable_CloseWindowRequest;
@@ -92,9 +112,9 @@ public class MvvmUserControl : UserControl, IViewServiceHost
     {
         if (_currentlyAttachedViewModel != null)
         {
-            _currentlyAttachedViewModel.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
-            _currentlyAttachedViewModel.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
             _currentlyAttachedViewModel.AssociatedView = null;
+            _currentlyAttachedViewModel.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
+            _currentlyAttachedViewModel.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
         }
         _currentlyAttachedViewModel = null;
     }
@@ -116,16 +136,13 @@ public class MvvmUserControl : UserControl, IViewServiceHost
     
     private void OnDataContextAttachable_CloseWindowRequest(object? sender, CloseWindowRequestEventArgs e)
     {
-        var parentWindow = this.FindLogicalAncestorOfType<Window>();
-        if (parentWindow == null) { return; }
-        
         if (e.DialogResult != null)
         {
-            parentWindow.Close(e.DialogResult);
+            this.Close(e.DialogResult);
         }
         else
         {
-            parentWindow.Close();
+            this.Close();
         }
     }
 }

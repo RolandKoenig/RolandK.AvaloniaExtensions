@@ -2,7 +2,7 @@
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
-namespace RolandK.AvaloniaExtensions.Mvvm.Markup;
+namespace RolandK.AvaloniaExtensions.Mvvm.Controls;
 
 public class ViewServiceHostUserControl : UserControl, IViewServiceHost
 {

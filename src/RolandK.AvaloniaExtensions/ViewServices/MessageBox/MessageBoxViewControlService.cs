@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using RolandK.AvaloniaExtensions.Views;
+using RolandK.AvaloniaExtensions.Controls;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
 namespace RolandK.AvaloniaExtensions.ViewServices.MessageBox;

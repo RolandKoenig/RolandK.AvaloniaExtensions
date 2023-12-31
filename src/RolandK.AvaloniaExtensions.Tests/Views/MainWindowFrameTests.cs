@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
 using RolandK.AvaloniaExtensions.Tests.Util;
-using RolandK.AvaloniaExtensions.Views;
+using RolandK.AvaloniaExtensions.Controls;
 
 namespace RolandK.AvaloniaExtensions.Tests.Views;
 

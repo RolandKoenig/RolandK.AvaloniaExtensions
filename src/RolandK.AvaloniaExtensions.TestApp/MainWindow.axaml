@@ -8,6 +8,7 @@
         x:Class="RolandK.AvaloniaExtensions.TestApp.MainWindow"
         Title="{Binding Path=Title}"
         ExtendClientAreaToDecorationsHint="True"
+        ViewFor="{x:Type local:MainWindowViewModel}"
         DataContext="{ext:CreateUsingDependencyInjection {x:Type local:MainWindowViewModel}}"
         d:DataContext="{x:Static local:MainWindowViewModel.DesignViewModel}">
     <ext:MainWindowFrame>
