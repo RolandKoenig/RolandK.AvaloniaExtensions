@@ -43,7 +43,7 @@ public class OpenFileDialogService : ViewServiceBase, IOpenFileViewService
         }
         else
         {
-            return selectedFiles[0].Path.ToString();
+            return selectedFiles[0].Path.AbsolutePath;
         }
     }
 
@@ -73,7 +73,7 @@ public class OpenFileDialogService : ViewServiceBase, IOpenFileViewService
         else
         {
             return selectedFiles
-                .Select(x => x.Path.ToString())
+                .Select(x => x.Path.AbsolutePath)
                 .ToArray();
         }
     }
