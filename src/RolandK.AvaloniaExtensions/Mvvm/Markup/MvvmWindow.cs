@@ -10,7 +10,20 @@ public class MvvmWindow : Window, IViewServiceHost
     private IAttachableViewModel? _currentlyAttachedViewModel;
     private bool _isOpened;
     private ViewServiceContainer _viewServiceContainer;
+    private Type? _viewFor;
 
+    public Type? ViewFor
+    {
+        get => _viewFor;
+        set
+        {
+            if (_viewFor == value) { return; }
+
+            _viewFor = value;
+            this.OnViewForChanged();
+        }
+    }
+    
     /// <inheritdoc />
     public ICollection<IViewService> ViewServices => _viewServiceContainer.ViewServices;
 
@@ -34,7 +47,7 @@ public class MvvmWindow : Window, IViewServiceHost
         base.OnOpened(e);
         
         _isOpened = true;
-        this.AttachToDataContext();
+        this.TryAttachToDataContext();
     }
 
     /// <inheritdoc />
@@ -59,16 +72,25 @@ public class MvvmWindow : Window, IViewServiceHost
 
             base.OnDataContextChanged(e);
 
-            this.AttachToDataContext();
+            this.TryAttachToDataContext();
         }
     }
 
-    private void AttachToDataContext()
+    private void OnViewForChanged()
+    {
+        if (!_isOpened) { return; }
+        
+        this.DetachFromDataContext();
+        this.TryAttachToDataContext();
+    }
+    
+    private void TryAttachToDataContext()
     {
         if (_currentlyAttachedViewModel == this.DataContext) { return; }
         
         this.DetachFromDataContext();
-        if (this.DataContext is IAttachableViewModel dataContextAttachable)
+        if ((this.DataContext is IAttachableViewModel dataContextAttachable) &&
+            (this.DataContext.GetType() == this.ViewFor))
         {
             dataContextAttachable.ViewServiceRequest += this.OnDataContextAttachable_ViewServiceRequest;
             dataContextAttachable.CloseWindowRequest += this.OnDataContextAttachable_CloseWindowRequest;

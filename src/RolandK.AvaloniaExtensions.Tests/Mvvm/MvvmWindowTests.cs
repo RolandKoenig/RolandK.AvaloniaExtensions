@@ -23,6 +23,7 @@ public class MvvmWindowTests
             
             // Act
             mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.ViewFor = typeof(TestViewModel);
             mvvmWindow.Show();
             
             // Assert
@@ -45,6 +46,7 @@ public class MvvmWindowTests
             
             // Act
             mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.ViewFor = typeof(TestViewModel);
             mvvmWindow.Show();
             
             testViewModel.TriggerCloseWindowRequest();
@@ -71,6 +73,7 @@ public class MvvmWindowTests
             
             // Act
             mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.ViewFor = typeof(TestViewModel);
             var showDialogTask = mvvmWindow.ShowDialog<object>(topLevelWindow);
 
             var dialogResult = new object();
@@ -100,6 +103,7 @@ public class MvvmWindowTests
             
             // Act
             mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.ViewFor = typeof(TestViewModel);
             mvvmWindow.Show();
             
             var messageBoxService = testViewModel.TryGetViewService<IOpenFileViewService>();
@@ -124,6 +128,7 @@ public class MvvmWindowTests
             
             // Act
             mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.ViewFor = typeof(TestViewModel);
             mvvmWindow.Show();
             
             var messageBoxService = testViewModel.TryGetViewService<ISaveFileViewService>();
@@ -151,6 +156,7 @@ public class MvvmWindowTests
             
             // Act
             mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.ViewFor = typeof(TestViewModel);
             mvvmWindow.Show();
             
             var messageBoxService = testViewModel.TryGetViewService<IMessageBoxViewService>();
@@ -178,6 +184,7 @@ public class MvvmWindowTests
             
             // Act
             mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.ViewFor = typeof(TestViewModel);
             mvvmWindow.Show();
             
             var messageBoxService = testViewModel.TryGetViewService<IMessageBoxViewService>();

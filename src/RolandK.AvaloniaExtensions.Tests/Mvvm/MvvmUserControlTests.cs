@@ -23,6 +23,7 @@ public class MvvmUserControlTests
 
             // Act
             testMvvmControl.DataContext = testViewModel;
+            testMvvmControl.ViewFor = typeof(TestViewModel);
             var testRoot = new TestRootWindow(testMvvmControl);
             
             // Assert
@@ -43,6 +44,7 @@ public class MvvmUserControlTests
 
             // Act
             testMvvmControl.DataContext = testViewModel;
+            testMvvmControl.ViewFor = typeof(TestViewModel);
             var testRoot = new TestRootWindow(testMvvmControl);
 
             testRoot.Content = new Grid();
@@ -65,6 +67,7 @@ public class MvvmUserControlTests
 
             // Act
             testMvvmControl.DataContext = testViewModel;
+            testMvvmControl.ViewFor = typeof(TestViewModel);
             
             var mvvmControlContainer = new Grid();
             mvvmControlContainer.Children.Add(testMvvmControl);
@@ -95,6 +98,7 @@ public class MvvmUserControlTests
 
             // Act
             testMvvmControl.DataContext = testViewModel;
+            testMvvmControl.ViewFor = typeof(TestViewModel);
             testViewModel.TriggerCloseWindowRequest();
 
             parentWindow.Content = null;
@@ -116,6 +120,7 @@ public class MvvmUserControlTests
 
             // Act
             testMvvmControl.DataContext = testViewModel;
+            testMvvmControl.ViewFor = typeof(TestViewModel);
             var mainWindowFrame = new MainWindowFrame(testMvvmControl);
             var testRoot = new TestRootWindow(mainWindowFrame);
             var messageBoxService = testViewModel.TryGetViewService<IMessageBoxViewService>();
