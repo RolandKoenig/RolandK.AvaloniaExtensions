@@ -32,6 +32,6 @@ public class SaveFileDialogService : ViewServiceBase, ISaveFileViewService
 
         var file = await _parent.StorageProvider.SaveFilePickerAsync(filePickerSaveOptions);
 
-        return file?.Path.ToString() ?? null;
+        return file?.Path.AbsolutePath ?? null;
     }
 }
