@@ -7,7 +7,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
 
-namespace RolandK.AvaloniaExtensions.Views;
+namespace RolandK.AvaloniaExtensions.Controls;
 
 public partial class MainWindowFrame : UserControl
 {
@@ -25,15 +25,15 @@ public partial class MainWindowFrame : UserControl
     private Panel _ctrlFooterArea;
     private Panel _ctrlStatusBar;
 
-    public Controls FullBackgroundArea => _ctrlFullBackgroundPanel.Children;
+    public Avalonia.Controls.Controls FullBackgroundArea => _ctrlFullBackgroundPanel.Children;
 
-    public Controls CustomTitleArea => _ctrlCustomTitleArea.Children;
+    public Avalonia.Controls.Controls CustomTitleArea => _ctrlCustomTitleArea.Children;
 
-    public Controls HeaderMenuArea => _ctrlHeaderMenuArea.Children;
+    public Avalonia.Controls.Controls HeaderMenuArea => _ctrlHeaderMenuArea.Children;
 
-    public Controls MainContentArea => _ctrlMainContentArea.Children;
+    public Avalonia.Controls.Controls MainContentArea => _ctrlMainContentArea.Children;
 
-    public Controls FooterArea => _ctrlFooterArea.Children;
+    public Avalonia.Controls.Controls FooterArea => _ctrlFooterArea.Children;
 
     public DialogHostControl Overlay { get; }
 

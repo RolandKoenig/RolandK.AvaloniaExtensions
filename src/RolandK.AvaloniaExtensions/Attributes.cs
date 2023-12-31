@@ -3,9 +3,9 @@ using Avalonia.Metadata;
 
 [assembly: XmlnsDefinition(
     "https://github.com/RolandK.AvaloniaExtensions", 
-    "RolandK.AvaloniaExtensions.Views")]
+    "RolandK.AvaloniaExtensions.Controls")]
 [assembly: XmlnsDefinition(
     "https://github.com/RolandK.AvaloniaExtensions", 
-    "RolandK.AvaloniaExtensions.Mvvm.Markup")]
+    "RolandK.AvaloniaExtensions.Mvvm.Controls")]
 
 [assembly: InternalsVisibleTo("RolandK.AvaloniaExtensions.Tests")]    

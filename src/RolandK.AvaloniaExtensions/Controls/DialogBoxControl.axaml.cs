@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace RolandK.AvaloniaExtensions.Views;
+namespace RolandK.AvaloniaExtensions.Controls;
 
 public partial class DialogBoxControl : UserControl
 {
@@ -14,7 +14,7 @@ public partial class DialogBoxControl : UserControl
         set => _txtHeader.Text = value;
     }
 
-    public Controls ContentArea
+    public Avalonia.Controls.Controls ContentArea
     {
         get => _gridContent.Children;
     }

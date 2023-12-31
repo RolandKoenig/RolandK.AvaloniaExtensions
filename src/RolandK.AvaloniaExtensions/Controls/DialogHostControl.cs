@@ -4,7 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
 
-namespace RolandK.AvaloniaExtensions.Views;
+namespace RolandK.AvaloniaExtensions.Controls;
 
 public class DialogHostControl : Grid
 {
