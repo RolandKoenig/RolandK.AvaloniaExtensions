@@ -132,6 +132,45 @@ public class MvvmUserControlTests
             GC.KeepAlive(testRoot);
         });
     }
+    
+    [Fact]
+    public Task Attach_ViewModel_to_multiple_views_throws_InvalidOperationException()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testMvvmControl1 = new MvvmUserControl();
+            var testMvvmControl2 = new MvvmUserControl();
+            var testViewModel = new TestViewModel();
+
+            // Act
+            Exception? catchedException = null;
+            try
+            {
+                testMvvmControl1.DataContext = testViewModel;
+                testMvvmControl1.ViewFor = typeof(TestViewModel);
+                testMvvmControl2.DataContext = testViewModel;
+                testMvvmControl2.ViewFor = typeof(TestViewModel);
+
+                var testPanel = new Panel();
+                testPanel.Children.Add(testMvvmControl1);
+                testPanel.Children.Add(testMvvmControl2);
+
+                _ = new TestRootWindow(testPanel);
+            }
+            catch (Exception ex)
+            {
+                catchedException = ex;
+            }
+            
+            // Assert
+            Assert.NotNull(catchedException);
+            var invalidOperationException = Assert.IsType<InvalidOperationException>(catchedException);
+            Assert.Contains("DataContext", invalidOperationException.Message);
+            Assert.Contains("MvvmUserControl", invalidOperationException.Message);
+            Assert.Contains("TestViewModel", invalidOperationException.Message);
+        });
+    }
 
     //*************************************************************************
     //*************************************************************************

@@ -7,7 +7,7 @@ using RolandK.AvaloniaExtensions.Controls;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
-namespace RolandK.AvaloniaExtensions.Tests.Views;
+namespace RolandK.AvaloniaExtensions.Tests.Mvvm;
 
 [Collection(nameof(ApplicationTestCollection))]
 public class MvvmWindowTests 
@@ -195,6 +195,42 @@ public class MvvmWindowTests
             
             // Cleanup
             mvvmWindow.Close();
+        });
+    }
+    
+    [Fact]
+    public Task Attach_ViewModel_to_multiple_views_throws_InvalidOperationException()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testViewModel = new TestViewModel();
+            var mvvmWindow1 = new MvvmWindow();
+            var mvvmWindow2 = new MvvmWindow();
+            
+            // Act
+            Exception? catchedException = null;
+            try
+            {
+                mvvmWindow1.DataContext = testViewModel;
+                mvvmWindow1.ViewFor = typeof(TestViewModel);
+                mvvmWindow1.Show();
+
+                mvvmWindow2.DataContext = testViewModel;
+                mvvmWindow2.ViewFor = typeof(TestViewModel);
+                mvvmWindow2.Show();
+            }
+            catch (Exception ex)
+            {
+                catchedException = ex;
+            }
+            
+            // Assert
+            Assert.NotNull(catchedException);
+            var invalidOperationException = Assert.IsType<InvalidOperationException>(catchedException);
+            Assert.Contains("DataContext", invalidOperationException.Message);
+            Assert.Contains("MvvmWindow", invalidOperationException.Message);
+            Assert.Contains("TestViewModel", invalidOperationException.Message);
         });
     }
     

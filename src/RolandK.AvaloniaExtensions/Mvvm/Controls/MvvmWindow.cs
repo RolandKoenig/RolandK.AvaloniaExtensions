@@ -92,6 +92,14 @@ public class MvvmWindow : Window, IViewServiceHost
         if ((this.DataContext is IAttachableViewModel dataContextAttachable) &&
             (this.DataContext.GetType() == this.ViewFor))
         {
+            if(dataContextAttachable.AssociatedView != null)
+            {
+                throw new InvalidOperationException(
+                    $"Unable to attach to DataContext from view {this.GetType().FullName}: " +
+                    $"The given DataContext of type {dataContextAttachable.GetType().FullName} " +
+                    $"is already attached to a view of type {dataContextAttachable.AssociatedView.GetType().FullName}");
+            }
+            
             dataContextAttachable.ViewServiceRequest += this.OnDataContextAttachable_ViewServiceRequest;
             dataContextAttachable.CloseWindowRequest += this.OnDataContextAttachable_CloseWindowRequest;
             try
