@@ -142,6 +142,20 @@ public class DependencyInjectionTests
         });
     }
     
+    [Fact]
+    public Task Get_ServiceProvider_from_Application()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Act
+            var serviceProvider = Application.Current?.GetServiceProvider();
+
+            // Assert
+            Assert.NotNull(serviceProvider);
+            Assert.NotNull(serviceProvider.GetService(typeof(IDummyService)));
+        });
+    }
+    
     //*************************************************************************
     //*************************************************************************
     //*************************************************************************
