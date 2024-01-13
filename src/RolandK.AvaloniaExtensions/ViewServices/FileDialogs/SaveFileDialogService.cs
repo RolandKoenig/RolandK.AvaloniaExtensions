@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using System.Web;
+using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
@@ -31,7 +32,11 @@ public class SaveFileDialogService : ViewServiceBase, ISaveFileViewService
         filePickerSaveOptions.FileTypeChoices = fileTypes;
 
         var file = await _parent.StorageProvider.SaveFilePickerAsync(filePickerSaveOptions);
-
-        return file?.Path.AbsolutePath ?? null;
+        if (file != null)
+        {
+            return HttpUtility.HtmlDecode(file.Path.AbsolutePath);
+        }
+        
+        return null;
     }
 }

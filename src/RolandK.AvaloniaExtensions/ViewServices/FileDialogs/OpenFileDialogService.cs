@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
@@ -43,7 +44,7 @@ public class OpenFileDialogService : ViewServiceBase, IOpenFileViewService
         }
         else
         {
-            return selectedFiles[0].Path.AbsolutePath;
+            return HttpUtility.UrlDecode(selectedFiles[0].Path.AbsolutePath);
         }
     }
 
@@ -73,7 +74,7 @@ public class OpenFileDialogService : ViewServiceBase, IOpenFileViewService
         else
         {
             return selectedFiles
-                .Select(x => x.Path.AbsolutePath)
+                .Select(x => HttpUtility.UrlDecode(x.Path.AbsolutePath))
                 .ToArray();
         }
     }
