@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.Platform;
 using RolandK.AvaloniaExtensions.ViewServices;
@@ -12,6 +13,12 @@ public class MvvmWindow : Window, IViewServiceHost
     private ViewServiceContainer _viewServiceContainer;
     private Type? _viewFor;
 
+    public event EventHandler<ViewModelAttachedEventArgs>? ViewModelAttached;
+
+    public event EventHandler<ViewModelPropertyChangedEventArgs>? ViewModelPropertyChanged;
+
+    public event EventHandler<ViewModelDetachedEventArgs>? ViewModelDetached; 
+    
     public Type? ViewFor
     {
         get => _viewFor;
@@ -76,6 +83,21 @@ public class MvvmWindow : Window, IViewServiceHost
         }
     }
 
+    protected virtual void OnViewModelPropertyChanged(ViewModelPropertyChangedEventArgs args)
+    {
+        this.ViewModelPropertyChanged?.Invoke(this, args);
+    }
+
+    protected virtual void OnViewModelAttached(ViewModelAttachedEventArgs args)
+    {
+        this.ViewModelAttached?.Invoke(this, args);
+    }
+
+    protected virtual void OnViewModelDetached(ViewModelDetachedEventArgs args)
+    {
+        this.ViewModelDetached?.Invoke(this, args);
+    }
+    
     private void OnViewForChanged()
     {
         if (!_isOpened) { return; }
@@ -100,8 +122,15 @@ public class MvvmWindow : Window, IViewServiceHost
                     $"is already attached to a view of type {dataContextAttachable.AssociatedView.GetType().FullName}");
             }
             
+            var dataContextPropertyChanged = dataContextAttachable as INotifyPropertyChanged;
+            
             dataContextAttachable.ViewServiceRequest += this.OnDataContextAttachable_ViewServiceRequest;
             dataContextAttachable.CloseWindowRequest += this.OnDataContextAttachable_CloseWindowRequest;
+            if (dataContextPropertyChanged != null)
+            {
+                dataContextPropertyChanged.PropertyChanged += this.OnDataContextAttachable_PropertyChanged;
+            }
+            
             try
             {
                 dataContextAttachable.AssociatedView = this;
@@ -110,9 +139,14 @@ public class MvvmWindow : Window, IViewServiceHost
             {
                 dataContextAttachable.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
                 dataContextAttachable.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
+                if (dataContextPropertyChanged != null)
+                {
+                    dataContextPropertyChanged.PropertyChanged -= this.OnDataContextAttachable_PropertyChanged;
+                }
                 throw;
             }
             _currentlyAttachedViewModel = dataContextAttachable;
+            this.OnViewModelAttached(new ViewModelAttachedEventArgs(dataContextAttachable));
         }
     }
 
@@ -123,6 +157,13 @@ public class MvvmWindow : Window, IViewServiceHost
             _currentlyAttachedViewModel.AssociatedView = null;
             _currentlyAttachedViewModel.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
             _currentlyAttachedViewModel.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
+            
+            if (_currentlyAttachedViewModel is INotifyPropertyChanged dataContextPropertyChanged)
+            {
+                dataContextPropertyChanged.PropertyChanged -= this.OnDataContextAttachable_PropertyChanged;
+            }
+
+            this.OnViewModelDetached(new ViewModelDetachedEventArgs(_currentlyAttachedViewModel));
         }
         _currentlyAttachedViewModel = null;
     }
@@ -131,6 +172,15 @@ public class MvvmWindow : Window, IViewServiceHost
     public object? TryGetDefaultViewService(Type viewServiceType)
     {
         return DefaultViewServices.TryGetDefaultViewService(this, viewServiceType);
+    }
+    
+    private void OnDataContextAttachable_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (_currentlyAttachedViewModel == null) { return; }
+        
+        this.OnViewModelPropertyChanged(new ViewModelPropertyChangedEventArgs(
+            _currentlyAttachedViewModel,
+            e.PropertyName));
     }
     
     private void OnDataContextAttachable_ViewServiceRequest(object? sender, ViewServiceRequestEventArgs e)
