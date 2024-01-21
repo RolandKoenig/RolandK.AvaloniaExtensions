@@ -10,7 +10,7 @@ using RolandK.AvaloniaExtensions.ViewServices.Base;
 namespace RolandK.AvaloniaExtensions.Tests.Mvvm;
 
 [Collection(nameof(ApplicationTestCollection))]
-public class MvvmWindowTests 
+public partial class MvvmWindowTests 
 {
     [Fact]
     public async Task Attach_MvvmWindow_to_ViewModel()
@@ -234,10 +234,70 @@ public class MvvmWindowTests
         });
     }
     
+    [Fact]
+    public Task Attach_MvvmWindow_to_ViewModel_then_detach_and_check_events_fired()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testMvvmWindow = new MvvmWindow();
+            var testViewModel = new TestViewModel();
+
+            var viewModelAttachedEventCount = 0;
+            var viewModelDetachedEventCount = 0;
+            testMvvmWindow.ViewModelAttached += (_, _) => viewModelAttachedEventCount++;
+            testMvvmWindow.ViewModelDetached += (_, _) => viewModelDetachedEventCount++;
+            
+            // Act
+            testMvvmWindow.DataContext = testViewModel;
+            testMvvmWindow.ViewFor = typeof(TestViewModel);
+            testMvvmWindow.Show();
+            testViewModel.TriggerCloseWindowRequest();
+            
+            // Assert
+            Assert.Equal(1, viewModelAttachedEventCount);
+            Assert.Equal(1, viewModelDetachedEventCount);
+            
+            // Cleanup
+            testMvvmWindow.Close();
+        });
+    }
+
+    [Fact]
+    public Task Attach_MvvmWindow_to_ViewModel_then_check_ViewModelPropertyChanged_event()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testMvvmWindow = new MvvmWindow();
+            var testViewModel = new TestViewModel();
+
+            var propertyChangedEventCount = 0;
+            var lastPropertyChangedEventPropertyName = string.Empty;
+            testMvvmWindow.ViewModelPropertyChanged += (_, args) =>
+            {
+                propertyChangedEventCount++;
+                lastPropertyChangedEventPropertyName = args.PropertyName;
+            };
+
+            // Act
+            testMvvmWindow.DataContext = testViewModel;
+            testMvvmWindow.ViewFor = typeof(TestViewModel);
+            testMvvmWindow.Show();
+            testViewModel.DummyProperty = "Some other value..";
+
+            // Assert
+            Assert.Equal(1, propertyChangedEventCount);
+            Assert.Equal(nameof(TestViewModel.DummyProperty), lastPropertyChangedEventPropertyName);
+
+            testMvvmWindow.Close();
+        });
+    }
+
     //*************************************************************************
     //*************************************************************************
     //*************************************************************************
-    private class TestViewModel : ObservableObject, IAttachableViewModel
+    private partial class TestViewModel : ObservableObject, IAttachableViewModel
     {
         /// <inheritdoc />
         public event EventHandler<CloseWindowRequestEventArgs>? CloseWindowRequest;
@@ -248,6 +308,9 @@ public class MvvmWindowTests
         /// <inheritdoc />
         public object? AssociatedView { get; set; }
 
+        [ObservableProperty]
+        private string _dummyProperty = string.Empty;
+        
         public TViewService? TryGetViewService<TViewService>()
             where TViewService : class
         {
