@@ -48,7 +48,24 @@ public partial class MainWindowViewModel : OwnViewModelBase
         
         await srvMessageBox.ShowAsync(
             "Open file",
-            $"File {selectedFile} selected", MessageBoxButtons.Ok);
+            $"File {selectedFile} selected", 
+            MessageBoxButtons.Ok);
+    }
+
+    [RelayCommand]
+    public async Task OpenDirectoryAsync()
+    {
+        var srvOpenDirectory = this.GetViewService<IOpenDirectoryViewService>();
+        var srvMessageBox = this.GetViewService<IMessageBoxViewService>();
+
+        var selectedDirectory = await srvOpenDirectory.ShowOpenDirectoryDialogAsync(
+            "Open directory");
+        if (string.IsNullOrEmpty(selectedDirectory)) { return; }
+
+        await srvMessageBox.ShowAsync(
+            "Open directory",
+            $"Directory {selectedDirectory} selected",
+            MessageBoxButtons.Ok);
     }
 
     [RelayCommand]

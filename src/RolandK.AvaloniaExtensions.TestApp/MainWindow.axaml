@@ -20,8 +20,10 @@
             <DockPanel LastChildFill="True">
                 <Menu DockPanel.Dock="Top">
                     <MenuItem Header="File">
-                        <MenuItem Header="Open"
+                        <MenuItem Header="Open file"
                                   Command="{Binding OpenFileCommand}" />
+                        <MenuItem Header="Open directory"
+                                  Command="{Binding OpenDirectoryCommand}" />
                         
                         <Separator />
                         

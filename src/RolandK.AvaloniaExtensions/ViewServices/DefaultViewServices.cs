@@ -33,6 +33,14 @@ internal static class DefaultViewServices
             
             return new MessageBoxViewControlService(dlgHostControl);
         }
+
+        if (viewServiceType == typeof(IOpenDirectoryViewService))
+        {
+            var parentWindow = host.FindLogicalAncestorOfType<Window>(true);
+            if (parentWindow == null) { return null; }
+
+            return new OpenDirectoryDialogService(parentWindow);
+        }
         
         return null;
     }
