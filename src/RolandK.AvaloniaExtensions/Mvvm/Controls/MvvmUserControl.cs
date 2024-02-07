@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
 using RolandK.AvaloniaExtensions.ViewServices;
@@ -13,6 +14,12 @@ public class MvvmUserControl : UserControl, IViewServiceHost
     private bool _isAttachedToLogicalTree;
     private ViewServiceContainer _viewServiceContainer;
     private Type? _viewFor;
+
+    public event EventHandler<ViewModelAttachedEventArgs>? ViewModelAttached;
+
+    public event EventHandler<ViewModelPropertyChangedEventArgs>? ViewModelPropertyChanged;
+
+    public event EventHandler<ViewModelDetachedEventArgs>? ViewModelDetached; 
 
     public Type? ViewFor
     {
@@ -76,6 +83,21 @@ public class MvvmUserControl : UserControl, IViewServiceHost
 
         this.TryAttachToDataContext();
     }
+    
+    protected virtual void OnViewModelPropertyChanged(ViewModelPropertyChangedEventArgs args)
+    {
+        this.ViewModelPropertyChanged?.Invoke(this, args);
+    }
+
+    protected virtual void OnViewModelAttached(ViewModelAttachedEventArgs args)
+    {
+        this.ViewModelAttached?.Invoke(this, args);
+    }
+
+    protected virtual void OnViewModelDetached(ViewModelDetachedEventArgs args)
+    {
+        this.ViewModelDetached?.Invoke(this, args);
+    }
 
     private void OnViewForChanged()
     {
@@ -101,8 +123,14 @@ public class MvvmUserControl : UserControl, IViewServiceHost
                     $"is already attached to a view of type {dataContextAttachable.AssociatedView.GetType().FullName}");
             }
             
+            var dataContextPropertyChanged = dataContextAttachable as INotifyPropertyChanged;
+            
             dataContextAttachable.ViewServiceRequest += this.OnDataContextAttachable_ViewServiceRequest;
             dataContextAttachable.CloseWindowRequest += this.OnDataContextAttachable_CloseWindowRequest;
+            if (dataContextPropertyChanged != null)
+            {
+                dataContextPropertyChanged.PropertyChanged += this.OnDataContextAttachable_PropertyChanged;
+            }
             try
             {
                 dataContextAttachable.AssociatedView = this;
@@ -111,9 +139,15 @@ public class MvvmUserControl : UserControl, IViewServiceHost
             {
                 dataContextAttachable.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
                 dataContextAttachable.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
+                if (dataContextPropertyChanged != null)
+                {
+                    dataContextPropertyChanged.PropertyChanged -= this.OnDataContextAttachable_PropertyChanged;
+                }
                 throw;
             }
+            
             _currentlyAttachedViewModel = dataContextAttachable;
+            this.OnViewModelAttached(new ViewModelAttachedEventArgs(dataContextAttachable));
         }
     }
 
@@ -121,9 +155,16 @@ public class MvvmUserControl : UserControl, IViewServiceHost
     {
         if (_currentlyAttachedViewModel != null)
         {
+            _currentlyAttachedViewModel.AssociatedView = null;
             _currentlyAttachedViewModel.ViewServiceRequest -= this.OnDataContextAttachable_ViewServiceRequest;
             _currentlyAttachedViewModel.CloseWindowRequest -= this.OnDataContextAttachable_CloseWindowRequest;
-            _currentlyAttachedViewModel.AssociatedView = null;
+            
+            if (_currentlyAttachedViewModel is INotifyPropertyChanged dataContextPropertyChanged)
+            {
+                dataContextPropertyChanged.PropertyChanged -= this.OnDataContextAttachable_PropertyChanged;
+            }
+
+            this.OnViewModelDetached(new ViewModelDetachedEventArgs(_currentlyAttachedViewModel));
         }
         _currentlyAttachedViewModel = null;
     }
@@ -132,6 +173,15 @@ public class MvvmUserControl : UserControl, IViewServiceHost
     public object? TryGetDefaultViewService(Type viewServiceType)
     {
         return DefaultViewServices.TryGetDefaultViewService(this, viewServiceType);
+    }
+    
+    private void OnDataContextAttachable_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (_currentlyAttachedViewModel == null) { return; }
+        
+        this.OnViewModelPropertyChanged(new ViewModelPropertyChangedEventArgs(
+            _currentlyAttachedViewModel,
+            e.PropertyName));
     }
     
     private void OnDataContextAttachable_ViewServiceRequest(object? sender, ViewServiceRequestEventArgs e)

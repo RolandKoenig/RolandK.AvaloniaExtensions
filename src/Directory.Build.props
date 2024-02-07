@@ -2,7 +2,7 @@
 
     <!-- Version -->
     <PropertyGroup>
-        <VersionPrefix>2.0.1</VersionPrefix>
+        <VersionPrefix>2.0.3</VersionPrefix>
     </PropertyGroup>
 
     <!-- Nuget -->
@@ -41,7 +41,7 @@
     <!-- Commn configuration-->
     <PropertyGroup>
         <Nullable>enable</Nullable>
-        <LangVersion>11.0</LangVersion>
+        <LangVersion>12</LangVersion>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsAsErrors />
         <NoWarn>1591,1712</NoWarn>

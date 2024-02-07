@@ -4,12 +4,7 @@ using System.Text;
 
 namespace RolandK.AvaloniaExtensions.Mvvm;
 
-public class CloseWindowRequestEventArgs
+public class CloseWindowRequestEventArgs(object? dialogResult) : EventArgs
 {
-    public object? DialogResult { get; }
-
-    public CloseWindowRequestEventArgs(object? dialogResult)
-    {
-        this.DialogResult = dialogResult;
-    }
+    public object? DialogResult { get; } = dialogResult;
 }
