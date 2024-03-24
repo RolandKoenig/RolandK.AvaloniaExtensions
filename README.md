@@ -307,6 +307,7 @@ public static void Main(string[] args)
             ex,
             ".<your-technical-app-name-here>",
             "<your-technical-app-name-here>.ExceptionViewer");
+        throw;
     }
 }
 ```

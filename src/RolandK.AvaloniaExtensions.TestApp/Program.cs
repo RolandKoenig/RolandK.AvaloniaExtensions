@@ -26,6 +26,7 @@ public static class Program
                 ex,
                 ".RKAvaloniaExtensions.TestApp",
                 "RolandK.AvaloniaExtensions.TestApp.ExceptionViewer");
+            throw;
         }
     }
 
