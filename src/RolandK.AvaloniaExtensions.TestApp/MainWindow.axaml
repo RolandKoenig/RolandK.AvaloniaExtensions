@@ -35,6 +35,14 @@
                                   Command="{Binding Path=RecreateTestDataCommand}"/>
                         <MenuItem Header="Show dummy MessageBox"
                                   Command="{Binding Path=ShowDummyMessageBoxCommand}" />
+                        
+                        <Separator />
+                        <MenuItem Header="Show dummy exception (this process)"
+                                  Click="OnMnu_ShowDummyException_ThisProcess_Click" />
+                        <MenuItem Header="Show dummy exception (other process)"
+                                  Click="OnMnu_ShowDummyException_OtherProcess_Click" />
+                        <MenuItem Header="Simulate unhandled exception"
+                                  Click="OnMnu_SimulateUnhandledException_Click" />
                     </MenuItem>
                 </Menu>
         

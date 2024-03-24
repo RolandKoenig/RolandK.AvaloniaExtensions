@@ -33,12 +33,15 @@ public static class GlobalErrorReporting
     /// <summary>
     /// Tries to show an error dialog with some exception details.
     /// If it is not possible for any reason, this method simply does nothing.
+    ///
+    /// This call is a blocking call. It es meant to be called within a global
+    /// try-catch block in Program.cs
     /// </summary>
     /// <param name="exception">The exception to be shown to the user.</param>
     /// <param name="applicationTempDirectoryName">This should be a technical name, the method uses it to create a temporary directory in the filesystem.</param>
     /// <param name="exceptionViewerExecutableProjectName">The project name of the executable showing the error dialog.</param>
     /// <param name="exceptionAnalyzers">If null, a default collection of IExceptionAnalyzers ist used.</param>
-    public static void TryShowGlobalExceptionDialogInAnotherProcess(
+    public static void TryShowBlockingGlobalExceptionDialogInAnotherProcess(
         Exception exception, 
         string applicationTempDirectoryName,
         string exceptionViewerExecutableProjectName,

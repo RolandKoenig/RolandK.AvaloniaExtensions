@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RolandK.AvaloniaExtensions.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.ExceptionHandling", "src\RolandK.AvaloniaExtensions.ExceptionHandling\RolandK.AvaloniaExtensions.ExceptionHandling.csproj", "{FC6CF99C-571A-454F-B385-52F0DEC21BFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolandK.AvaloniaExtensions.TestApp.ExceptionViewer", "src\RolandK.AvaloniaExtensions.TestApp.ExceptionViewer\RolandK.AvaloniaExtensions.TestApp.ExceptionViewer.csproj", "{ED908FBE-7113-4E38-A725-89AA6B4BA9C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{FC6CF99C-571A-454F-B385-52F0DEC21BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC6CF99C-571A-454F-B385-52F0DEC21BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC6CF99C-571A-454F-B385-52F0DEC21BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED908FBE-7113-4E38-A725-89AA6B4BA9C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED908FBE-7113-4E38-A725-89AA6B4BA9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED908FBE-7113-4E38-A725-89AA6B4BA9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED908FBE-7113-4E38-A725-89AA6B4BA9C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
