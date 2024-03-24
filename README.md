@@ -11,14 +11,17 @@ DependencyInjection and some Mvvm sugar
 | Package                                         | Link                                                                          |
 |-------------------------------------------------|-------------------------------------------------------------------------------|
 | RolandK.AvaloniaExtensions                      | https://www.nuget.org/packages/RolandK.AvaloniaExtensions                     |
-| RolandK.AvaloniaExtensions.FluentThemeDetection | (obsolete due to Avalonia 11)                                                 |
 | RolandK.AvaloniaExtensions.DependencyInjection  | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection |
+| RolandK.AvaloniaExtensions.ExceptionHandling    | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.ExceptionHandling   |
+| RolandK.AvaloniaExtensions.FluentThemeDetection | (obsolete due to Avalonia 11)                                                 |
 
 ## Feature overview
  - [ViewServices over the popular Mvvm pattern by **not** providing an own Mvvm implementation](#viewservices-over-the-popular-mvvm-pattern)
  - [Some default ViewServices (FileDialogs, MessageBox)](#some-default-viewservices)
  - [Notification on ViewModels when view is attaching and detaching](#notification-on-viewmodels-when-view-is-attaching-and-detaching)
  - [DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection](#dependencyinjection-for-avalonia-based-on-microsftextensionsdependencyinjection)
+ - [Error dialog for unhandled exceptions](#error-dialog-for-unhandled-exceptions)
+ - [Global error handling for unhandled exceptions](#global-error-handling-for-unhandled-exceptions)
 
 # Samples
 Here you find samples to the features of RolandK.AvaloniaExtensions. Most of
@@ -258,3 +261,81 @@ in xaml namespace 'https://github.com/RolandK.AvaloniaExtensions'
     <!-- ... -->
 </Window>
 ```
+
+## Error dialog for unhandled exceptions
+Add nuget package [RolandK.AvaloniaExtensions.ErrorHandling](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.ExceptionHandling)
+
+Then use a try-catch block like the following to show a dialog for unhandled exceptions.
+```csharp
+ try
+ {
+     // Some logic
+ }
+ catch (Exception ex)
+ {
+     await GlobalErrorReporting.ShowGlobalExceptionDialogAsync(ex, this);
+ }
+```
+
+The method GlobalErrorReporting.ShowGlobalExceptionDialogAsync opens following modal dialog:
+![Unhandled exception dialog](assets/screenshots/unhandled-exception-dialog.png)
+
+## Global error handling for unhandled exceptions
+One draw back for Avalonia is that is does not offer something similar to 
+[Application.DispatcherUnhandledException](https://learn.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception)
+in WPF. Therefore, you have little change to react anyhow on errors which you never expected
+to happen. The only way you can handle these kind of exceptions is to wrap the entry point
+of your application with a global try-catch. In order to show an error dialog in this case
+I have the following solution.
+
+Add nuget package [RolandK.AvaloniaExtensions.ErrorHandling](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.ExceptionHandling)
+
+Now modify the entry point of your application to handle exceptions like in the sample
+application of this repository.
+```csharp
+[STAThread]
+public static void Main(string[] args)
+{
+    try
+    {
+        BuildAvaloniaApp()
+            .StartWithClassicDesktopLifetime(args);
+    }
+    catch (Exception ex)
+    {
+        GlobalErrorReporting.TryShowBlockingGlobalExceptionDialogInAnotherProcess(
+            ex,
+            ".<your-technical-app-name-here>",
+            "<your-technical-app-name-here>.ExceptionViewer");
+    }
+}
+```
+
+So, what does GlobalErrorReporting.TryShowBlockingGlobalExceptionDialogInAnotherProcess do?
+The problem here is, that we can't just show a dialog. We don't know in which state the 
+Avalonia application is currently. So, we need something to show the error dialog in a separate
+process. GlobalErrorReporting.TryShowBlockingGlobalExceptionDialogInAnotherProcess does exactly this.
+It collects error information, serializes it and sends it to a new instance of the 
+application '<your-technical-app-name-here>.ExceptionViewer'. So, just the application
+'<your-technical-app-name-here>.ExceptionViewer' is now missing.
+
+In the next step, create a new Avalonia application in your solution that is called
+'<your-technical-app-name-here>.ExceptionViewer'. There you also reference RolandK.AvaloniaExtensions.ErrorHandling.
+Then you can remove MainWindow.axaml and modify App.xaml.cs to look like the following:
+
+```csharp
+public partial class App : ExceptionViewerApplication
+{
+    public override void Initialize()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+}
+```
+
+The base class ExceptionViewerApplication does the job then. It reads exception information
+from incoming arguments and shows the error dialog. 
+
+One last thing. You also need to add a reference from your application to '<your-technical-app-name-here>.ExceptionViewer'.
+This ensures that the executable of our exception viewer is copied to the output directory
+of your application.
