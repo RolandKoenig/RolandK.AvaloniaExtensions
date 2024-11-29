@@ -2,7 +2,7 @@
 
     <!-- Version -->
     <PropertyGroup>
-        <VersionPrefix>2.1.4</VersionPrefix>
+        <VersionPrefix>11.2.2.0</VersionPrefix>
     </PropertyGroup>
 
     <!-- Nuget -->
