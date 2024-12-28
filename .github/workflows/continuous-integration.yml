@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest   
     steps:
     - uses: actions/checkout@v2
+      
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: |
-          8.0.x
-          9.0.x
+        global-json-file: "./global.json"
+        
     - name: Build and test
       shell: pwsh
       working-directory: ./scripts
