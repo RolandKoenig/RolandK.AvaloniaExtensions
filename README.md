@@ -119,10 +119,15 @@ when the ViewService can not be found.
 In order for that to work, you also have to use one of the base classes MvvmWindow or MvvmUserControl on the
 view side. They are responsible for attaching to the view model and detaching again, when
 the view is closed. Be sure that you also derive from the correct base class in
-the corresponding code behind. Attention: You also have to set the 'ViewFor' property
-on MvvmWindow or MvvmUserControl. The reason behind this is that DataContext is also set
-on child elements automatically. If one of these would also derive from MvvmWindow oder
-MvvmUserControl, these one would attach to your ViewModel too.
+the corresponding code behind. 
+
+There is still one problem: The ViewModel (-> DataContext) is also set to all child elements 
+automatically by Avalonia. Because of this, we need some kind of functionality to clearly 
+identify which View belongs to which ViewModel. By default, RolandK.AvaloniaExtensions provides
+a convention using the AvaloniaExtensionsConventions.IsViewForViewModelFunc delegate. This
+one checks for the naming, e. g. MainWindowViewModel is the ViewModel for the MainWindow View.
+If the naming of the ViewModel differs, then you can override the convention or just set
+the ViewModel type using the ViewFor property of MvvmWindow or MvvmUserControl base classes.
 
 ```xml
 <ext:MvvmWindow xmlns="https://github.com/avaloniaui"
