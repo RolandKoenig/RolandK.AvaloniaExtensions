@@ -48,6 +48,22 @@ public class MvvmWindow : Window, IViewServiceHost
         _viewServiceContainer = new ViewServiceContainer(this);
     }
 
+    private bool IsViewFor(Type viewModelType)
+    {
+        if (viewModelType == this.ViewFor)
+        {
+            return true;
+        }
+
+        var conventionFunc = AvaloniaExtensionsConventions.IsViewForViewModelFunc;
+        if (conventionFunc?.Invoke(this.GetType(), viewModelType) == true)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
     /// <inheritdoc />
     protected override void OnOpened(EventArgs e)
     {
@@ -111,8 +127,8 @@ public class MvvmWindow : Window, IViewServiceHost
         if (_currentlyAttachedViewModel == this.DataContext) { return; }
         
         this.DetachFromDataContext();
-        if ((this.DataContext is IAttachableViewModel dataContextAttachable) &&
-            (this.DataContext.GetType() == this.ViewFor))
+        if (this.DataContext is IAttachableViewModel dataContextAttachable &&
+            this.IsViewFor(this.DataContext.GetType()))
         {
             if(dataContextAttachable.AssociatedView != null)
             {

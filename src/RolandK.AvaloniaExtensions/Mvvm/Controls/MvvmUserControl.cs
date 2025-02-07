@@ -50,6 +50,22 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         this.Content = initialChild;
     }
 
+    private bool IsViewFor(Type viewModelType)
+    {
+        if (viewModelType == this.ViewFor)
+        {
+            return true;
+        }
+
+        var conventionFunc = AvaloniaExtensionsConventions.IsViewForViewModelFunc;
+        if (conventionFunc?.Invoke(this.GetType(), viewModelType) == true)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
     /// <inheritdoc />
     protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
     {
@@ -112,8 +128,8 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         if (_currentlyAttachedViewModel == this.DataContext) { return; }
         
         this.DetachFromDataContext();
-        if ((this.DataContext is IAttachableViewModel dataContextAttachable) &&
-            (this.DataContext.GetType() == this.ViewFor))
+        if (this.DataContext is IAttachableViewModel dataContextAttachable &&
+            this.IsViewFor(this.DataContext.GetType()))
         {
             if(dataContextAttachable.AssociatedView != null)
             {

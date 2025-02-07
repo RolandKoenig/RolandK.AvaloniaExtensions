@@ -34,6 +34,26 @@ public partial class MvvmUserControlTests
     }
     
     [Fact]
+    public Task Attach_TestView_to_TestViewModel_by_conventions()
+    {
+        return UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testView = new TestView();
+            var testViewModel = new TestViewModel();
+
+            // Act
+            testView.DataContext = testViewModel;
+            var testRoot = new TestRootWindow(testView);
+            
+            // Assert
+            Assert.Equal(testView, testViewModel.AssociatedView);
+
+            GC.KeepAlive(testRoot);
+        });
+    }
+    
+    [Fact]
     public Task Attach_MvvmUserControl_to_ViewModel_then_detach()
     {
         return UnitTestApplication.RunInApplicationContextAsync(() =>
@@ -260,5 +280,10 @@ public partial class MvvmUserControlTests
         {
             this.CloseWindowRequest?.Invoke(this, new CloseWindowRequestEventArgs(dialogResult));
         }
+    }
+
+    private class TestView : MvvmUserControl
+    {
+        
     }
 }
