@@ -36,6 +36,28 @@ public partial class MvvmWindowTests
     }
     
     [Fact]
+    public async Task Attach_TestView_to_TestViewModel_by_conventions()
+    {
+        await UnitTestApplication.RunInApplicationContextAsync(() =>
+        {
+            // Arrange
+            var testViewModel = new TestViewModel();
+            var mvvmWindow = new TestView();
+            
+            // Act
+            mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.Show();
+            
+            // Assert
+            Assert.True(mvvmWindow.IsVisible);
+            Assert.Equal(testViewModel.AssociatedView, mvvmWindow);
+            
+            // Cleanup
+            mvvmWindow.Close();
+        });
+    }
+    
+    [Fact]
     public async Task Attach_MvvmWindow_to_ViewModel_then_close_using_ViewModel()
     {
         await UnitTestApplication.RunInApplicationContextAsync(() =>
@@ -323,5 +345,10 @@ public partial class MvvmWindowTests
         {
             this.CloseWindowRequest?.Invoke(this, new CloseWindowRequestEventArgs(dialogResult));
         }
+    }
+
+    private class TestView : MvvmWindow
+    {
+        
     }
 }
