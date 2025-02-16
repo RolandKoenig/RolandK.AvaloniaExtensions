@@ -2,7 +2,7 @@
 
     <!-- Version -->
     <PropertyGroup>
-        <VersionPrefix>11.2.3.1</VersionPrefix>
+        <VersionPrefix>11.2.4.0</VersionPrefix>
     </PropertyGroup>
 
     <!-- Nuget -->
@@ -13,7 +13,7 @@
             A .NET library which extends Avalonia with commonly used features like ViewServices, 
             DependencyInjection and some Mvvm sugar
         </Description>
-        <Copyright>©2023 by Roland König</Copyright>
+        <Copyright>©2025 by Roland König</Copyright>
         <PackageProjectUrl>https://github.com/RolandKoenig/RolandK.AvaloniaExtensions</PackageProjectUrl>
         <RepositoryUrl>https://github.com/RolandKoenig/RolandK.AvaloniaExtensions</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
