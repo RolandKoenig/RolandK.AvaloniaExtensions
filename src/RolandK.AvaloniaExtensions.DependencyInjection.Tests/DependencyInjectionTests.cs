@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Headless.XUnit;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
@@ -8,7 +9,6 @@ using RolandK.AvaloniaExtensions.DependencyInjection.Tests.Util;
 
 namespace RolandK.AvaloniaExtensions.DependencyInjection.Tests;
 
-[Collection(nameof(ApplicationTestCollection))]
 public class DependencyInjectionTests
 {
     /// <summary>
@@ -23,137 +23,119 @@ public class DependencyInjectionTests
         services.AddSingleton<MyDummyViewModel>();
     }
 
-    [Fact]
-    public Task After_startup_check_IServiceProvider_in_resources()
+    [AvaloniaFact]
+    public void After_startup_check_IServiceProvider_in_resources()
     {
-        return UnitTestApplication.RunInApplicationContextAsync(() =>
-        {
-            // Assert
-            var serviceProvider = Application.Current!.FindResource(DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY);
-            Assert.NotNull(serviceProvider);
-            Assert.IsAssignableFrom<IServiceProvider>(serviceProvider);
-        });
+        // Assert
+        var serviceProvider = Application.Current!.FindResource(DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY);
+        Assert.NotNull(serviceProvider);
+        Assert.IsAssignableFrom<IServiceProvider>(serviceProvider);
     }
     
-    [Fact]
-    public Task After_startup_check_IServiceProvider_contains_MyDummyViewModel()
+    [AvaloniaFact]
+    public void After_startup_check_IServiceProvider_contains_MyDummyViewModel()
     {
-        return UnitTestApplication.RunInApplicationContextAsync(() =>
-        {
-            // Arrange
-            var serviceProvider = (IServiceProvider)Application.Current!.FindResource(
-                DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY)!;
+        // Arrange
+        var serviceProvider = (IServiceProvider)Application.Current!.FindResource(
+            DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY)!;
             
-            // Act
-            var dummyViewModel = serviceProvider.GetService<MyDummyViewModel>();
+        // Act
+        var dummyViewModel = serviceProvider.GetService<MyDummyViewModel>();
 
-            // Assert
-            Assert.NotNull(dummyViewModel);
-        });
+        // Assert
+        Assert.NotNull(dummyViewModel);
     }
 
-    [Fact]
-    public Task Create_ViewModel_by_CreateUsingDependencyInjectionExtension_after_attached_to_logical_tree()
+    [AvaloniaFact]
+    public void Create_ViewModel_by_CreateUsingDependencyInjectionExtension_after_attached_to_logical_tree()
     {
-        return UnitTestApplication.RunInApplicationContextAsync(() =>
-        {
-            // Arrange
-            var myUserControl = new UserControl();
-            var rootObjectProvider = Substitute.For<IRootObjectProvider>();
-            rootObjectProvider.RootObject.Returns(myUserControl);
+        // Arrange
+        var myUserControl = new UserControl();
+        var rootObjectProvider = Substitute.For<IRootObjectProvider>();
+        rootObjectProvider.RootObject.Returns(myUserControl);
 
-            var markupExtensionServiceProvider = Substitute.For<IServiceProvider>();
-            markupExtensionServiceProvider.GetService(typeof(IRootObjectProvider)).Returns(rootObjectProvider);
+        var markupExtensionServiceProvider = Substitute.For<IServiceProvider>();
+        markupExtensionServiceProvider.GetService(typeof(IRootObjectProvider)).Returns(rootObjectProvider);
             
-            // Act
-            var testWindow = new TestRootWindow(myUserControl);
-            testWindow.Show();
+        // Act
+        var testWindow = new TestRootWindow(myUserControl);
+        testWindow.Show();
             
-            var attribute = new CreateUsingDependencyInjectionExtension(typeof(MyDummyViewModel));
-            var viewModel = attribute.ProvideValue(markupExtensionServiceProvider);
+        var attribute = new CreateUsingDependencyInjectionExtension(typeof(MyDummyViewModel));
+        var viewModel = attribute.ProvideValue(markupExtensionServiceProvider);
 
-            // Assert
-            Assert.NotNull(viewModel);
-            Assert.IsType<MyDummyViewModel>(viewModel);
+        // Assert
+        Assert.NotNull(viewModel);
+        Assert.IsType<MyDummyViewModel>(viewModel);
             
-            // Cleanup
-            testWindow.Close();
-        });
+        // Cleanup
+        testWindow.Close();
     }
     
-    [Fact]
-    public Task Assign_ViewModel_by_CreateUsingDependencyInjectionExtension_after_attached_to_logical_tree()
+    [AvaloniaFact]
+    public void Assign_ViewModel_by_CreateUsingDependencyInjectionExtension_after_attached_to_logical_tree()
     {
-        return UnitTestApplication.RunInApplicationContextAsync(() =>
-        {
-            // Arrange
-            var myUserControl = new UserControl();
+        // Arrange
+        var myUserControl = new UserControl();
             
-            var rootObjectProvider = Substitute.For<IRootObjectProvider>();
-            rootObjectProvider.RootObject.Returns(myUserControl);
+        var rootObjectProvider = Substitute.For<IRootObjectProvider>();
+        rootObjectProvider.RootObject.Returns(myUserControl);
 
-            var provideValueTarget = Substitute.For<IProvideValueTarget>();
-            provideValueTarget.TargetObject.Returns(myUserControl);
-            provideValueTarget.TargetProperty.Returns(StyledElement.DataContextProperty);
+        var provideValueTarget = Substitute.For<IProvideValueTarget>();
+        provideValueTarget.TargetObject.Returns(myUserControl);
+        provideValueTarget.TargetProperty.Returns(StyledElement.DataContextProperty);
 
-            var markupExtensionServiceProvider = Substitute.For<IServiceProvider>();
-            markupExtensionServiceProvider.GetService(typeof(IRootObjectProvider)).Returns(rootObjectProvider);
-            markupExtensionServiceProvider.GetService(typeof(IProvideValueTarget)).Returns(provideValueTarget);
+        var markupExtensionServiceProvider = Substitute.For<IServiceProvider>();
+        markupExtensionServiceProvider.GetService(typeof(IRootObjectProvider)).Returns(rootObjectProvider);
+        markupExtensionServiceProvider.GetService(typeof(IProvideValueTarget)).Returns(provideValueTarget);
             
-            // Act
-            var attribute = new CreateUsingDependencyInjectionExtension(typeof(MyDummyViewModel));
-            var initialProvideValueResult = attribute.ProvideValue(markupExtensionServiceProvider);
+        // Act
+        var attribute = new CreateUsingDependencyInjectionExtension(typeof(MyDummyViewModel));
+        var initialProvideValueResult = attribute.ProvideValue(markupExtensionServiceProvider);
             
-            var testWindow = new TestRootWindow(myUserControl);
-            testWindow.Show();
+        var testWindow = new TestRootWindow(myUserControl);
+        testWindow.Show();
 
-            var viewModel = myUserControl.DataContext;
+        var viewModel = myUserControl.DataContext;
 
-            // Assert
-            Assert.Null(initialProvideValueResult); // this one is null because myUserControl was not attached to logical tree
-            Assert.NotNull(viewModel); // This one is set because the attribute automatically assigns the value after myUserControl is attached to logical tree 
-            Assert.IsType<MyDummyViewModel>(viewModel);
+        // Assert
+        Assert.Null(initialProvideValueResult); // this one is null because myUserControl was not attached to logical tree
+        Assert.NotNull(viewModel); // This one is set because the attribute automatically assigns the value after myUserControl is attached to logical tree 
+        Assert.IsType<MyDummyViewModel>(viewModel);
             
-            // Cleanup
-            testWindow.Close();
-        });
+        // Cleanup
+        testWindow.Close();
     }
 
-    [Fact]
-    public Task Create_Control_and_get_ServiceProvider_from_it()
+    [AvaloniaFact]
+    public void Create_Control_and_get_ServiceProvider_from_it()
     {
-        return UnitTestApplication.RunInApplicationContextAsync(() =>
-        {
-            // Arrange
-            var myUserControl = new UserControl();
+        // Arrange
+        var myUserControl = new UserControl();
             
-            // Act
-            var testWindow = new TestRootWindow(myUserControl);
-            testWindow.Show();
+        // Act
+        var testWindow = new TestRootWindow(myUserControl);
+        testWindow.Show();
 
-            var serviceProvider = myUserControl.GetServiceProvider();
+        var serviceProvider = myUserControl.GetServiceProvider();
 
-            // Assert
-            Assert.NotNull(serviceProvider);
-            Assert.NotNull(serviceProvider.GetService(typeof(IDummyService)));
+        // Assert
+        Assert.NotNull(serviceProvider);
+        Assert.NotNull(serviceProvider.GetService(typeof(IDummyService)));
             
-            // Cleanup
-            testWindow.Close();
-        });
+        // Cleanup
+        testWindow.Close();
     }
     
-    [Fact]
-    public Task Get_ServiceProvider_from_Application()
+    [AvaloniaFact]
+    public void Get_ServiceProvider_from_Application()
     {
-        return UnitTestApplication.RunInApplicationContextAsync(() =>
-        {
-            // Act
-            var serviceProvider = Application.Current?.GetServiceProvider();
+        // Act
+        var serviceProvider = Application.Current?.GetServiceProvider();
 
-            // Assert
-            Assert.NotNull(serviceProvider);
-            Assert.NotNull(serviceProvider.GetService(typeof(IDummyService)));
-        });
+        // Assert
+        Assert.NotNull(serviceProvider);
+        Assert.NotNull(serviceProvider.GetService(typeof(IDummyService)));
     }
     
     //*************************************************************************

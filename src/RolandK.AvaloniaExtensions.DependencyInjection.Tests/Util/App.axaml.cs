@@ -1,7 +1,7 @@
 using Avalonia;
 using Avalonia.Markup.Xaml;
 
-namespace RolandK.AvaloniaExtensions.Tests.Util;
+namespace RolandK.AvaloniaExtensions.DependencyInjection.Tests.Util;
 
 public partial class App : Application
 {
