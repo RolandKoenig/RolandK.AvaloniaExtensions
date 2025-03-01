@@ -1,6 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Platform;
-using NSubstitute;
 
 namespace RolandK.AvaloniaExtensions.Tests.Util;
 
@@ -16,5 +14,12 @@ internal class TestRootWindow : Window
         : this()
     {
         this.Content = initialChild;
+    }
+
+    public static TestRootWindow CreateAndShow(Control initialChild)
+    {
+        var window = new TestRootWindow(initialChild);
+        window.Show();
+        return window;
     }
 }
