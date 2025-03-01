@@ -11,16 +11,12 @@ namespace RolandK.AvaloniaExtensions.DependencyInjection.Tests;
 
 public class DependencyInjectionTests
 {
-    /// <summary>
-    /// Setup services for automated tests.
-    /// </summary>
-    internal static void AddServicesForUnitTests(IServiceCollection services)
+    public DependencyInjectionTests()
     {
-        // Services
-        services.AddTransient<IDummyService, DummyServiceImpl>();
-        
-        // ViewModels
-        services.AddSingleton<MyDummyViewModel>();
+        Application.Current!.Resources[DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY] = new ServiceCollection()
+            .AddTransient<IDummyService, DummyServiceImpl>()
+            .AddSingleton<MyDummyViewModel>()
+            .BuildServiceProvider();
     }
 
     [AvaloniaFact]
