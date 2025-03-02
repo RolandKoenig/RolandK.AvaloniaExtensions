@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.Tests.MarkupExtensions.PrimitiveValues"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="RolandK.AvaloniaExtensions.Tests.MarkupExtensions.PrimitiveValues.PrimitiveValueUiTestControl">
+    <UserControl.DataContext>
+        <local:PrimitiveValueUiTestControlViewModel BoolValueTrue="{ext:BoolValue true}"
+                                                    BoolValueFalse="{ext:BoolValue false}" 
+                                                    ByteValue="{ext:ByteValue 128}" 
+                                                    CharValue="{ext:CharValue A}"
+                                                    DecimalValue="{ext:DecimalValue 128.12}" 
+                                                    DoubleValue="{ext:DoubleValue 128.12}" 
+                                                    FloatValue="{ext:FloatValue 128.12}"
+                                                    LongValue="{ext:LongValue 128}"
+                                                    IntValue="{ext:IntValue 128}"
+                                                    NIntValue="{ext:NIntValue 128}"
+                                                    SByteValue="{ext:SByteValue 64}"
+                                                    ShortValue="{ext:ShortValue 128}"
+                                                    UIntValue="{ext:UIntValue 128}"
+                                                    ULongValue="{ext:ULongValue 128}"
+                                                    UShortValue="{ext:UShortValue 128}" />
+    </UserControl.DataContext>
+</UserControl>
