@@ -3,7 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.LogicalTree;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
 
@@ -11,9 +10,14 @@ namespace RolandK.AvaloniaExtensions.Controls;
 
 public partial class MainWindowFrame : UserControl
 {
+    // ReSharper disable once RedundantArgumentDefaultValue
     public static readonly StyledProperty<MainWindowFrameStatus> StatusProperty =
         AvaloniaProperty.Register<MainWindowFrame, MainWindowFrameStatus>(
             nameof(Status), MainWindowFrameStatus.Hidden);
+
+    public static readonly StyledProperty<double> FullAppZoomProperty =
+        AvaloniaProperty.Register<MainWindowFrame, double>(
+            nameof(FullAppZoom), 1.0);
 
     private Window? _mainWindow;
     private Grid _ctrlFullWindowGrid;
@@ -24,6 +28,7 @@ public partial class MainWindowFrame : UserControl
     private Panel _ctrlMainContentArea;
     private Panel _ctrlFooterArea;
     private Panel _ctrlStatusBar;
+    private ScaleTransform _ctrlFullAppZoomTransform;
 
     public Avalonia.Controls.Controls FullBackgroundArea => _ctrlFullBackgroundPanel.Children;
 
@@ -43,21 +48,31 @@ public partial class MainWindowFrame : UserControl
         set => this.SetValue(StatusProperty, value);
     }
 
+    public double FullAppZoom
+    {
+        get => this.GetValue(FullAppZoomProperty);
+        set => this.SetValue(FullAppZoomProperty, value);
+    }
+
     public bool IsAttachedToWindow => _mainWindow != null;
 
     public MainWindowFrame()
     {
-        AvaloniaXamlLoader.Load(this);
+        this.InitializeComponent();
+        
+        _ctrlFullWindowGrid = this.CtrlFullWindowGrid ?? throw new InvalidOperationException("Control CtrlFullWindowGrid not found!");
+        _ctrlFullBackgroundPanel = this.CtrlFullBackgroundPanel ?? throw new InvalidOperationException("Control CtrlFullBackgroundPanel not found!");
+        _ctrlMainGrid = this.CtrlMainGrid ?? throw new InvalidOperationException("Control CtrlMainGrid not found!");
+        _ctrlCustomTitleArea = this.CtrlCustomTitleArea ?? throw new InvalidOperationException("Control CtrlCustomTitleArea not found!");
+        _ctrlHeaderMenuArea = this.CtrlHeaderMenuArea ?? throw new InvalidOperationException("Control CtrlHeaderMenuArea not found!");
+        _ctrlMainContentArea = this.CtrlMainContentArea ?? throw new InvalidOperationException("Control CtrlMainContentArea not found!");
+        _ctrlFooterArea = this.CtrlFooterArea ?? throw new InvalidOperationException("Control CtrlFooterArea not found!");
+        _ctrlStatusBar = this.CtrlStatusBar ?? throw new InvalidOperationException("Control CtrlStatusBar not found!");
+        this.Overlay = this.CtrlOverlay ?? throw new InvalidOperationException("Control CtrlOverlay not found!");
 
-        _ctrlFullWindowGrid = this.Find<Grid>("CtrlFullWindowGrid") ?? throw new InvalidOperationException("Control CtrlFullWindowGrid not found!");
-        _ctrlFullBackgroundPanel = this.Find<Panel>("CtrlFullBackgroundPanel") ?? throw new InvalidOperationException("Control CtrlFullBackgroundPanel not found!");
-        _ctrlMainGrid = this.Find<Grid>("CtrlMainGrid")?? throw new InvalidOperationException("Control CtrlMainGrid not found!");
-        _ctrlCustomTitleArea = this.Find<StackPanel>("CtrlCustomTitleArea") ?? throw new InvalidOperationException("Control CtrlCustomTitleArea not found!");
-        _ctrlHeaderMenuArea = this.Find<Panel>("CtrlHeaderMenuArea") ?? throw new InvalidOperationException("Control CtrlHeaderMenuArea not found!");
-        _ctrlMainContentArea = this.Find<Panel>("CtrlMainContentArea") ?? throw new InvalidOperationException("Control CtrlMainContentArea not found!");
-        _ctrlFooterArea = this.Find<Panel>("CtrlFooterArea") ?? throw new InvalidOperationException("Control CtrlFooterArea not found!");
-        _ctrlStatusBar = this.Find<Panel>("CtrlStatusBar") ?? throw new InvalidOperationException("Control CtrlStatusBar not found!");
-        this.Overlay = this.Find<DialogHostControl>("CtrlOverlay") ?? throw new InvalidOperationException("Control CtrlOverlay not found!");
+        var fullAppZoomLayoutControl = this.CtrlFullAppZoom;
+        _ctrlFullAppZoomTransform = new ScaleTransform(this.FullAppZoom, this.FullAppZoom);
+        fullAppZoomLayoutControl.LayoutTransform = _ctrlFullAppZoomTransform;
     }
 
     public MainWindowFrame(Control initialChild)
@@ -74,6 +89,11 @@ public partial class MainWindowFrame : UserControl
         if (change.Property == StatusProperty)
         {
             this.UpdateFrameState();
+        }
+        else if (change.Property == FullAppZoomProperty)
+        {
+            _ctrlFullAppZoomTransform.ScaleX = this.FullAppZoom;
+            _ctrlFullAppZoomTransform.ScaleY = this.FullAppZoom;
         }
     }
 

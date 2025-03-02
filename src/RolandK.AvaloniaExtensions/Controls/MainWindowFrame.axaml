@@ -5,14 +5,14 @@
              xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="RolandK.AvaloniaExtensions.Controls.MainWindowFrame">
-    <Grid x:Name="CtrlFullWindowGrid">
+    <Grid Name="CtrlFullWindowGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Full background -->
-        <Panel x:Name="CtrlFullBackgroundPanel" 
+        <Panel Name="CtrlFullBackgroundPanel" 
                Grid.Row="0" 
                Grid.RowSpan="2"
                IsHitTestVisible="False"/>
@@ -21,45 +21,49 @@
         <Grid Grid.Row="0"
               Background="{DynamicResource MainWindowFrameTitleBackgroundBrush}"
               IsHitTestVisible="False">
-            <StackPanel x:Name="CtrlCustomTitleArea"
+            <StackPanel Name="CtrlCustomTitleArea"
                         Orientation="Horizontal" />
         </Grid>
 
-        <Grid Grid.Row="1" x:Name="CtrlMainGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <LayoutTransformControl Grid.Row="1"
+                                Name="CtrlFullAppZoom">
+            <Panel>
+                <Grid Name="CtrlMainGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-            <!-- Header row (normally a menu) -->
-            <Panel Grid.Row="0" x:Name="CtrlHeaderMenuArea">
+                    <!-- Header row (normally a menu) -->
+                    <Panel Grid.Row="0" Name="CtrlHeaderMenuArea">
 
+                    </Panel>
+
+                    <!-- Main content -->
+                    <Panel Grid.Row="1" Name="CtrlMainContentArea"
+                           Margin="5">
+
+                    </Panel>
+
+
+                    <!-- Footer panel-->
+                    <Panel Grid.Row="2" Name="CtrlFooterArea">
+
+                    </Panel>
+
+                    <!-- Colored status bar -->
+                    <Panel Name="CtrlStatusBar" 
+                           Grid.Row="3"
+                           Height="7"
+                           IsHitTestVisible="False"
+                           Background="#0975C6"/>
+                </Grid>
+
+                <local:DialogHostControl Name="CtrlOverlay" 
+                                         OccludedControl="{Binding ElementName=CtrlMainGrid}" />
             </Panel>
-
-            <!-- Main content -->
-            <Panel Grid.Row="1" x:Name="CtrlMainContentArea"
-                   Margin="5">
-
-            </Panel>
-
-
-            <!-- Footer panel-->
-            <Panel Grid.Row="2" x:Name="CtrlFooterArea">
-
-            </Panel>
-
-            <!-- Colored status bar -->
-            <Panel x:Name="CtrlStatusBar" 
-                   Grid.Row="3"
-                   Height="7"
-                   IsHitTestVisible="False"
-                   Background="#0975C6"/>
-        </Grid>
-
-        <local:DialogHostControl x:Name="CtrlOverlay" 
-                                 OccludedControl="{Binding ElementName=CtrlMainGrid}"
-                                 Grid.Row="1" />
+        </LayoutTransformControl>
     </Grid>
 </UserControl>

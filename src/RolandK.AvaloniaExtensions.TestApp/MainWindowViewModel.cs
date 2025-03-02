@@ -18,6 +18,12 @@ public partial class MainWindowViewModel : OwnViewModelBase
 
     [ObservableProperty]
     private ObservableCollection<UserData> _dataRows = new();
+    
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CurrentZoomDisplayText))]
+    private double _fullAppZoom = 1;
+    
+    public string CurrentZoomDisplayText => $"{(this.FullAppZoom * 100):N0}%";
 
     public MainWindowViewModel(ITestDataGenerator testDataGenerator)
     {
@@ -26,6 +32,17 @@ public partial class MainWindowViewModel : OwnViewModelBase
         this.Title = "RolandK.AvaloniaExtension Test Application";
         this.DataRows = new ObservableCollection<UserData>(
             _testDataGenerator.GenerateUserData(50));
+    }
+
+    [RelayCommand(CanExecute = nameof(CanSetFullAppZoom))]
+    public void SetFullAppZoom(double zoom)
+    {
+        this.FullAppZoom = zoom;
+    }
+
+    public bool CanSetFullAppZoom(double zoom)
+    {
+        return Math.Abs(zoom - this.FullAppZoom) > 0.0001;
     }
 
     [RelayCommand]
