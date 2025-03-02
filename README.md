@@ -22,6 +22,7 @@ DependencyInjection and some Mvvm sugar
  - [DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection](#dependencyinjection-for-avalonia-based-on-microsftextensionsdependencyinjection)
  - [Error dialog for unhandled exceptions](#error-dialog-for-unhandled-exceptions)
  - [Global error handling for unhandled exceptions](#global-error-handling-for-unhandled-exceptions)
+ - [MarkupExtensions for primitive values](#markupextensions-for-primitive_values)
 
 # Samples
 Here you find samples to the features of RolandK.AvaloniaExtensions. Most of
@@ -345,3 +346,36 @@ from incoming arguments and shows the error dialog.
 One last thing. You also need to add a reference from your application to '<your-technical-app-name-here>.ExceptionViewer'.
 This ensures that the executable of our exception viewer is copied to the output directory
 of your application.
+
+## MarkupExtensions for primitive values
+RolandK.AvaloniaExtensions provides one MarkupExtension per primitive type in C#. You can use them whenever you need
+a value to be a specific primitive .NET type.
+
+```xml
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.Tests.MarkupExtensions.PrimitiveValues"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="RolandK.AvaloniaExtensions.Tests.MarkupExtensions.PrimitiveValues.PrimitiveValueUiTestControl">
+    <UserControl.DataContext>
+        <local:PrimitiveValueUiTestControlViewModel BoolValueTrue="{ext:Bool true}"
+                                                    BoolValueFalse="{ext:Bool false}" 
+                                                    ByteValue="{ext:Byte 128}" 
+                                                    CharValue="{ext:Char A}"
+                                                    DecimalValue="{ext:Decimal 128.12}" 
+                                                    DoubleValue="{ext:Double 128.12}" 
+                                                    FloatValue="{ext:Float 128.12}"
+                                                    LongValue="{ext:Long 128}"
+                                                    IntValue="{ext:Int 128}"
+                                                    NIntValue="{ext:NInt 128}"
+                                                    SByteValue="{ext:SByte 64}"
+                                                    ShortValue="{ext:ShortValue 128}"
+                                                    UIntValue="{ext:UInt 128}"
+                                                    ULongValue="{ext:ULong 128}"
+                                                    UShortValue="{ext:UShort 128}" />
+    </UserControl.DataContext>
+</UserControl>
+```
