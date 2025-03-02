@@ -10,7 +10,7 @@
         ExtendClientAreaToDecorationsHint="True"
         DataContext="{ext:CreateUsingDependencyInjection {x:Type local:MainWindowViewModel}}"
         d:DataContext="{x:Static local:MainWindowViewModel.DesignViewModel}">
-    <ext:MainWindowFrame>
+    <ext:MainWindowFrame FullAppZoom="{Binding FullAppZoom}">
         <ext:MainWindowFrame.CustomTitleArea>
             <TextBlock Text="{Binding Path=Title}" />
         </ext:MainWindowFrame.CustomTitleArea>
@@ -29,6 +29,7 @@
                         <MenuItem Header="Exit"
                                   Command="{Binding ExitCommand}" />
                     </MenuItem>
+                    
                     <MenuItem Header="Tests">
                         <MenuItem Header="Recreate test data"
                                   Command="{Binding Path=RecreateTestDataCommand}"/>
@@ -42,6 +43,27 @@
                                   Click="OnMnu_ShowDummyException_OtherProcess_Click" />
                         <MenuItem Header="Simulate unhandled exception"
                                   Click="OnMnu_SimulateUnhandledException_Click" />
+                    </MenuItem>
+                    
+                    <!-- Full app zoom -->
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock>
+                                Zoom (<Run Text="{Binding CurrentZoomDisplayText}" />)
+                            </TextBlock>
+                        </MenuItem.Header>
+                        <MenuItem Header="75%"
+                                  Command="{Binding SetFullAppZoomCommand}"
+                                  CommandParameter="{ext:Double 0.75}" />
+                        <MenuItem Header="100%"
+                                  Command="{Binding SetFullAppZoomCommand}"
+                                  CommandParameter="{ext:Double 1.0}" />
+                        <MenuItem Header="125%"
+                                  Command="{Binding SetFullAppZoomCommand}"
+                                  CommandParameter="{ext:Double 1.25}" />
+                        <MenuItem Header="150%"
+                                  Command="{Binding SetFullAppZoomCommand}"
+                                  CommandParameter="{ext:Double 1.50}" />
                     </MenuItem>
                 </Menu>
         
