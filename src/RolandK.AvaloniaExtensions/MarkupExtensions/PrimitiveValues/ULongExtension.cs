@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class IntValueExtension : MarkupExtension
+/// <summary>
+/// Provides an ulong value in XAML.
+/// </summary>
+public class ULongExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public int Value { get; set; }
+    public ulong Value { get; set; }
 
-    public IntValueExtension()
+    public ULongExtension()
     {
         
     }
 
-    public IntValueExtension(int value)
+    public ULongExtension(ulong value)
     {
         this.Value = value;
     }

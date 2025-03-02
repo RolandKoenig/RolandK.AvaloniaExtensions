@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class CharValueExtension : MarkupExtension
+/// <summary>
+/// Provides an int value in XAML.
+/// </summary>
+public class IntExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public char Value { get; set; }
+    public int Value { get; set; }
 
-    public CharValueExtension()
+    public IntExtension()
     {
         
     }
 
-    public CharValueExtension(char value)
+    public IntExtension(int value)
     {
         this.Value = value;
     }

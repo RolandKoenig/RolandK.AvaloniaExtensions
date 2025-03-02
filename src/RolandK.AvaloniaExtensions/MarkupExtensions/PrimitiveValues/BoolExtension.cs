@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class UIntValueExtension : MarkupExtension
+/// <summary>
+/// Provides a bool value in XAML.
+/// </summary>
+public class BoolExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public uint Value { get; set; }
+    public bool Value { get; set; }
 
-    public UIntValueExtension()
+    public BoolExtension()
     {
         
     }
 
-    public UIntValueExtension(uint value)
+    public BoolExtension(bool value)
     {
         this.Value = value;
     }

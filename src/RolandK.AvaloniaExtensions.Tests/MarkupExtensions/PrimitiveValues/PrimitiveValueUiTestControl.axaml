@@ -7,20 +7,20 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="RolandK.AvaloniaExtensions.Tests.MarkupExtensions.PrimitiveValues.PrimitiveValueUiTestControl">
     <UserControl.DataContext>
-        <local:PrimitiveValueUiTestControlViewModel BoolValueTrue="{ext:BoolValue true}"
-                                                    BoolValueFalse="{ext:BoolValue false}" 
-                                                    ByteValue="{ext:ByteValue 128}" 
-                                                    CharValue="{ext:CharValue A}"
-                                                    DecimalValue="{ext:DecimalValue 128.12}" 
-                                                    DoubleValue="{ext:DoubleValue 128.12}" 
-                                                    FloatValue="{ext:FloatValue 128.12}"
-                                                    LongValue="{ext:LongValue 128}"
-                                                    IntValue="{ext:IntValue 128}"
-                                                    NIntValue="{ext:NIntValue 128}"
-                                                    SByteValue="{ext:SByteValue 64}"
+        <local:PrimitiveValueUiTestControlViewModel BoolValueTrue="{ext:Bool true}"
+                                                    BoolValueFalse="{ext:Bool false}" 
+                                                    ByteValue="{ext:Byte 128}" 
+                                                    CharValue="{ext:Char A}"
+                                                    DecimalValue="{ext:Decimal 128.12}" 
+                                                    DoubleValue="{ext:Double 128.12}" 
+                                                    FloatValue="{ext:Float 128.12}"
+                                                    LongValue="{ext:Long 128}"
+                                                    IntValue="{ext:Int 128}"
+                                                    NIntValue="{ext:NInt 128}"
+                                                    SByteValue="{ext:SByte 64}"
                                                     ShortValue="{ext:ShortValue 128}"
-                                                    UIntValue="{ext:UIntValue 128}"
-                                                    ULongValue="{ext:ULongValue 128}"
-                                                    UShortValue="{ext:UShortValue 128}" />
+                                                    UIntValue="{ext:UInt 128}"
+                                                    ULongValue="{ext:ULong 128}"
+                                                    UShortValue="{ext:UShort 128}" />
     </UserControl.DataContext>
 </UserControl>

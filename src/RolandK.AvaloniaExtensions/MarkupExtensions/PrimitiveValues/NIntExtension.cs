@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class ShortValueExtension : MarkupExtension
+/// <summary>
+/// Provides a nint value in XAML.
+/// </summary>
+public class NIntExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public short Value { get; set; }
+    public nint Value { get; set; }
 
-    public ShortValueExtension()
+    public NIntExtension()
     {
         
     }
 
-    public ShortValueExtension(short value)
+    public NIntExtension(nint value)
     {
         this.Value = value;
     }

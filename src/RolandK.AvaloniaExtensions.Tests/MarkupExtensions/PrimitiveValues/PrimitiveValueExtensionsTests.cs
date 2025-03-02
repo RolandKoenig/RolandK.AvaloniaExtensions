@@ -42,12 +42,12 @@ public class PrimitiveValueExtensionsTests
     public void BoolValueExtension_returns_expected_value(bool value)
     {
         // Property setter
-        var boolValueExtension1 = new BoolValueExtension();
+        var boolValueExtension1 = new BoolExtension();
         boolValueExtension1.Value = value;
         Assert.Equal(value, boolValueExtension1.Value);
 
         // Constructor
-        var boolValueExtension2 = new BoolValueExtension(value);
+        var boolValueExtension2 = new BoolExtension(value);
         Assert.Equal(value, boolValueExtension2.Value);
     }
 
@@ -55,12 +55,12 @@ public class PrimitiveValueExtensionsTests
     public void CharValueExtension_returns_expected_value()
     {
         // Property setter
-        var charValueExtension1 = new CharValueExtension();
+        var charValueExtension1 = new CharExtension();
         charValueExtension1.Value = 'A';
         Assert.Equal('A', charValueExtension1.Value);
 
         // Constructor
-        var charValueExtension2 = new CharValueExtension('A');
+        var charValueExtension2 = new CharExtension('A');
         Assert.Equal('A', charValueExtension2.Value);
     }
 
@@ -68,12 +68,12 @@ public class PrimitiveValueExtensionsTests
     public void DoubleValueExtension_returns_expected_value()
     {
         // Property setter
-        var doubleValueExtension1 = new DoubleValueExtension();
+        var doubleValueExtension1 = new DoubleExtension();
         doubleValueExtension1.Value = 123.45;
         Assert.Equal(123.45, doubleValueExtension1.Value);
 
         // Constructor
-        var doubleValueExtension2 = new DoubleValueExtension(123.45);
+        var doubleValueExtension2 = new DoubleExtension(123.45);
         Assert.Equal(123.45, doubleValueExtension2.Value);
     }
 
@@ -81,12 +81,12 @@ public class PrimitiveValueExtensionsTests
     public void FloatValueExtension_returns_expected_value()
     {
         // Property setter
-        var floatValueExtension1 = new FloatValueExtension();
+        var floatValueExtension1 = new FloatExtension();
         floatValueExtension1.Value = 123.45f;
         Assert.Equal(123.45f, floatValueExtension1.Value);
 
         // Constructor
-        var floatValueExtension2 = new FloatValueExtension(123.45f);
+        var floatValueExtension2 = new FloatExtension(123.45f);
         Assert.Equal(123.45f, floatValueExtension2.Value);
     }
 
@@ -94,12 +94,12 @@ public class PrimitiveValueExtensionsTests
     public void LongValueExtension_returns_expected_value()
     {
         // Property setter
-        var longValueExtension1 = new LongValueExtension();
+        var longValueExtension1 = new LongExtension();
         longValueExtension1.Value = 123L;
         Assert.Equal(123L, longValueExtension1.Value);
 
         // Constructor
-        var longValueExtension2 = new LongValueExtension(123L);
+        var longValueExtension2 = new LongExtension(123L);
         Assert.Equal(123L, longValueExtension2.Value);
     }
 
@@ -107,12 +107,12 @@ public class PrimitiveValueExtensionsTests
     public void NIntValueExtension_returns_expected_value()
     {
         // Property setter
-        var nIntValueExtension1 = new NIntValueExtension();
+        var nIntValueExtension1 = new NIntExtension();
         nIntValueExtension1.Value = 123;
         Assert.Equal(123, nIntValueExtension1.Value);
 
         // Constructor
-        var nIntValueExtension2 = new NIntValueExtension(123);
+        var nIntValueExtension2 = new NIntExtension(123);
         Assert.Equal(123, nIntValueExtension2.Value);
     }
 
@@ -120,12 +120,12 @@ public class PrimitiveValueExtensionsTests
     public void SByteValueExtension_returns_expected_value()
     {
         // Property setter
-        var sByteValueExtension1 = new SByteValueExtension();
+        var sByteValueExtension1 = new SByteExtension();
         sByteValueExtension1.Value = 123;
         Assert.Equal((sbyte)123, sByteValueExtension1.Value);
 
         // Constructor
-        var sByteValueExtension2 = new SByteValueExtension(123);
+        var sByteValueExtension2 = new SByteExtension(123);
         Assert.Equal((sbyte)123, sByteValueExtension2.Value);
     }
 
@@ -146,12 +146,12 @@ public class PrimitiveValueExtensionsTests
     public void UIntValueExtension_returns_expected_value()
     {
         // Property setter
-        var uIntValueExtension1 = new UIntValueExtension();
+        var uIntValueExtension1 = new UIntExtension();
         uIntValueExtension1.Value = 123u;
         Assert.Equal(123u, uIntValueExtension1.Value);
 
         // Constructor
-        var uIntValueExtension2 = new UIntValueExtension(123u);
+        var uIntValueExtension2 = new UIntExtension(123u);
         Assert.Equal(123u, uIntValueExtension2.Value);
     }
 
@@ -159,12 +159,12 @@ public class PrimitiveValueExtensionsTests
     public void ULongValueExtension_returns_expected_value()
     {
         // Property setter
-        var uLongValueExtension1 = new ULongValueExtension();
+        var uLongValueExtension1 = new ULongExtension();
         uLongValueExtension1.Value = 123UL;
         Assert.Equal(123UL, uLongValueExtension1.Value);
 
         // Constructor
-        var uLongValueExtension2 = new ULongValueExtension(123UL);
+        var uLongValueExtension2 = new ULongExtension(123UL);
         Assert.Equal(123UL, uLongValueExtension2.Value);
     }
 
@@ -172,12 +172,12 @@ public class PrimitiveValueExtensionsTests
     public void UShortValueExtension_returns_expected_value()
     {
         // Property setter
-        var uShortValueExtension1 = new UShortValueExtension();
+        var uShortValueExtension1 = new UShortExtension();
         uShortValueExtension1.Value = 123;
         Assert.Equal((ushort)123, uShortValueExtension1.Value);
 
         // Constructor
-        var uShortValueExtension2 = new UShortValueExtension(123);
+        var uShortValueExtension2 = new UShortExtension(123);
         Assert.Equal((ushort)123, uShortValueExtension2.Value);
     }
 }

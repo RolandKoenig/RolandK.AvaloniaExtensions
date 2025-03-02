@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class SByteValueExtension : MarkupExtension
+/// <summary>
+/// Provides a long value in XAML.
+/// </summary>
+public class LongExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public sbyte Value { get; set; }
+    public long Value { get; set; }
 
-    public SByteValueExtension()
+    public LongExtension()
     {
         
     }
 
-    public SByteValueExtension(sbyte value)
+    public LongExtension(long value)
     {
         this.Value = value;
     }

@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class LongValueExtension : MarkupExtension
+/// <summary>
+/// Provides a decimal value in XAML.
+/// </summary>
+public class DecimalExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public long Value { get; set; }
+    public decimal Value { get; set; }
 
-    public LongValueExtension()
+    public DecimalExtension()
     {
         
     }
 
-    public LongValueExtension(long value)
+    public DecimalExtension(decimal value)
     {
         this.Value = value;
     }

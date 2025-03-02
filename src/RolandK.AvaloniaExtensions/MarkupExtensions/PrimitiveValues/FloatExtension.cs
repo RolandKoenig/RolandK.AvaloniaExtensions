@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class NIntValueExtension : MarkupExtension
+/// <summary>
+/// Provides a float value in XAML.
+/// </summary>
+public class FloatExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public nint Value { get; set; }
+    public float Value { get; set; }
 
-    public NIntValueExtension()
+    public FloatExtension()
     {
         
     }
 
-    public NIntValueExtension(nint value)
+    public FloatExtension(float value)
     {
         this.Value = value;
     }

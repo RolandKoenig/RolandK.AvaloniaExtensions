@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class FloatValueExtension : MarkupExtension
+/// <summary>
+/// Provides a byte value in XAML.
+/// </summary>
+public class ByteExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public float Value { get; set; }
+    public byte Value { get; set; }
 
-    public FloatValueExtension()
+    public ByteExtension()
     {
         
     }
 
-    public FloatValueExtension(float value)
+    public ByteExtension(byte value)
     {
         this.Value = value;
     }

@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class BoolValueExtension : MarkupExtension
+/// <summary>
+/// Provides a sbyte value in XAML.
+/// </summary>
+public class SByteExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public bool Value { get; set; }
+    public sbyte Value { get; set; }
 
-    public BoolValueExtension()
+    public SByteExtension()
     {
         
     }
 
-    public BoolValueExtension(bool value)
+    public SByteExtension(sbyte value)
     {
         this.Value = value;
     }

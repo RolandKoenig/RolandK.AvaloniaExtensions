@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class ULongValueExtension : MarkupExtension
+/// <summary>
+/// Provides an ushort value in XAML.
+/// </summary>
+public class UShortExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public ulong Value { get; set; }
+    public ushort Value { get; set; }
 
-    public ULongValueExtension()
+    public UShortExtension()
     {
         
     }
 
-    public ULongValueExtension(ulong value)
+    public UShortExtension(ushort value)
     {
         this.Value = value;
     }

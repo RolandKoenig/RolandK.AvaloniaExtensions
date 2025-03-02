@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class DoubleValueExtension : MarkupExtension
+/// <summary>
+/// Provides an uint value in XAML.
+/// </summary>
+public class UIntExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public double Value { get; set; }
+    public uint Value { get; set; }
 
-    public DoubleValueExtension()
+    public UIntExtension()
     {
         
     }
 
-    public DoubleValueExtension(double value)
+    public UIntExtension(uint value)
     {
         this.Value = value;
     }

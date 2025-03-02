@@ -2,17 +2,20 @@ using Avalonia.Markup.Xaml;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 
-public class ByteValueExtension : MarkupExtension
+/// <summary>
+/// Provides a char value in XAML.
+/// </summary>
+public class CharExtension : MarkupExtension
 {
     [ConstructorArgument("value")]
-    public byte Value { get; set; }
+    public char Value { get; set; }
 
-    public ByteValueExtension()
+    public CharExtension()
     {
         
     }
 
-    public ByteValueExtension(byte value)
+    public CharExtension(char value)
     {
         this.Value = value;
     }
