@@ -10,6 +10,9 @@ public static class AppBuilderExtensions
     /// <summary>
     /// Registers Microsoft.Extensions.DependencyInjection for this application.
     /// The <see cref="ServiceProvider"/> is added to the application's resources.
+    ///
+    /// This method can be called multiple times. Each time it gets the <see cref="IServiceCollection"/>
+    /// instance from the previous call. 
     /// </summary>
     /// <param name="appBuilder"></param>
     /// <param name="registerServicesAction">Callback for registering application's services and ViewModels</param>
@@ -42,7 +45,7 @@ public static class AppBuilderExtensions
             
             // Update services
             registerServicesAction(services);
-
+            
             // Create the IServiceProvider
             x.Instance.Resources[DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY] =
                 services.BuildServiceProvider();
