@@ -22,9 +22,8 @@ public static class AppBuilderExtensions
         
         appBuilder.AfterSetup(x =>
         {
-            if (x == null) { return; }
             if (x.Instance == null) { return; }
-
+            
             // Get IServiceCollection object
             // We search for an existing one to be able to call UseDependencyInjection multiple times (needed for UI-Testing)
             IServiceCollection services;
