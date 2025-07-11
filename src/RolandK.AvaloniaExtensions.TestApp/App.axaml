@@ -9,13 +9,4 @@
         <StyleInclude Source="avares://RolandK.AvaloniaExtensions/Themes/Fluent.axaml" />
     </Application.Styles>
     
-    <Application.Resources>
-        <!-- These two brushes seem to not correctly switch between light and dark theme. 
-             So we override them here
-             
-             This will be fixed in 11.x release, see https://github.com/AvaloniaUI/Avalonia/issues/9410 -->
-        <SolidColorBrush x:Key="DataGridColumnHeaderForegroundBrush" Color="{DynamicResource SystemBaseHighColor}" />
-        <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="{DynamicResource SystemChromeMediumColor}" />
-    </Application.Resources>
-    
 </Application>
