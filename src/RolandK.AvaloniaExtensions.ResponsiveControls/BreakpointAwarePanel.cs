@@ -1,9 +1,16 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 using Avalonia.Data;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls;
 
+[PseudoClasses(
+    ":breakpoint-sm",
+    ":breakpoint-md",
+    ":breakpoint-lg",
+    ":breakpoint-xl",
+    ":breakpoint-xxl")]
 public class BreakpointAwarePanel : Panel
 {
     // ReSharper disable once MemberCanBePrivate.Global
@@ -80,9 +87,7 @@ public class BreakpointAwarePanel : Panel
 
     public BreakpointAwarePanel()
     {
-        this.PseudoClasses.Set(
-            GetPseudoClassByBreakpoint(_currentBreakpoint),
-            true);
+        this.UpdatePseudeClasses();
     }
     
     protected override Size MeasureCore(Size availableSize)
@@ -90,22 +95,35 @@ public class BreakpointAwarePanel : Panel
         var breakpointBefore = _currentBreakpoint;
         _currentBreakpoint = CalculateBreakpoint(availableSize.Width);
         
-        if (_currentBreakpoint != breakpointBefore)
-        {
-            this.PseudoClasses.Set(
-                GetPseudoClassByBreakpoint(breakpointBefore), false);
-            this.PseudoClasses.Set(
-                GetPseudoClassByBreakpoint(_currentBreakpoint), true);
-        }
+        if (_currentBreakpoint != breakpointBefore) { this.UpdatePseudeClasses(); }
         
         return base.MeasureCore(availableSize);
+    }
+
+    private void UpdatePseudeClasses()
+    {
+        this.PseudoClasses.Set(
+            GetPseudoClassByBreakpoint(Breakpoint.Sm),
+            _currentBreakpoint >= Breakpoint.Sm);
+        this.PseudoClasses.Set(
+            GetPseudoClassByBreakpoint(Breakpoint.Md),
+            _currentBreakpoint >= Breakpoint.Md);
+        this.PseudoClasses.Set(
+            GetPseudoClassByBreakpoint(Breakpoint.Lg),
+            _currentBreakpoint >= Breakpoint.Lg);
+        this.PseudoClasses.Set(
+            GetPseudoClassByBreakpoint(Breakpoint.Xl),
+            _currentBreakpoint >= Breakpoint.Xl);
+        this.PseudoClasses.Set(
+            GetPseudoClassByBreakpoint(Breakpoint.Xxl),
+            _currentBreakpoint >= Breakpoint.Xxl);
     }
 
     private static string GetPseudoClassByBreakpoint(Breakpoint breakpoint)
     {
         return breakpoint switch
         {
-            Breakpoint.Xs => ":breakpoint-xs",
+            // Xs is not relevant, it is the default
             Breakpoint.Sm => ":breakpoint-sm",
             Breakpoint.Md => ":breakpoint-md",
             Breakpoint.Lg => ":breakpoint-lg",
