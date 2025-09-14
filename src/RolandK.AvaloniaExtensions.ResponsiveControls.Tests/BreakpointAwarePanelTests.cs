@@ -1,5 +1,7 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
+using Avalonia.Styling;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls.Tests;
 
@@ -25,6 +27,47 @@ public class BreakpointAwarePanelTests
         
         // Act
         panel.Measure(new Size(width, 100.0));
+        
+        // Assert
+        Assert.Equal(expectedBreakpoint, panel.CurrentBreakpoint);
+    }
+    
+    [AvaloniaTheory]
+    [InlineData(15d, Breakpoint.Xs)]
+    [InlineData(49d, Breakpoint.Xs)]
+    [InlineData(50d, Breakpoint.Sm)]
+    [InlineData(99d, Breakpoint.Sm)]
+    [InlineData(100d, Breakpoint.Md)]
+    [InlineData(149d, Breakpoint.Md)]
+    [InlineData(150d, Breakpoint.Lg)]
+    [InlineData(199d, Breakpoint.Lg)]
+    [InlineData(200d, Breakpoint.Xl)]
+    [InlineData(249d, Breakpoint.Xl)]
+    [InlineData(250d, Breakpoint.Xxl)]
+    [InlineData(300d, Breakpoint.Xxl)]
+    public void CheckForCorrectBreakpoint_CustomSettings(double width, Breakpoint expectedBreakpoint)
+    {
+        // Arrange
+        var window = new Window();
+
+        var breakpointAwarePanelStyle = new Style();
+        breakpointAwarePanelStyle.Selector = Selectors.OfType(null, typeof(BreakpointAwarePanel));
+        breakpointAwarePanelStyle.Setters.Add(new Setter(
+            BreakpointAwarePanel.BreakpointSmProperty, 50d));
+        breakpointAwarePanelStyle.Setters.Add(new Setter(
+            BreakpointAwarePanel.BreakpointMdProperty, 100d));
+        breakpointAwarePanelStyle.Setters.Add(new Setter(
+            BreakpointAwarePanel.BreakpointLgProperty, 150d));
+        breakpointAwarePanelStyle.Setters.Add(new Setter(
+            BreakpointAwarePanel.BreakpointXlProperty, 200d));
+        breakpointAwarePanelStyle.Setters.Add(new Setter(
+            BreakpointAwarePanel.BreakpointXxlProperty, 250d));
+        window.Styles.Add(breakpointAwarePanelStyle);
+        
+        var panel = new BreakpointAwarePanel();
+        window.Content = panel;
+        window.Width = width;
+        window.Show();
         
         // Assert
         Assert.Equal(expectedBreakpoint, panel.CurrentBreakpoint);

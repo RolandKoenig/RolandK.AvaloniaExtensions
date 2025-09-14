@@ -85,6 +85,16 @@ public class BreakpointAwarePanel : Panel
     /// </summary>
     public Breakpoint CurrentBreakpoint => _currentBreakpoint;
 
+    static BreakpointAwarePanel()
+    {
+        AffectsMeasure<ResponsiveGrid>(
+            BreakpointSmProperty,
+            BreakpointMdProperty,
+            BreakpointLgProperty,
+            BreakpointXlProperty,
+            BreakpointXxlProperty);
+    }
+    
     public BreakpointAwarePanel()
     {
         this.UpdatePseudeClasses();
