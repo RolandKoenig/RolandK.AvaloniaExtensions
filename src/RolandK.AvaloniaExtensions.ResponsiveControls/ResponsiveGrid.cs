@@ -59,12 +59,18 @@ public class ResponsiveGrid : BreakpointAwarePanel
         set => SetValue(RowAlignmentProperty, value);
     }
     
+    /// <summary>
+    /// Gets or sets the spacing between rows.
+    /// </summary>
     public double RowSpacing
     {
         get => GetValue(RowSpacingProperty);
         set => SetValue(RowSpacingProperty, value);
     }
     
+    /// <summary>
+    /// Gets or sets the spacing between columns.
+    /// </summary>
     public double ColumnSpacing
     {
         get => GetValue(ColumnSpacingProperty);
@@ -282,6 +288,7 @@ public class ResponsiveGrid : BreakpointAwarePanel
             if (actColumnCount + columnCountForCalculation > 12)
             {
                 // Transit to new row
+                this.FillupFlexibleColumns(actRow);
                 result.Add(new ResponsiveGridRow(actRow.ToArray()));
                 actRow.Clear();
                 actColumnCount = 0;
@@ -289,16 +296,46 @@ public class ResponsiveGrid : BreakpointAwarePanel
 
             actColumnCount += columnCountForCalculation;
             actRow.Add(new ResponsiveGridRowChild(
-                actChild, columnCountForCalculation));
+                actChild, actChildColumnCount));
         }
 
         // Finish last row
         if (actRow.Count > 0)
         {
+            this.FillupFlexibleColumns(actRow);
             result.Add(new ResponsiveGridRow(actRow.ToArray()));
         }
 
         return result;
+    }
+
+    private void FillupFlexibleColumns(IList<ResponsiveGridRowChild> children)
+    {
+        var totalOccupiedColumnCount = 0;
+        var flexibleChildCount = 0;
+        foreach (var actChild in children)
+        {
+            totalOccupiedColumnCount += actChild.ColumnCount;
+            if(actChild.ColumnCount == 0){ flexibleChildCount++; }
+        }
+        
+        // Cancel, if there is no flexible child
+        if (flexibleChildCount == 0) { return; }
+
+        // Cancel, if we've already occupied all columns
+        if (totalOccupiedColumnCount == 12) { return; }
+        
+        var remainingColumns = 12 - totalOccupiedColumnCount;
+        var extendableColumnCountPerChild = (double)remainingColumns / (double)flexibleChildCount;
+        for (var loop=0; loop<children.Count; loop++)
+        {
+            var actChild = children[loop];
+            if(actChild.ColumnCount > 0){ continue; }
+
+            children[loop] = new ResponsiveGridRowChild(
+                actChild.ChildControl!,
+                (int)Math.Round(extendableColumnCountPerChild));
+        }
     }
     
     private int GetColumnCount(Control child, Breakpoint breakpoint)
