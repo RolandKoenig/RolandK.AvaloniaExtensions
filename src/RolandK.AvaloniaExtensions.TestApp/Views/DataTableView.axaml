@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.TestApp.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="RolandK.AvaloniaExtensions.TestApp.Views.DataTableView"
+             DataContext="{ext:CreateUsingDependencyInjection {x:Type local:DataTableViewModel}}"
+             d:DataContext="{x:Static local:DataTableViewModel.DesignViewModel}"
+             x:CompileBindings="True"
+             x:DataType="local:DataTableViewModel">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Recreate Test Data"
+                      Command="{Binding RecreateTestDataCommand}" />
+        </Menu>
+        
+        <DataGrid ItemsSource="{Binding Path=DataRows}"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="True"
+                  CanUserResizeColumns="True" />
+    </DockPanel>
+</UserControl>
