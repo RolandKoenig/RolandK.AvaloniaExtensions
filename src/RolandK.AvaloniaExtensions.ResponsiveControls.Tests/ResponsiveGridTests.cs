@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
+using Avalonia.Layout;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls.Tests;
 
@@ -89,6 +90,138 @@ public class ResponsiveGridTests
         Assert.Equal(expectedWidthLeft, leftChild.Bounds.Width);
         Assert.Equal(100d, leftChild.Bounds.Height);
         Assert.Equal(expectedWidthRight, rightChild.Bounds.Width);
+        Assert.Equal(100d, leftChild.Bounds.Height);
+    }
+
+    [AvaloniaTheory]
+    [InlineData(HorizontalAlignment.Left, 0, 200, 200, 200)]
+    [InlineData(HorizontalAlignment.Center, 400, 600, 200, 200)]
+    [InlineData(HorizontalAlignment.Right, 800, 1000, 200, 200)]
+    [InlineData(HorizontalAlignment.Stretch, 0, 600, 600, 600)]
+    public void TwoColumnLayout_WithRemainingSpace(
+        HorizontalAlignment rowAlignment,
+        double expectedXPositionLeft, double expectedXPositionRight,
+        double expectedWidthLeft, double expectedWidthRight)
+    {
+        // Arrange
+        var responsiveGrid = new ResponsiveGrid();
+        responsiveGrid.RowAlignment = rowAlignment;
+        
+        var leftChild = new Border();
+        leftChild.SetValue(ResponsiveGrid.ColumnsProperty, 2);
+        leftChild.MinHeight = 100;
+        responsiveGrid.Children.Add(leftChild);
+        
+        var rightChild = new Border();
+        rightChild.SetValue(ResponsiveGrid.ColumnsProperty, 2);
+        rightChild.MinHeight = 100;
+        responsiveGrid.Children.Add(rightChild);
+        
+        var parentWindow = new Window();
+        parentWindow.Width = 1200;
+        parentWindow.Height = 600;
+        parentWindow.Content = responsiveGrid;
+        
+        // Act
+        parentWindow.Show();
+        
+        // Assert
+        Assert.Equal(expectedWidthLeft, leftChild.Bounds.Width);
+        Assert.Equal(expectedXPositionLeft, leftChild.Bounds.Left);
+        Assert.Equal(100d, leftChild.Bounds.Height);
+        Assert.Equal(expectedWidthRight, rightChild.Bounds.Width);
+        Assert.Equal(expectedXPositionRight, rightChild.Bounds.Left);
+        Assert.Equal(100d, leftChild.Bounds.Height);
+    }
+    
+    [AvaloniaTheory]
+    [InlineData(HorizontalAlignment.Left, 0, 220, 210, 210)]
+    [InlineData(HorizontalAlignment.Center, 440, 660, 210, 210)]
+    [InlineData(HorizontalAlignment.Right, 880, 1100, 210, 210)]
+    [InlineData(HorizontalAlignment.Stretch, 0, 660, 650, 650)]
+    public void TwoColumnLayout_WithRemainingSpace_WithSpacing(
+        HorizontalAlignment rowAlignment,
+        double expectedXPositionLeft, double expectedXPositionRight,
+        double expectedWidthLeft, double expectedWidthRight)
+    {
+        // Arrange
+        var responsiveGrid = new ResponsiveGrid();
+        responsiveGrid.RowAlignment = rowAlignment;
+        responsiveGrid.ColumnSpacing = 10d;
+        
+        var leftChild = new Border();
+        leftChild.SetValue(ResponsiveGrid.ColumnsProperty, 2);
+        leftChild.MinHeight = 100;
+        responsiveGrid.Children.Add(leftChild);
+        
+        var rightChild = new Border();
+        rightChild.SetValue(ResponsiveGrid.ColumnsProperty, 2);
+        rightChild.MinHeight = 100;
+        responsiveGrid.Children.Add(rightChild);
+        
+        var parentWindow = new Window();
+        parentWindow.Width = 1310;
+        parentWindow.Height = 600;
+        parentWindow.Content = responsiveGrid;
+        
+        // Act
+        parentWindow.Show();
+        
+        // Assert
+        Assert.Equal(expectedWidthLeft, leftChild.Bounds.Width);
+        Assert.Equal(expectedXPositionLeft, leftChild.Bounds.Left);
+        Assert.Equal(100d, leftChild.Bounds.Height);
+        Assert.Equal(expectedWidthRight, rightChild.Bounds.Width);
+        Assert.Equal(expectedXPositionRight, rightChild.Bounds.Left);
+        Assert.Equal(100d, leftChild.Bounds.Height);
+    }
+    
+    [AvaloniaTheory]
+    [InlineData(HorizontalAlignment.Left, 0, 220, 210, 210)]
+    [InlineData(HorizontalAlignment.Center, 440, 660, 210, 210)]
+    [InlineData(HorizontalAlignment.Right, 880, 1100, 210, 210)]
+    [InlineData(HorizontalAlignment.Stretch, 0, 660, 650, 650)]
+    public void TwoColumnLayout_WithRemainingSpace_WithSpacing_OnSecondRow(
+        HorizontalAlignment rowAlignment,
+        double expectedXPositionLeft, double expectedXPositionRight,
+        double expectedWidthLeft, double expectedWidthRight)
+    {
+        // Arrange
+        var responsiveGrid = new ResponsiveGrid();
+        responsiveGrid.RowAlignment = rowAlignment;
+        responsiveGrid.ColumnSpacing = 10d;
+
+        var firstRow = new Border();
+        firstRow.SetValue(ResponsiveGrid.ColumnsProperty, 12);
+        firstRow.MinHeight = 100;
+        responsiveGrid.Children.Add(firstRow);
+        
+        var leftChild = new Border();
+        leftChild.SetValue(ResponsiveGrid.ColumnsProperty, 2);
+        leftChild.MinHeight = 100;
+        responsiveGrid.Children.Add(leftChild);
+        
+        var rightChild = new Border();
+        rightChild.SetValue(ResponsiveGrid.ColumnsProperty, 2);
+        rightChild.MinHeight = 100;
+        responsiveGrid.Children.Add(rightChild);
+        
+        var parentWindow = new Window();
+        parentWindow.Width = 1310;
+        parentWindow.Height = 600;
+        parentWindow.Content = responsiveGrid;
+        
+        // Act
+        parentWindow.Show();
+        
+        // Assert
+        Assert.Equal(expectedWidthLeft, leftChild.Bounds.Width);
+        Assert.Equal(expectedXPositionLeft, leftChild.Bounds.Left);
+        Assert.Equal(100d, leftChild.Bounds.Top);
+        Assert.Equal(100d, leftChild.Bounds.Height);
+        Assert.Equal(expectedWidthRight, rightChild.Bounds.Width);
+        Assert.Equal(expectedXPositionRight, rightChild.Bounds.Left);
+        Assert.Equal(100d, leftChild.Bounds.Top);
         Assert.Equal(100d, leftChild.Bounds.Height);
     }
 }
