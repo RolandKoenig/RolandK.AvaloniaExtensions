@@ -4,7 +4,7 @@ using Avalonia.Layout;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls.Tests;
 
-public class ResponsiveGridTests
+public partial class ResponsiveGridTests
 {
     [AvaloniaTheory]
     [InlineData(0, 2, 1000d, 200d)]
@@ -47,6 +47,115 @@ public class ResponsiveGridTests
         Assert.Equal(100d, leftChild.Bounds.Height);
         Assert.Equal(expectedWidthRight, rightChild.Bounds.Width);
         Assert.Equal(100d, leftChild.Bounds.Height);
+    }
+    
+    [AvaloniaTheory]
+    [InlineData(10, 2, 1000d, 200d)]
+    [InlineData(8, 4, 800d, 400d)]
+    [InlineData(6, 6, 600d, 600d)]
+    public void TwoColumnLayout_WithMultipleRows(
+        int leftColumns, int rightColumns, 
+        double expectedWidthLeft, double expectedWidthRight)
+    {
+        // Arrange
+        var responsiveGrid = new ResponsiveGrid();
+        
+        var leftChildRow1 = new Border();
+        leftChildRow1.SetValue(ResponsiveGrid.ColumnsProperty, leftColumns);
+        leftChildRow1.MinHeight = 100;
+        responsiveGrid.Children.Add(leftChildRow1);
+        
+        var rightChildRow1 = new Border();
+        rightChildRow1.SetValue(ResponsiveGrid.ColumnsProperty, rightColumns);
+        rightChildRow1.MinHeight = 100;
+        responsiveGrid.Children.Add(rightChildRow1);
+        
+        var leftChildRow2 = new Border();
+        leftChildRow2.SetValue(ResponsiveGrid.ColumnsProperty, leftColumns);
+        leftChildRow2.MinHeight = 100;
+        responsiveGrid.Children.Add(leftChildRow2);
+        
+        var rightChildRow2 = new Border();
+        rightChildRow2.SetValue(ResponsiveGrid.ColumnsProperty, rightColumns);
+        rightChildRow2.MinHeight = 100;
+        responsiveGrid.Children.Add(rightChildRow2);
+        
+        var parentWindow = new Window();
+        parentWindow.Width = 1200;
+        parentWindow.Height = 600;
+        parentWindow.Content = responsiveGrid;
+        
+        // Act
+        parentWindow.Show();
+        
+        // Assert
+        Assert.Equal(expectedWidthLeft, leftChildRow1.Bounds.Width);
+        Assert.Equal(expectedWidthLeft, leftChildRow2.Bounds.Width);
+        Assert.Equal(0, leftChildRow1.Bounds.Top);
+        Assert.Equal(100d, leftChildRow2.Bounds.Top);
+        Assert.Equal(100d, leftChildRow1.Bounds.Height);
+        Assert.Equal(100d, leftChildRow2.Bounds.Height);
+        Assert.Equal(expectedWidthRight, rightChildRow1.Bounds.Width);
+        Assert.Equal(expectedWidthRight, rightChildRow2.Bounds.Width);
+        Assert.Equal(0, rightChildRow1.Bounds.Top);
+        Assert.Equal(100d, rightChildRow2.Bounds.Top);
+        Assert.Equal(100d, leftChildRow1.Bounds.Height);
+        Assert.Equal(100d, leftChildRow2.Bounds.Height);
+    }
+    
+    [AvaloniaTheory]
+    [InlineData(10, 2, 1000d, 200d)]
+    [InlineData(8, 4, 800d, 400d)]
+    [InlineData(6, 6, 600d, 600d)]
+    public void TwoColumnLayout_WithMultipleRows_WithRowSpacing(
+        int leftColumns, int rightColumns, 
+        double expectedWidthLeft, double expectedWidthRight)
+    {
+        // Arrange
+        var responsiveGrid = new ResponsiveGrid();
+        responsiveGrid.RowSpacing = 10d;
+        
+        var leftChildRow1 = new Border();
+        leftChildRow1.SetValue(ResponsiveGrid.ColumnsProperty, leftColumns);
+        leftChildRow1.MinHeight = 100;
+        responsiveGrid.Children.Add(leftChildRow1);
+        
+        var rightChildRow1 = new Border();
+        rightChildRow1.SetValue(ResponsiveGrid.ColumnsProperty, rightColumns);
+        rightChildRow1.MinHeight = 100;
+        responsiveGrid.Children.Add(rightChildRow1);
+        
+        var leftChildRow2 = new Border();
+        leftChildRow2.SetValue(ResponsiveGrid.ColumnsProperty, leftColumns);
+        leftChildRow2.MinHeight = 100;
+        responsiveGrid.Children.Add(leftChildRow2);
+        
+        var rightChildRow2 = new Border();
+        rightChildRow2.SetValue(ResponsiveGrid.ColumnsProperty, rightColumns);
+        rightChildRow2.MinHeight = 100;
+        responsiveGrid.Children.Add(rightChildRow2);
+        
+        var parentWindow = new Window();
+        parentWindow.Width = 1200;
+        parentWindow.Height = 600;
+        parentWindow.Content = responsiveGrid;
+        
+        // Act
+        parentWindow.Show();
+        
+        // Assert
+        Assert.Equal(expectedWidthLeft, leftChildRow1.Bounds.Width);
+        Assert.Equal(expectedWidthLeft, leftChildRow2.Bounds.Width);
+        Assert.Equal(0, leftChildRow1.Bounds.Top);
+        Assert.Equal(110d, leftChildRow2.Bounds.Top);
+        Assert.Equal(100d, leftChildRow1.Bounds.Height);
+        Assert.Equal(100d, leftChildRow2.Bounds.Height);
+        Assert.Equal(expectedWidthRight, rightChildRow1.Bounds.Width);
+        Assert.Equal(expectedWidthRight, rightChildRow2.Bounds.Width);
+        Assert.Equal(0, rightChildRow1.Bounds.Top);
+        Assert.Equal(110d, rightChildRow2.Bounds.Top);
+        Assert.Equal(100d, leftChildRow1.Bounds.Height);
+        Assert.Equal(100d, leftChildRow2.Bounds.Height);
     }
     
     [AvaloniaTheory]
