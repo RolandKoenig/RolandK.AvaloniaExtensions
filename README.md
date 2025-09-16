@@ -13,8 +13,7 @@ DependencyInjection and some Mvvm sugar
 | RolandK.AvaloniaExtensions                      | https://www.nuget.org/packages/RolandK.AvaloniaExtensions                     |
 | RolandK.AvaloniaExtensions.DependencyInjection  | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection |
 | RolandK.AvaloniaExtensions.ExceptionHandling    | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.ExceptionHandling   |
-| RolandK.AvaloniaExtensions.FluentThemeDetection | (obsolete due to Avalonia 11)                                                 |
-| RolandK.AvaloniaExtensions.ResponsiveControls   |                                                                               |
+| RolandK.AvaloniaExtensions.ResponsiveControls   | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.ResponsiveControls  |
 
 ## Feature overview
  - [ViewServices over the popular Mvvm pattern by **not** providing an own Mvvm implementation](#viewservices-over-the-popular-mvvm-pattern)
@@ -23,7 +22,7 @@ DependencyInjection and some Mvvm sugar
  - [DependencyInjection for Avalonia based on Microsft.Extensions.DependencyInjection](#dependencyinjection-for-avalonia-based-on-microsftextensionsdependencyinjection)
  - [Error dialog for unhandled exceptions](#error-dialog-for-unhandled-exceptions)
  - [Global error handling for unhandled exceptions](#global-error-handling-for-unhandled-exceptions)
- - [MarkupExtensions for primitive values](#markupextensions-for-primitive_values)
+ - [MarkupExtensions for primitive values](#markupextensions-for-primitive-values)
  - [ResponsiveControls inspired by Bootstrap](#responsivecontrols-inspired-by-bootstrap)
 
 # Samples
@@ -383,4 +382,40 @@ a value to be a specific primitive .NET type.
 ```
 
 ## ResponsiveControls inspired by Bootstrap
-tbd.
+This package provides the following Controls:
+ - BreakpointAwarePanel
+ - ResponsiveGrid 
+
+They are highly inspired by the layout system of the Bootstrap, especially by two features:
+ 1. The idea of breakpoints depending on the size of the viewport
+ 2. The idea of breaking down the available viewport into 12 columns
+
+### BreakpointAwarePanel
+BreakpointAwarePanel is a quite basic control which behaves like a normal Panel. It adds
+the detection of breakpoints. By default they are defined the same way as in Bootstrap
+ - Xs: Extra small, this is the default breakpoint (for smallest viewport sizes)
+ - Sm: Small, begins at width 576
+ - Md: Medium, begins at width 768
+ - Lg: Large, begins at width 992
+ - Xl: Extra large, begins at width 1200
+ - Xxl: Extra extra large, begins at width 1400
+You can change the with all of those breakpoints through they are configured using the StyledProperties
+BreakpointSm, BreakpointMd, BreakpointLg, BreakpointXl and BreakpointXxl
+
+BreakpointAwarePanel sets PseudoClasses depending on the current Breakpoint.
+ - For Xs: -
+ - For Sm: :breakpoint-sm
+ - For Md: :breakpoint-sm, :breakpoint-md
+ - For Lg: :breakpoint-sm, :breakpoint-md, :breakpoint-lg
+ - For Xl: :breakpoint-sm, :breakpoint-md, :breakpoint-lg, :breakpoint-xl
+ - For Xxl: :breakpoint-sm, :breakpoint-md, :breakpoint-lg, :breakpoint-xl, :breakpoint-xxl
+You can use them to style children depending on the current breakpoint.
+
+### ResponsiveGrid
+ResponsiveGrid derives from BreakpointAwarePanel, it extends it with the grid layout system
+inspired by Bootstrap. In short words it works like follows:
+ - The available space is seperated into 12 equally sized columns (for every breakpoint)
+ - Each child Control can define, how many columns it occupies
+   - You can also override this value for each breakpoint
+ - If children need more than 12 columns, the ResponsiveGrid generates additional rows
+
