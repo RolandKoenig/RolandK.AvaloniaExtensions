@@ -14,6 +14,7 @@ DependencyInjection and some Mvvm sugar
 | RolandK.AvaloniaExtensions.DependencyInjection  | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.DependencyInjection |
 | RolandK.AvaloniaExtensions.ExceptionHandling    | https://www.nuget.org/packages/RolandK.AvaloniaExtensions.ExceptionHandling   |
 | RolandK.AvaloniaExtensions.FluentThemeDetection | (obsolete due to Avalonia 11)                                                 |
+| RolandK.AvaloniaExtensions.ResponsiveControls   |                                                                               |
 
 ## Feature overview
  - [ViewServices over the popular Mvvm pattern by **not** providing an own Mvvm implementation](#viewservices-over-the-popular-mvvm-pattern)
@@ -23,6 +24,7 @@ DependencyInjection and some Mvvm sugar
  - [Error dialog for unhandled exceptions](#error-dialog-for-unhandled-exceptions)
  - [Global error handling for unhandled exceptions](#global-error-handling-for-unhandled-exceptions)
  - [MarkupExtensions for primitive values](#markupextensions-for-primitive_values)
+ - [ResponsiveControls inspired by Bootstrap](#responsivecontrols-inspired-by-bootstrap)
 
 # Samples
 Here you find samples to the features of RolandK.AvaloniaExtensions. Most of
@@ -379,3 +381,6 @@ a value to be a specific primitive .NET type.
     </UserControl.DataContext>
 </UserControl>
 ```
+
+## ResponsiveControls inspired by Bootstrap
+tbd.
