@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Data;
+using Avalonia.Threading;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls;
 
@@ -67,6 +68,8 @@ public class BreakpointAwarePanel : Panel
         get => this.GetValue(BreakpointXxlProperty);
         set => this.SetValue(BreakpointXxlProperty, value);
     }
+
+    public event EventHandler<EventArgs>? CurrentBreakpointChanged; 
     
     /// <summary>
     /// The Breakpoints which was calculated through the last Measure pass.
@@ -75,9 +78,9 @@ public class BreakpointAwarePanel : Panel
         AvaloniaProperty.RegisterDirect<BreakpointAwarePanel, Breakpoint>(
             nameof(CurrentBreakpoint),
             o => o.CurrentBreakpoint,
-            defaultBindingMode: BindingMode.OneWayToSource);
+            defaultBindingMode: BindingMode.OneWay);
     
-    private Breakpoint _currentBreakpoint = Breakpoint.Sm;
+    private Breakpoint _currentBreakpoint = Breakpoint.Xs;
     
     // ReSharper disable once MemberCanBeProtected.Global
     /// <summary>
@@ -88,6 +91,7 @@ public class BreakpointAwarePanel : Panel
     static BreakpointAwarePanel()
     {
         AffectsMeasure<ResponsiveGrid>(
+            CurrentBreakpointProperty,
             BreakpointSmProperty,
             BreakpointMdProperty,
             BreakpointLgProperty,
@@ -103,9 +107,20 @@ public class BreakpointAwarePanel : Panel
     protected override Size MeasureCore(Size availableSize)
     {
         var breakpointBefore = _currentBreakpoint;
-        _currentBreakpoint = CalculateBreakpoint(availableSize.Width);
-        
-        if (_currentBreakpoint != breakpointBefore) { this.UpdatePseudeClasses(); }
+        var newBreakpoint = CalculateBreakpoint(availableSize.Width);
+
+        if (newBreakpoint != breakpointBefore)
+        {
+            // Fire changes in new pass
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                _currentBreakpoint = newBreakpoint;
+                this.UpdatePseudeClasses();
+                this.RaisePropertyChanged(
+                    CurrentBreakpointProperty, breakpointBefore, newBreakpoint);
+                this.CurrentBreakpointChanged?.Invoke(this, EventArgs.Empty);
+            });
+        }
         
         return base.MeasureCore(availableSize);
     }

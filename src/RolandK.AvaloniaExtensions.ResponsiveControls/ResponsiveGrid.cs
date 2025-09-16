@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 
+// ReSharper disable RedundantCast
+
 namespace RolandK.AvaloniaExtensions.ResponsiveControls;
 
 public class ResponsiveGrid : BreakpointAwarePanel

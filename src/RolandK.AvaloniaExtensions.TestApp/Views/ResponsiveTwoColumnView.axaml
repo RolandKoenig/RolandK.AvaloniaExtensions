@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:conv="clr-namespace:RolandK.AvaloniaExtensions.TestApp.Converters"
              xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="RolandK.AvaloniaExtensions.TestApp.Views.ResponsiveTwoColumnView">
@@ -20,8 +21,16 @@
                   HorizontalScrollBarVisibility="Disabled"
                   Background="#333333">
         <Border Padding="12">
-            <ext:ResponsiveGrid ColumnSpacing="12" RowSpacing="12"
-                                VerticalAlignment="Top" >
+            <ext:ResponsiveGrid x:Name="ResponsiveRoot" ColumnSpacing="12" RowSpacing="12"
+                                VerticalAlignment="Top" 
+                                CurrentBreakpointChanged="OnResponsiveGrid_CurrentBreakpointChanged">
+                <Border ext:ResponsiveGrid.Columns="12">
+                    <TextBlock>
+                        Breakpoint: <Run Text="{Binding ElementName=ResponsiveRoot, Path=CurrentBreakpoint}" /><LineBreak />
+                        PseudoClasses: <Run x:Name="PseudoClassesText" 
+                                                    Text="{Binding ElementName=ResponsiveRoot, Path=Classes, UpdateSourceTrigger=Explicit, Converter={conv:EnumerableToConcatenatedStringConverter}}" />
+                    </TextBlock>
+                </Border>
                 
                 <StackPanel ext:ResponsiveGrid.Columns="12"
                             ext:ResponsiveGrid.ColumnsLg="6" 

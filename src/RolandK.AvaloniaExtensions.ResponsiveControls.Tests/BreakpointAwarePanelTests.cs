@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Styling;
+using Avalonia.Threading;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls.Tests;
 
@@ -27,6 +28,7 @@ public class BreakpointAwarePanelTests
         
         // Act
         panel.Measure(new Size(width, 100.0));
+        Dispatcher.UIThread.RunJobs();
         
         // Assert
         Assert.Equal(expectedBreakpoint, panel.CurrentBreakpoint);
@@ -69,6 +71,8 @@ public class BreakpointAwarePanelTests
         window.Width = width;
         window.Show();
         
+        Dispatcher.UIThread.RunJobs();
+        
         // Assert
         Assert.Equal(expectedBreakpoint, panel.CurrentBreakpoint);
     }
@@ -96,8 +100,33 @@ public class BreakpointAwarePanelTests
         
         // Act
         panel.Measure(new Size(width, 100.0));
+        Dispatcher.UIThread.RunJobs();
         
         // Assert
         Assert.Contains(expectedPseudoClass, panel.Classes);
+    }
+    
+    [AvaloniaTheory]
+    [InlineData(300d, false)]
+    [InlineData(576d, true)]
+    [InlineData(768d, true)]
+    [InlineData(1200d, true)]
+    public void CheckCurrentBreakpointChangedEventFired(double width, bool shouldFireEvent)
+    {
+        // Arrange
+        var panel = new BreakpointAwarePanel();
+
+        var eventFired = false;
+        panel.CurrentBreakpointChanged += (_, _) =>
+        {
+            eventFired = true;
+        };
+        
+        // Act
+        panel.Measure(new Size(width, 100.0));
+        Dispatcher.UIThread.RunJobs();
+        
+        // Assert
+        Assert.Equal(shouldFireEvent, eventFired);
     }
 }
