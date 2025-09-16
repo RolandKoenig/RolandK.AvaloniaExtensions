@@ -333,19 +333,12 @@ public class ResponsiveGrid : BreakpointAwarePanel
             var actChild = children[loop];
             if(actChild.ColumnCount > 0){ continue; }
 
-            var currentlyCalculated = Math.Round(extendableColumnCountPerChild);
-            remainingCountBecauseOfRounding = extendableColumnCountPerChild - currentlyCalculated;
+            var currentlyCalculated = Math.Round(extendableColumnCountPerChild + remainingCountBecauseOfRounding);
+            remainingCountBecauseOfRounding += extendableColumnCountPerChild - currentlyCalculated;
             
             children[loop] = new ResponsiveGridRowChild(
                 actChild.ChildControl!,
                 (int)currentlyCalculated);
-        }
-
-        while ((int)Math.Round(remainingCountBecauseOfRounding) > 0)
-        {
-            // TODO: Distribute remaining space to all flexible columns
-            
-            remainingCountBecauseOfRounding -= 1d;
         }
     }
     
