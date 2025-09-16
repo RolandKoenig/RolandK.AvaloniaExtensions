@@ -70,6 +70,9 @@
                     <TabItem Header="DataTable">
                         <views:DataTableView />
                     </TabItem>
+                    <TabItem Header="Responsive TwoColumn">
+                        <views:ResponsiveTwoColumnView />
+                    </TabItem>
                 </TabControl>
             </DockPanel>
         </ext:MainWindowFrame.MainContentArea>
