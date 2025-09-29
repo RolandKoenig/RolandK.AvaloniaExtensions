@@ -31,6 +31,27 @@ public partial class MvvmUserControlTests
     }
     
     [AvaloniaFact]
+    public void Attach_MvvmUserControl_to_ViewModel_Discarded_in_DesignMode()
+    {
+        using(TestUtil.EnableDesignModeScope())
+        {
+            // Arrange
+            var testMvvmControl = new MvvmUserControl();
+            var testViewModel = new TestViewModel();
+
+            // Act
+            testMvvmControl.DataContext = testViewModel;
+            testMvvmControl.ViewFor = typeof(TestViewModel);
+            var testRootWindow = TestRootWindow.CreateAndShow(testMvvmControl);
+
+            // Assert
+            Assert.Null(testViewModel.AssociatedView);
+
+            GC.KeepAlive(testRootWindow);
+        }
+    }
+    
+    [AvaloniaFact]
     public void Attach_TestView_to_TestViewModel_by_conventions()
     {
         // Arrange

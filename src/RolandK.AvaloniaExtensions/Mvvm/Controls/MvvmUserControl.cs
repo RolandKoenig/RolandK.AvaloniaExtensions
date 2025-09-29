@@ -125,6 +125,7 @@ public class MvvmUserControl : UserControl, IViewServiceHost
 
     private void TryAttachToDataContext()
     {
+        if (Design.IsDesignMode) { return; }
         if (_currentlyAttachedViewModel == this.DataContext) { return; }
         
         this.DetachFromDataContext();
