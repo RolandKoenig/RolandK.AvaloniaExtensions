@@ -1,3 +1,4 @@
+using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
@@ -46,5 +47,20 @@ internal static class TestUtil
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Enables DesignMode in the scope of the return IDisposable.
+    /// </summary>
+    public static IDisposable EnableDesignModeScope()
+    {
+        var prefValue = Design.IsDesignMode;
+        var designModeProperty = typeof(Design).GetProperty(
+            nameof(Design.IsDesignMode),
+            BindingFlags.Public | BindingFlags.Static)!;
+
+        designModeProperty.SetValue(null, true);
+        return new DummyDisposable(
+            () => designModeProperty.SetValue(null, prefValue));
     }
 }

@@ -124,6 +124,7 @@ public class MvvmWindow : Window, IViewServiceHost
     
     private void TryAttachToDataContext()
     {
+        if (Design.IsDesignMode) { return; }
         if (_currentlyAttachedViewModel == this.DataContext) { return; }
         
         this.DetachFromDataContext();

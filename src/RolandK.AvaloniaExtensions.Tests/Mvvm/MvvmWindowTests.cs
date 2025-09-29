@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using RolandK.AvaloniaExtensions.Mvvm;
 using RolandK.AvaloniaExtensions.Mvvm.Controls;
 using RolandK.AvaloniaExtensions.Controls;
+using RolandK.AvaloniaExtensions.Tests.Util;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
@@ -25,10 +26,33 @@ public partial class MvvmWindowTests
             
         // Assert
         Assert.True(mvvmWindow.IsVisible);
-        Assert.Equal(testViewModel.AssociatedView, mvvmWindow);
+        Assert.Equal(mvvmWindow, testViewModel.AssociatedView);
             
         // Cleanup
         mvvmWindow.Close();
+    }
+    
+    [AvaloniaFact]
+    public void Attach_MvvmWindow_to_ViewModel_Discarded_in_DesignMode()
+    {
+        using(TestUtil.EnableDesignModeScope())
+        {
+            // Arrange
+            var testViewModel = new TestViewModel();
+            var mvvmWindow = new MvvmWindow();
+            
+            // Act
+            mvvmWindow.DataContext = testViewModel;
+            mvvmWindow.ViewFor = typeof(TestViewModel);
+            mvvmWindow.Show();
+            
+            // Assert
+            Assert.True(mvvmWindow.IsVisible);
+            Assert.Null(testViewModel.AssociatedView);
+            
+            // Cleanup
+            mvvmWindow.Close();
+        }
     }
     
     [AvaloniaFact]
@@ -44,7 +68,7 @@ public partial class MvvmWindowTests
             
         // Assert
         Assert.True(mvvmWindow.IsVisible);
-        Assert.Equal(testViewModel.AssociatedView, mvvmWindow);
+        Assert.Equal(mvvmWindow, testViewModel.AssociatedView);
             
         // Cleanup
         mvvmWindow.Close();
