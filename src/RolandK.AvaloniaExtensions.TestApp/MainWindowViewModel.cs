@@ -11,13 +11,8 @@ namespace RolandK.AvaloniaExtensions.TestApp;
 
 public partial class MainWindowViewModel : OwnViewModelBase
 {
-    private readonly ITestDataGenerator _testDataGenerator;
-
     [ObservableProperty] 
     private string _title = string.Empty;
-
-    [ObservableProperty]
-    private ObservableCollection<UserData> _dataRows = new();
     
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentZoomDisplayText))]
@@ -25,13 +20,9 @@ public partial class MainWindowViewModel : OwnViewModelBase
     
     public string CurrentZoomDisplayText => $"{(this.FullAppZoom * 100):N0}%";
 
-    public MainWindowViewModel(ITestDataGenerator testDataGenerator)
+    public MainWindowViewModel()
     {
-        _testDataGenerator = testDataGenerator;
-
         this.Title = "RolandK.AvaloniaExtension Test Application";
-        this.DataRows = new ObservableCollection<UserData>(
-            _testDataGenerator.GenerateUserData(50));
     }
 
     [RelayCommand(CanExecute = nameof(CanSetFullAppZoom))]
@@ -43,13 +34,6 @@ public partial class MainWindowViewModel : OwnViewModelBase
     public bool CanSetFullAppZoom(double zoom)
     {
         return Math.Abs(zoom - this.FullAppZoom) > 0.0001;
-    }
-
-    [RelayCommand]
-    public void RecreateTestData()
-    {
-        this.DataRows = new ObservableCollection<UserData>(
-            _testDataGenerator.GenerateUserData(50));
     }
 
     [RelayCommand]
@@ -102,6 +86,5 @@ public partial class MainWindowViewModel : OwnViewModelBase
         this.CloseHostWindow();
     }
 
-    public static MainWindowViewModel DesignViewModel => new(
-        NSubstitute.Substitute.For<ITestDataGenerator>());
+    public static MainWindowViewModel DesignViewModel => new();
 }

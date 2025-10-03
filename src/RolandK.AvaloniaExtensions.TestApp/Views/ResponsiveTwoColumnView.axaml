@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:conv="clr-namespace:RolandK.AvaloniaExtensions.TestApp.Converters"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="RolandK.AvaloniaExtensions.TestApp.Views.ResponsiveTwoColumnView">
+    <UserControl.Styles>
+        <Style Selector="Border.FakeContent">
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="TextBlock.Foreground" Value="Black" />
+            <Setter Property="Background" Value="LightGray" />
+            <Setter Property="BorderBrush" Value="SlateGray" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+    </UserControl.Styles>
+    
+    <ScrollViewer VerticalScrollBarVisibility="Visible"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Background="#333333">
+        <Border Padding="12">
+            <ext:ResponsiveGrid x:Name="ResponsiveRoot" ColumnSpacing="12" RowSpacing="12"
+                                VerticalAlignment="Top" 
+                                CurrentBreakpointChanged="OnResponsiveGrid_CurrentBreakpointChanged">
+                <Border ext:ResponsiveGrid.Columns="12">
+                    <TextBlock>
+                        Breakpoint: <Run Text="{Binding ElementName=ResponsiveRoot, Path=CurrentBreakpoint}" /><LineBreak />
+                        PseudoClasses: <Run x:Name="PseudoClassesText" 
+                                                    Text="{Binding ElementName=ResponsiveRoot, Path=Classes, UpdateSourceTrigger=Explicit, Converter={conv:EnumerableToConcatenatedStringConverter}}" />
+                    </TextBlock>
+                </Border>
+                
+                <StackPanel ext:ResponsiveGrid.Columns="12"
+                            ext:ResponsiveGrid.ColumnsLg="6" 
+                            Orientation="Vertical"
+                            Spacing="12">
+                    <Border Classes="FakeContent" Height="200">
+                        <TextBlock Text="Half content panel left #1" />
+                    </Border>
+                    <Border Classes="FakeContent" Height="200">
+                        <TextBlock Text="Half content panel left #2" />
+                    </Border>
+                </StackPanel>
+                
+                <StackPanel ext:ResponsiveGrid.Columns="12"
+                            ext:ResponsiveGrid.ColumnsLg="6" 
+                            Orientation="Vertical"
+                            Spacing="12">
+                    <Border Classes="FakeContent" Height="200">
+                        <TextBlock Text="Half content panel right #1" />
+                    </Border>
+                    <Border Classes="FakeContent" Height="200">
+                        <TextBlock Text="Half content panel right #2" />
+                    </Border>
+                </StackPanel>
+            </ext:ResponsiveGrid>
+        </Border>
+    </ScrollViewer>
+</UserControl>

@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
         <TrimMode>copyused</TrimMode>
-        <BuiltInComInteropSupport>true</BuiltInComInteropSupport> 
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     </PropertyGroup>
     
     <ItemGroup>
@@ -20,6 +20,7 @@
         <PackageReference Include="Avalonia" Version="11.3.6" />
         <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.6" />
         <PackageReference Include="Avalonia.Desktop" Version="11.3.6" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.3.6" />
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.6" />
         <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.6" />
         <PackageReference Include="Bogus" Version="35.6.4" />
@@ -30,6 +31,7 @@
     <ItemGroup>
       <ProjectReference Include="..\RolandK.AvaloniaExtensions.DependencyInjection\RolandK.AvaloniaExtensions.DependencyInjection.csproj" />
       <ProjectReference Include="..\RolandK.AvaloniaExtensions.ExceptionHandling\RolandK.AvaloniaExtensions.ExceptionHandling.csproj" />
+      <ProjectReference Include="..\RolandK.AvaloniaExtensions.ResponsiveControls\RolandK.AvaloniaExtensions.ResponsiveControls.csproj" />
       <ProjectReference Include="..\RolandK.AvaloniaExtensions.TestApp.ExceptionViewer\RolandK.AvaloniaExtensions.TestApp.ExceptionViewer.csproj" />
       <ProjectReference Include="..\RolandK.AvaloniaExtensions\RolandK.AvaloniaExtensions.csproj" />
     </ItemGroup>

@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+        xmlns:views="clr-namespace:RolandK.AvaloniaExtensions.TestApp.Views"
         xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.TestApp"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RolandK.AvaloniaExtensions.TestApp.MainWindow"
@@ -31,8 +32,6 @@
                     </MenuItem>
                     
                     <MenuItem Header="Tests">
-                        <MenuItem Header="Recreate test data"
-                                  Command="{Binding Path=RecreateTestDataCommand}"/>
                         <MenuItem Header="Show dummy MessageBox"
                                   Command="{Binding Path=ShowDummyMessageBoxCommand}" />
                         
@@ -67,12 +66,14 @@
                     </MenuItem>
                 </Menu>
         
-                <Grid>
-                    <DataGrid ItemsSource="{Binding Path=DataRows}"
-                              IsReadOnly="True"
-                              AutoGenerateColumns="True"
-                              CanUserResizeColumns="True" />
-                </Grid>
+                <TabControl>
+                    <TabItem Header="DataTable">
+                        <views:DataTableView />
+                    </TabItem>
+                    <TabItem Header="Responsive TwoColumn">
+                        <views:ResponsiveTwoColumnView />
+                    </TabItem>
+                </TabControl>
             </DockPanel>
         </ext:MainWindowFrame.MainContentArea>
         

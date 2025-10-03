@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.ExceptionHandling;
 using RolandK.AvaloniaExtensions.TestApp.Services;
+using RolandK.AvaloniaExtensions.TestApp.Views;
 
 namespace RolandK.AvaloniaExtensions.TestApp;
 
@@ -42,5 +43,6 @@ public static class Program
                 
                 // ViewModels
                 services.AddTransient<MainWindowViewModel>();
+                services.AddTransient<DataTableViewModel>();
             });
 }
