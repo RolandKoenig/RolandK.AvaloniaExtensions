@@ -36,10 +36,10 @@
                             ext:ResponsiveGrid.ColumnsLg="6" 
                             Orientation="Vertical"
                             Spacing="12">
-                    <Border Classes="FakeContent" Height="300">
+                    <Border Classes="FakeContent" Height="200">
                         <TextBlock Text="Half content panel left #1" />
                     </Border>
-                    <Border Classes="FakeContent" Height="500">
+                    <Border Classes="FakeContent" Height="200">
                         <TextBlock Text="Half content panel left #2" />
                     </Border>
                 </StackPanel>
@@ -48,11 +48,11 @@
                             ext:ResponsiveGrid.ColumnsLg="6" 
                             Orientation="Vertical"
                             Spacing="12">
-                    <Border Classes="FakeContent" Height="300">
-                        <TextBlock Text="Half content panel left #1" />
+                    <Border Classes="FakeContent" Height="200">
+                        <TextBlock Text="Half content panel right #1" />
                     </Border>
-                    <Border Classes="FakeContent" Height="500">
-                        <TextBlock Text="Half content panel left #2" />
+                    <Border Classes="FakeContent" Height="200">
+                        <TextBlock Text="Half content panel right #2" />
                     </Border>
                 </StackPanel>
             </ext:ResponsiveGrid>
