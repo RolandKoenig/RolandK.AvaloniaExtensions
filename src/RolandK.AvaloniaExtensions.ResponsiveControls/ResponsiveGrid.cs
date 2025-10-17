@@ -205,8 +205,8 @@ public class ResponsiveGrid : BreakpointAwarePanel
         var fullBottomYPosition = 0d;
         for (var loop = 0; loop < _currentRows.Count; loop++)
         {
-            var actChild = _currentRows[loop];
-            var actRowHeight = actChild.Children.Max(x => x.ChildControl!.DesiredSize.Height);
+            var actChildRow = _currentRows[loop];
+            var actRowHeight = actChildRow.Children.Max(x => x.ChildControl!.DesiredSize.Height);
 
             if (loop > 0)
             {
@@ -214,7 +214,7 @@ public class ResponsiveGrid : BreakpointAwarePanel
             }
             
             ArrangeRowChildren(
-                actChild.Children,
+                actChildRow.Children,
                 fullBottomYPosition,
                 actRowHeight,
                 finalSize.Width);
@@ -283,6 +283,8 @@ public class ResponsiveGrid : BreakpointAwarePanel
         var breakpoint = this.CurrentBreakpoint;
         foreach (var actChild in this.Children)
         {
+            if(!actChild.IsVisible){ continue; }
+            
             var actChildColumnCount = GetColumnCount(actChild, breakpoint);
             var columnCountForCalculation = actChildColumnCount > 0
                 ? actChildColumnCount

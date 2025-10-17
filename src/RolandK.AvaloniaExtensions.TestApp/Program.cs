@@ -44,5 +44,6 @@ public static class Program
                 // ViewModels
                 services.AddTransient<MainWindowViewModel>();
                 services.AddTransient<DataTableViewModel>();
+                services.AddTransient<ResponsiveTwoColumnViewModel>();
             });
 }
