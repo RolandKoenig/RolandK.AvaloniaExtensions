@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:conv="clr-namespace:RolandK.AvaloniaExtensions.TestApp.Converters"
              xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.TestApp.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="RolandK.AvaloniaExtensions.TestApp.Views.ResponsiveTwoColumnView">
+             x:DataType="local:ResponsiveTwoColumnViewModel"
+             x:Class="RolandK.AvaloniaExtensions.TestApp.Views.ResponsiveTwoColumnView"
+             DataContext="{ext:CreateUsingDependencyInjection Type={x:Type local:ResponsiveTwoColumnViewModel}}">
     <UserControl.Styles>
         <Style Selector="Border.FakeContent">
             <Setter Property="CornerRadius" Value="10" />
@@ -17,45 +20,63 @@
         </Style>
     </UserControl.Styles>
     
-    <ScrollViewer VerticalScrollBarVisibility="Visible"
-                  HorizontalScrollBarVisibility="Disabled"
-                  Background="#333333">
-        <Border Padding="12">
-            <ext:ResponsiveGrid x:Name="ResponsiveRoot" ColumnSpacing="12" RowSpacing="12"
-                                VerticalAlignment="Top" 
-                                CurrentBreakpointChanged="OnResponsiveGrid_CurrentBreakpointChanged">
-                <Border ext:ResponsiveGrid.Columns="12">
-                    <TextBlock>
-                        Breakpoint: <Run Text="{Binding ElementName=ResponsiveRoot, Path=CurrentBreakpoint}" /><LineBreak />
-                        PseudoClasses: <Run x:Name="PseudoClassesText" 
-                                                    Text="{Binding ElementName=ResponsiveRoot, Path=Classes, UpdateSourceTrigger=Explicit, Converter={conv:EnumerableToConcatenatedStringConverter}}" />
-                    </TextBlock>
-                </Border>
-                
-                <StackPanel ext:ResponsiveGrid.Columns="12"
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" 
+                    Orientation="Horizontal">
+            <TextBlock Text="Visibility: "
+                       VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding FirstColumnVisible}" />
+            <CheckBox IsChecked="{Binding SecondColumnVisible}" />
+            <CheckBox IsChecked="{Binding ThirdColumnVisible}" />
+            <CheckBox IsChecked="{Binding FourthColumnVisible}" />
+        </StackPanel>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Background="#333333">
+            <Border Padding="12">
+                <ext:ResponsiveGrid x:Name="ResponsiveRoot" ColumnSpacing="12" RowSpacing="12"
+                                    VerticalAlignment="Top" 
+                                    CurrentBreakpointChanged="OnResponsiveGrid_CurrentBreakpointChanged">
+                    <Border ext:ResponsiveGrid.Columns="12">
+                        <TextBlock>
+                            Breakpoint: <Run Text="{Binding ElementName=ResponsiveRoot, Path=CurrentBreakpoint}" /><LineBreak />
+                            PseudoClasses: <Run x:Name="PseudoClassesText" 
+                                                        Text="{Binding ElementName=ResponsiveRoot, Path=Classes, UpdateSourceTrigger=Explicit, Converter={conv:EnumerableToConcatenatedStringConverter}}" />
+                        </TextBlock>
+                    </Border>
+                    
+                    <Border Classes="FakeContent" Height="200"
+                            ext:ResponsiveGrid.Columns="12"
                             ext:ResponsiveGrid.ColumnsLg="6" 
-                            Orientation="Vertical"
-                            Spacing="12">
-                    <Border Classes="FakeContent" Height="200">
-                        <TextBlock Text="Half content panel left #1" />
+                            IsVisible="{Binding FirstColumnVisible}">
+                        <TextBlock Text="Content panel #1" />
                     </Border>
-                    <Border Classes="FakeContent" Height="200">
-                        <TextBlock Text="Half content panel left #2" />
-                    </Border>
-                </StackPanel>
-                
-                <StackPanel ext:ResponsiveGrid.Columns="12"
+                    
+                    <Border Classes="FakeContent" Height="200"
+                            ext:ResponsiveGrid.Columns="12"
                             ext:ResponsiveGrid.ColumnsLg="6" 
-                            Orientation="Vertical"
-                            Spacing="12">
-                    <Border Classes="FakeContent" Height="200">
-                        <TextBlock Text="Half content panel right #1" />
+                            IsVisible="{Binding SecondColumnVisible}">
+                        <TextBlock Text="Content panel #2" />
                     </Border>
-                    <Border Classes="FakeContent" Height="200">
-                        <TextBlock Text="Half content panel right #2" />
+                    
+                    <Border Classes="FakeContent" Height="200"
+                            ext:ResponsiveGrid.Columns="12"
+                            ext:ResponsiveGrid.ColumnsLg="6" 
+                            IsVisible="{Binding ThirdColumnVisible}">
+                        <TextBlock Text="Content panel #3" />
                     </Border>
-                </StackPanel>
-            </ext:ResponsiveGrid>
-        </Border>
-    </ScrollViewer>
+                    
+                    <Border Classes="FakeContent" Height="200"
+                            ext:ResponsiveGrid.Columns="12"
+                            ext:ResponsiveGrid.ColumnsLg="6" 
+                            IsVisible="{Binding FourthColumnVisible}">
+                        <TextBlock Text="Content panel #4" />
+                    </Border>
+                    
+                </ext:ResponsiveGrid>
+            </Border>
+        </ScrollViewer>
+    </DockPanel>
+    
 </UserControl>
