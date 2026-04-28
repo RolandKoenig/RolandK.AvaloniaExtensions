@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Headless.XUnit;
+using Xunit;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls.Tests;
 
