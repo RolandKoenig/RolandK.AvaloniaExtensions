@@ -1,4 +1,5 @@
 using Avalonia.Markup.Xaml;
+using Avalonia.Metadata;
 
 namespace RolandK.AvaloniaExtensions.MarkupExtensions.PrimitiveValues;
 

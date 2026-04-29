@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
+using Xunit;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls.Tests;
 

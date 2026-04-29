@@ -1,3 +1,5 @@
+using Xunit;
+
 namespace RolandK.AvaloniaExtensions.ResponsiveControls.Tests;
 
 public class BreakpointTests

@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Styling;
 using Avalonia.Threading;
+using Xunit;
 
 namespace RolandK.AvaloniaExtensions.ResponsiveControls.Tests;
 

@@ -192,7 +192,7 @@ public class MvvmUserControl : UserControl, IViewServiceHost
         return DefaultViewServices.TryGetDefaultViewService(this, viewServiceType);
     }
     
-    private void OnDataContextAttachable_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void OnDataContextAttachable_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_currentlyAttachedViewModel == null) { return; }
         
