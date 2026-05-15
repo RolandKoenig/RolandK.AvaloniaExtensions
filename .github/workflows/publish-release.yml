@@ -27,12 +27,6 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Version: $VERSION"
           
-      - name: Update version
-        shell: pwsh
-        working-directory: ./scripts/workflows
-        run: ./set-version.ps1 `
-          -Version $env:VERSION
-          
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
@@ -51,7 +45,7 @@ jobs:
       - name: Build
         shell: pwsh
         working-directory: ./scripts/workflows
-        run: ./build.ps1
+        run: ./build.ps1 -Version $env:VERSION
 
       - name: Test
         shell: pwsh
@@ -61,12 +55,11 @@ jobs:
       - name: Pack
         shell: pwsh
         working-directory: ./scripts/workflows
-        run: ./pack.ps1
+        run: ./pack.ps1 -Version $env:VERSION
         
       - name: Publish
         shell: pwsh
         working-directory: ./scripts/workflows
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: ./publish.ps1 `
-          -Version $env:VERSION
+        run: ./publish.ps1
