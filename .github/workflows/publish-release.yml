@@ -1,0 +1,45 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+    
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Version: $VERSION"
+          
+      - name: Update version
+        shell: pwsh
+        working-directory: ./scripts
+        run: ./set-version.ps1  \
+          -Version ${VERSION}
+          
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: "./global.json"
+
+      - name: Restore
+        shell: pwsh
+        working-directory: ./scripts
+        run: ./restore.ps1
+        
+      - name: Build and test
+        shell: pwsh
+        working-directory: ./scripts
+        run: ./build-and-test.ps1
+
+      - name: Pack
+        shell: pwsh
+        working-directory: ./scripts
+        run: ./pack.ps1
