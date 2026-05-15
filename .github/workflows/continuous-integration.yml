@@ -2,11 +2,17 @@ name: Continuous integration
 
 on:
   push:
+    paths:
+      - .github/workflows/continuous-integration.yml
+      - scripts/workflows/**
+      - src/**
+      - Directory.Build.props
+      - global.json
   pull_request:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest   
     steps:
     - uses: actions/checkout@v2
@@ -16,7 +22,22 @@ jobs:
       with:
         global-json-file: "./global.json"
         
-    - name: Build and test
+    - name: Cleanup
       shell: pwsh
-      working-directory: ./scripts
-      run: ./BuildAndTest.ps1
+      working-directory: ./scripts/workflows
+      run: ./cleanup.ps1
+      
+    - name: Restore
+      shell: pwsh
+      working-directory: ./scripts/workflows
+      run: ./restore.ps1
+      
+    - name: Build
+      shell: pwsh
+      working-directory: ./scripts/workflows
+      run: ./build.ps1
+      
+    - name: Test
+      shell: pwsh
+      working-directory: ./scripts/workflows
+      run: ./test.ps1

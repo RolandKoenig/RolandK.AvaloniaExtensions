@@ -1,0 +1,1 @@
+dotnet test -c Release "../../RolandK.AvaloniaExtensions.sln"
