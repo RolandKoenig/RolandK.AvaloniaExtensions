@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)]
-    [string]$Version,
+    [string]$Version
 )
 
 $FilePath = "../Directory.Build.props";
