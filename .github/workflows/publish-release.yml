@@ -21,8 +21,7 @@ jobs:
       - name: Update version
         shell: pwsh
         working-directory: ./scripts
-        run: ./set-version.ps1  \
-          -Version ${VERSION}
+        run: ./set-version.ps1 -Version $env:VERSION
           
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
