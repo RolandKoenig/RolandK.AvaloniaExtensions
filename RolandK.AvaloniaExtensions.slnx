@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="src/RolandK.AvaloniaExtensions.DependencyInjection.Tests/RolandK.AvaloniaExtensions.DependencyInjection.Tests.csproj" />
+  <Project Path="src/RolandK.AvaloniaExtensions.DependencyInjection/RolandK.AvaloniaExtensions.DependencyInjection.csproj" />
+  <Project Path="src/RolandK.AvaloniaExtensions.ExceptionHandling/RolandK.AvaloniaExtensions.ExceptionHandling.csproj" />
+  <Project Path="src/RolandK.AvaloniaExtensions.ResponsiveControls.Tests/RolandK.AvaloniaExtensions.ResponsiveControls.Tests.csproj" />
+  <Project Path="src/RolandK.AvaloniaExtensions.ResponsiveControls/RolandK.AvaloniaExtensions.ResponsiveControls.csproj" />
+  <Project Path="src/RolandK.AvaloniaExtensions.TestApp.ExceptionViewer/RolandK.AvaloniaExtensions.TestApp.ExceptionViewer.csproj" />
+  <Project Path="src/RolandK.AvaloniaExtensions.TestApp/RolandK.AvaloniaExtensions.TestApp.csproj" />
+  <Project Path="src/RolandK.AvaloniaExtensions.Tests/RolandK.AvaloniaExtensions.Tests.csproj" />
+  <Project Path="src/RolandK.AvaloniaExtensions/RolandK.AvaloniaExtensions.csproj" />
+</Solution>

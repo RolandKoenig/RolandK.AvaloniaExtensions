@@ -1,1 +1,1 @@
-dotnet build -c Release "../../RolandK.AvaloniaExtensions.sln"
+dotnet build -c Release "../../RolandK.AvaloniaExtensions.slnx"

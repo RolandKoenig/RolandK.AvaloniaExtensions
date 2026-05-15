@@ -1,5 +1,5 @@
 # Cleanup solution
-dotnet clean "../../RolandK.AvaloniaExtensions.sln"
+dotnet clean "../../RolandK.AvaloniaExtensions.slnx"
 
 # Delete all bin and obj directories
 $directories = Get-ChildItem "../../src/" -include bin,obj -Recurse
