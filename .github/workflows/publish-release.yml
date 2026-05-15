@@ -5,11 +5,14 @@ on:
     tags:
       - '*.*.*'
     
+permissions: 
+  contents: read
+    
 jobs:
   build-test-and-publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Ensure tag points to main
         shell: pwsh
@@ -63,6 +66,7 @@ jobs:
       - name: Publish
         shell: pwsh
         working-directory: ./scripts/workflows
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: ./publish.ps1 `
-          -Version $env:VERSION `
-          -NugetApiKey ${{ secrets.NUGET_API_KEY }}
+          -Version $env:VERSION
