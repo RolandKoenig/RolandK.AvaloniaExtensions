@@ -1,13 +1,17 @@
 # definition of parameters
 Param(
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]$NugetApiKey,
-
-    [Parameter(Mandatory = $true)]
-    [string]$Version
 )
 
-dotnet nuget push ../../publish/RolandK.AvaloniaExtensions.$Version.nupkg --api-key $NugetApiKey --source https://api.nuget.org/v3/index.json
-dotnet nuget push ../../publish/RolandK.AvaloniaExtensions.DependencyInjection.$Version.nupkg --api-key $NugetApiKey --source https://api.nuget.org/v3/index.json
-dotnet nuget push ../../publish/RolandK.AvaloniaExtensions.ExceptionHandling.$Version.nupkg --api-key $NugetApiKey --source https://api.nuget.org/v3/index.json
-dotnet nuget push ../../publish/RolandK.AvaloniaExtensions.ResponsiveControls.$Version.nupkg --api-key $NugetApiKey --source https://api.nuget.org/v3/index.json
+# Get NuGet API key
+if ([string]::IsNullOrWhiteSpace($NugetApiKey)) {
+    $NugetApiKey = $env:NUGET_API_KEY
+}
+if ([string]::IsNullOrWhiteSpace($NugetApiKey)) {
+    Write-Error "NuGet API key was not provided. Pass -NugetApiKey or set the NUGET_API_KEY environment variable."
+    exit 1
+}
+
+# Push all packages in the publish directory
+dotnet nuget push ../../publish/*.nupkg --api-key $NugetApiKey --source https://api.nuget.org/v3/index.json

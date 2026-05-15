@@ -1,3 +1,7 @@
+param(
+	[string]$Version
+)
+
 # Clear previous artifacts
 if (Test-Path "../../publish")
 {
@@ -6,4 +10,9 @@ if (Test-Path "../../publish")
 }
 
 # Build nuget packages
-dotnet pack -c Release -o ../../publish "../../RolandK.AvaloniaExtensions.slnx"  /p:ContinuousIntegrationBuild=true /p:IncludeSymbols=true /p:EmbedUntrackedSources=true -p:SymbolPackageFormat=snupkg
+$argList = @("pack", "-c", "Release", "-o", "../../publish", "../../RolandK.AvaloniaExtensions.slnx", "/p:ContinuousIntegrationBuild=true", "/p:IncludeSymbols=true", "/p:EmbedUntrackedSources=true", "-p:SymbolPackageFormat=snupkg")
+if (![string]::IsNullOrWhiteSpace($Version)) {
+	$argList += "/p:Version=$Version"
+}
+
+dotnet @argList
