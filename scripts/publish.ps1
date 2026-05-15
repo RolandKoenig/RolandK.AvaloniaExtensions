@@ -1,6 +1,9 @@
 # definition of parameters
 Param(
+    [Parameter(Mandatory = $true)]
     [string]$NugetApiKey,
+
+    [Parameter(Mandatory = $true)]
     [string]$Version
 )
 

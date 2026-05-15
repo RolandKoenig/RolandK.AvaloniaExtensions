@@ -19,4 +19,4 @@ jobs:
     - name: Build and test
       shell: pwsh
       working-directory: ./scripts
-      run: ./BuildAndTest.ps1
+      run: ./build-and-test.ps1
