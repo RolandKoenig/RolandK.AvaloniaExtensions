@@ -3,7 +3,7 @@ param(
     [string]$Version
 )
 
-$FilePath = "../Directory.Build.props";
+$FilePath = "../../Directory.Build.props";
 
 $content = Get-Content $FilePath -Raw
 $updatedContent = $content -replace '<VersionPrefix>.*?</VersionPrefix>', "<VersionPrefix>$Version</VersionPrefix>"

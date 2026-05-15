@@ -6,11 +6,24 @@ on:
       - '*.*.*'
     
 jobs:
-  publish:
+  build-test-and-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
+      - name: Ensure tag points to main
+        shell: pwsh
+        run: |
+          git fetch origin main
+          
+          if (git merge-base --is-ancestor $env:GITHUB_SHA origin/main) {
+            Write-Host "Tag is on main"
+          }
+          else {
+            Write-Host "Tag is NOT on main, publish canceled"
+            exit 1
+          }
+      
       - name: Extract version from tag
         id: version
         run: |
@@ -29,17 +42,34 @@ jobs:
         with:
           global-json-file: "./global.json"
 
+      - name: Cleanup
+        shell: pwsh
+        working-directory: ./scripts/workflows
+        run: ./cleanup.ps1
+
       - name: Restore
         shell: pwsh
-        working-directory: ./scripts
+        working-directory: ./scripts/workflows
         run: ./restore.ps1
-        
-      - name: Build and test
+
+      - name: Build
         shell: pwsh
-        working-directory: ./scripts
-        run: ./build-and-test.ps1
+        working-directory: ./scripts/workflows
+        run: ./build.ps1
+
+      - name: Test
+        shell: pwsh
+        working-directory: ./scripts/workflows
+        run: ./test.ps1
 
       - name: Pack
         shell: pwsh
-        working-directory: ./scripts
+        working-directory: ./scripts/workflows
         run: ./pack.ps1
+        
+      - name: Publish
+        shell: pwsh
+        working-directory: ./scripts/workflows
+        run: ./publish.ps1 `
+          -Version $env:VERSION `
+          -NugetApiKey ${{ secrets.NUGET_API_KEY }}
