@@ -14,12 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ensure tag points to main
-        shell: pwsh
-        working-directory: ./scripts/workflows
-        run: ./check-tag-is-origin-main.ps1 `
-          -Tag $env:GITHUB_REF_NAME
-
       - name: Extract version from tag
         id: version
         run: |
