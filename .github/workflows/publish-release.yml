@@ -26,7 +26,7 @@ jobs:
           
       - name: Update version
         shell: pwsh
-        working-directory: ./scripts
+        working-directory: ./scripts/workflows
         run: ./set-version.ps1 `
           -Version $env:VERSION
           
