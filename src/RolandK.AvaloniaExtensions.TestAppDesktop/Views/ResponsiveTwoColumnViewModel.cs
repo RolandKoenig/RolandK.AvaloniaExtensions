@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace RolandK.AvaloniaExtensions.TestApp.Views;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.Views;
 
 public partial class ResponsiveTwoColumnViewModel : ObservableObject
 {

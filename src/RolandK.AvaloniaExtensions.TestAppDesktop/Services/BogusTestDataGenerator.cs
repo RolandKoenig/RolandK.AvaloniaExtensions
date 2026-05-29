@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using Bogus.DataSets;
-using RolandK.AvaloniaExtensions.TestApp.Data;
+using RolandK.AvaloniaExtensions.TestAppDesktop.Data;
 
-namespace RolandK.AvaloniaExtensions.TestApp.Services;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.Services;
 
 public class BogusTestDataGenerator : ITestDataGenerator
 {

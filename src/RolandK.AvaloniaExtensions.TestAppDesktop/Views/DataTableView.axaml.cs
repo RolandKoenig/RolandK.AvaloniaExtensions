@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace RolandK.AvaloniaExtensions.TestApp.Views;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.Views;
 
 public partial class DataTableView : UserControl
 {

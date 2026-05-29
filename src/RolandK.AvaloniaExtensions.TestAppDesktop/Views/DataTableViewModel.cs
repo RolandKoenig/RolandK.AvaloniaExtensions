@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RolandK.AvaloniaExtensions.TestApp.Data;
-using RolandK.AvaloniaExtensions.TestApp.Services;
+using RolandK.AvaloniaExtensions.TestAppDesktop.Data;
+using RolandK.AvaloniaExtensions.TestAppDesktop.Services;
 
-namespace RolandK.AvaloniaExtensions.TestApp.Views;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.Views;
 
 public partial class DataTableViewModel : ObservableObject
 {

@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Documents;
 using Avalonia.Data;
 
-namespace RolandK.AvaloniaExtensions.TestApp.Views;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.Views;
 
 public partial class ResponsiveTwoColumnView : UserControl
 {

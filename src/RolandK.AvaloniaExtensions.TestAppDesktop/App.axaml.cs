@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-namespace RolandK.AvaloniaExtensions.TestApp;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop;
 
 public partial class App : Application
 {

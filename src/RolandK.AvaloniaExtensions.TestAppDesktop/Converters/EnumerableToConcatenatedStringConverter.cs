@@ -6,7 +6,7 @@ using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml;
 
-namespace RolandK.AvaloniaExtensions.TestApp.Converters;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.Converters;
 
 public class EnumerableToConcatenatedStringConverter : MarkupExtension, IValueConverter
 {

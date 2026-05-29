@@ -1,7 +1,7 @@
 using Avalonia.Markup.Xaml;
 using RolandK.AvaloniaExtensions.ExceptionHandling;
 
-namespace RolandK.AvaloniaExtensions.TestApp.ExceptionViewer;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer;
 
 public partial class App : ExceptionViewerApplication
 {

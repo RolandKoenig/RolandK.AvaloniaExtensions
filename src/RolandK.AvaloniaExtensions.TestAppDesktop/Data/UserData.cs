@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace RolandK.AvaloniaExtensions.TestApp.Data;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.Data;
 
 public partial class UserData : ObservableObject
 {

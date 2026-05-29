@@ -3,11 +3,11 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RolandK.AvaloniaExtensions.TestApp.Data;
-using RolandK.AvaloniaExtensions.TestApp.Services;
+using RolandK.AvaloniaExtensions.TestAppDesktop.Data;
+using RolandK.AvaloniaExtensions.TestAppDesktop.Services;
 using RolandK.AvaloniaExtensions.ViewServices;
 
-namespace RolandK.AvaloniaExtensions.TestApp;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop;
 
 public partial class MainWindowViewModel : OwnViewModelBase
 {
@@ -22,7 +22,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
 
     public MainWindowViewModel()
     {
-        this.Title = "RolandK.AvaloniaExtension Test Application";
+        this.Title = "RolandK.AvaloniaExtension Desktop Test Application";
     }
 
     [RelayCommand(CanExecute = nameof(CanSetFullAppZoom))]

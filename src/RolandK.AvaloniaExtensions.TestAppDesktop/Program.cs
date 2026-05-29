@@ -3,10 +3,10 @@ using Avalonia;
 using Microsoft.Extensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.ExceptionHandling;
-using RolandK.AvaloniaExtensions.TestApp.Services;
-using RolandK.AvaloniaExtensions.TestApp.Views;
+using RolandK.AvaloniaExtensions.TestAppDesktop.Services;
+using RolandK.AvaloniaExtensions.TestAppDesktop.Views;
 
-namespace RolandK.AvaloniaExtensions.TestApp;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop;
 
 public static class Program
 {
@@ -25,8 +25,8 @@ public static class Program
         {
             GlobalErrorReporting.TryShowBlockingGlobalExceptionDialogInAnotherProcess(
                 ex,
-                ".RKAvaloniaExtensions.TestApp",
-                "RolandK.AvaloniaExtensions.TestApp.ExceptionViewer");
+                ".RKAvaloniaExtensions.TestAppDesktop",
+                "RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer");
             throw;
         }
     }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using RolandK.AvaloniaExtensions.TestApp.Data;
+using RolandK.AvaloniaExtensions.TestAppDesktop.Data;
 
-namespace RolandK.AvaloniaExtensions.TestApp.Services;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.Services;
 
 public interface ITestDataGenerator
 {

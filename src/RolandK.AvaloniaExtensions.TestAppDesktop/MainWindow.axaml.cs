@@ -3,7 +3,7 @@ using Avalonia.Interactivity;
 using RolandK.AvaloniaExtensions.ExceptionHandling;
 using RolandK.AvaloniaExtensions.Mvvm.Controls;
 
-namespace RolandK.AvaloniaExtensions.TestApp;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop;
 
 public partial class MainWindow : MvvmWindow
 {
@@ -35,7 +35,7 @@ public partial class MainWindow : MvvmWindow
             GlobalErrorReporting.TryShowBlockingGlobalExceptionDialogInAnotherProcess(
                 ex,
                 ".RKAvaloniaExtensions.TestApp",
-                "RolandK.AvaloniaExtensions.TestApp.ExceptionViewer");
+                "RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer");
         }
     }
 

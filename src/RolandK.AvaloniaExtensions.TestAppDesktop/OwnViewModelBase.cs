@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using RolandK.AvaloniaExtensions.Mvvm;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
-namespace RolandK.AvaloniaExtensions.TestApp;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop;
 
 #pragma warning disable CS0067
 

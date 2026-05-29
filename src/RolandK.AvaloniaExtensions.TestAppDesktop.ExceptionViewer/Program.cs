@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace RolandK.AvaloniaExtensions.TestApp.ExceptionViewer;
+namespace RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer;
 
 internal class Program
 {

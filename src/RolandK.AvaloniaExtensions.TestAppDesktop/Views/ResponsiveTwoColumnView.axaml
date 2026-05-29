@@ -2,12 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:conv="clr-namespace:RolandK.AvaloniaExtensions.TestApp.Converters"
+             xmlns:conv="clr-namespace:RolandK.AvaloniaExtensions.TestAppDesktop.Converters"
              xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
-             xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.TestApp.Views"
+             xmlns:local="clr-namespace:RolandK.AvaloniaExtensions.TestAppDesktop.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="local:ResponsiveTwoColumnViewModel"
-             x:Class="RolandK.AvaloniaExtensions.TestApp.Views.ResponsiveTwoColumnView"
+             x:Class="RolandK.AvaloniaExtensions.TestAppDesktop.Views.ResponsiveTwoColumnView"
              DataContext="{ext:CreateUsingDependencyInjection Type={x:Type local:ResponsiveTwoColumnViewModel}}">
     <UserControl.Styles>
         <Style Selector="Border.FakeContent">
