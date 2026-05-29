@@ -1,7 +1,7 @@
 # definition of parameters
 Param(
     [Parameter(Mandatory = $false)]
-    [string]$NugetApiKey,
+    [string]$NugetApiKey
 )
 
 # Get NuGet API key
