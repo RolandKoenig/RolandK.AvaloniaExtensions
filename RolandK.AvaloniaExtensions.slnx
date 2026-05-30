@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/TestAppDesktop/">
+    <Project Path="src/RolandK.AvaloniaExtensions.TestAppDesktop.Tests/RolandK.AvaloniaExtensions.TestAppDesktop.Tests.csproj" />
     <Project Path="src\RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer\RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer.csproj" />
     <Project Path="src\RolandK.AvaloniaExtensions.TestAppDesktop\RolandK.AvaloniaExtensions.TestAppDesktop.csproj" />
   </Folder>
