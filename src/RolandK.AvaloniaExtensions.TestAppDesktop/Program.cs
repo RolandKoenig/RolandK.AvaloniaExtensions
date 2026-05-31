@@ -1,10 +1,7 @@
 ﻿using System;
 using Avalonia;
-using Microsoft.Extensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.ExceptionHandling;
-using RolandK.AvaloniaExtensions.TestAppDesktop.Services;
-using RolandK.AvaloniaExtensions.TestAppDesktop.Views;
 
 namespace RolandK.AvaloniaExtensions.TestAppDesktop;
 
@@ -36,14 +33,5 @@ public static class Program
         => AppBuilder.Configure<App>()
             .LogToTrace()
             .UsePlatformDetect()
-            .UseDependencyInjection(services =>
-            {
-                // Services
-                services.AddSingleton<ITestDataGenerator, BogusTestDataGenerator>();
-                
-                // ViewModels
-                services.AddTransient<MainWindowViewModel>();
-                services.AddTransient<DataTableViewModel>();
-                services.AddTransient<ResponsiveTwoColumnViewModel>();
-            });
+            .UseDependencyInjection(AppServices.Configure);
 }

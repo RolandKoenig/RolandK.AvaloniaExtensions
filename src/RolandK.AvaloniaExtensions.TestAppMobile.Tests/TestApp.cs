@@ -3,25 +3,25 @@ using Avalonia.Headless;
 using RolandK.AvaloniaExtensions.DependencyInjection;
 
 [assembly: AvaloniaTestApplication(
-    typeof(RolandK.AvaloniaExtensions.TestAppDesktop.Tests.TestApp))]
+    typeof(RolandK.AvaloniaExtensions.TestAppMobile.Tests.TestApp))]
 
-namespace RolandK.AvaloniaExtensions.TestAppDesktop.Tests;
+namespace RolandK.AvaloniaExtensions.TestAppMobile.Tests;
 
 public static class TestApp
 {
     public static void Reset()
     {
-      
+        
     }
     
     public static AppBuilder BuildAvaloniaApp() => AppBuilder.Configure<App>()
         .WithInterFont()
-        .UseHeadless(new AvaloniaHeadlessPlatformOptions())
         .UseDependencyInjection(services =>
         {
             AppServices.Configure(services);
             
             // Modify services
             // ...
-        });
+        })
+        .UseHeadless(new AvaloniaHeadlessPlatformOptions());
 }

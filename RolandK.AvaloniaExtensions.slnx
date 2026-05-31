@@ -4,6 +4,17 @@
     <Project Path="src\RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer\RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer.csproj" />
     <Project Path="src\RolandK.AvaloniaExtensions.TestAppDesktop\RolandK.AvaloniaExtensions.TestAppDesktop.csproj" />
   </Folder>
+  <Folder Name="/TestAppMobile/">
+    <Project Path="src/RolandK.AvaloniaExtensions.TestAppMobile.Tests/RolandK.AvaloniaExtensions.TestAppMobile.Tests.csproj" />
+    <Project Path="src/RolandK.AvaloniaExtensions.TestAppMobile.Android/RolandK.AvaloniaExtensions.TestAppMobile.Android.csproj">
+      <Deploy />
+    </Project>
+    <Project Path="src/RolandK.AvaloniaExtensions.TestAppMobile.Desktop/RolandK.AvaloniaExtensions.TestAppMobile.Desktop.csproj" />
+    <Project Path="src/RolandK.AvaloniaExtensions.TestAppMobile.iOS/RolandK.AvaloniaExtensions.TestAppMobile.iOS.csproj">
+      <Deploy />
+    </Project>
+    <Project Path="src/RolandK.AvaloniaExtensions.TestAppMobile/RolandK.AvaloniaExtensions.TestAppMobile.csproj" />
+  </Folder>
   <Project Path="src/RolandK.AvaloniaExtensions.DependencyInjection.Tests/RolandK.AvaloniaExtensions.DependencyInjection.Tests.csproj" />
   <Project Path="src/RolandK.AvaloniaExtensions.DependencyInjection/RolandK.AvaloniaExtensions.DependencyInjection.csproj" />
   <Project Path="src/RolandK.AvaloniaExtensions.ExceptionHandling/RolandK.AvaloniaExtensions.ExceptionHandling.csproj" />

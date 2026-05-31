@@ -2,8 +2,13 @@
 
 namespace RolandK.AvaloniaExtensions.TestAppDesktop.Tests;
 
-public class UiTests
+public class MainWindowTests
 {
+    public MainWindowTests()
+    {
+        TestApp.Reset();
+    }
+    
     [AvaloniaFact]
     public void Test1()
     {
