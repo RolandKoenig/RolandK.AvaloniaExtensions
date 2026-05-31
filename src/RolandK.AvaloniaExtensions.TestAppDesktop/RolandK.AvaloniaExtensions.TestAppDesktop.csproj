@@ -23,8 +23,14 @@
         <PackageReference Include="Avalonia.Desktop" Version="12.0.4" />
         <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.4" />
         <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.4" />
+        <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.1">
+            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+        </PackageReference>
         <PackageReference Include="Bogus" Version="35.6.5" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.8" />
         <PackageReference Include="NSubstitute" Version="5.3.0" />
     </ItemGroup>
     

@@ -18,7 +18,10 @@
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="Bogus" Version="35.6.5" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.1"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.8" />
     </ItemGroup>
 
     <ItemGroup>

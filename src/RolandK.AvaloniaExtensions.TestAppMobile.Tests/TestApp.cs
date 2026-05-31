@@ -18,7 +18,7 @@ public static class TestApp
         .WithInterFont()
         .UseDependencyInjection(services =>
         {
-            AppServices.Configure(services);
+            services.AddAppServices();
             
             // Modify services
             // ...

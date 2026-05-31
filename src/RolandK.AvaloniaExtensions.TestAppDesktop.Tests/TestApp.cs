@@ -19,7 +19,7 @@ public static class TestApp
         .UseHeadless(new AvaloniaHeadlessPlatformOptions())
         .UseDependencyInjection(services =>
         {
-            AppServices.Configure(services);
+            services.AddAppServices();
             
             // Modify services
             // ...

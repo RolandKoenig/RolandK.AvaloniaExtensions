@@ -1,5 +1,7 @@
 ﻿using System;
 using Avalonia;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using RolandK.AvaloniaExtensions.DependencyInjection;
 
 namespace RolandK.AvaloniaExtensions.TestAppMobile.Desktop;
@@ -17,9 +19,15 @@ public static class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .UseDependencyInjection(AppServices.Configure)
+            .UseDependencyInjection(
+                services => services.AddAppServices(),
+                out var serviceProvider)
 #if DEBUG
-            .WithDeveloperTools()
+            .WithDeveloperTools(options =>
+            {
+                options.AddMicrosoftLoggerObservable(
+                    serviceProvider.GetRequiredService<ILoggerFactory>());
+            })
 #endif
             .WithInterFont()
             .LogToTrace();

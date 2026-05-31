@@ -1,5 +1,7 @@
 ﻿using System;
 using Avalonia;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.ExceptionHandling;
 
@@ -31,7 +33,16 @@ public static class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
+            .UseDependencyInjection(
+                services => services.AddAppServices(), 
+                out var serviceProvider)
+#if DEBUG
+            .WithDeveloperTools(options =>
+            {
+                options.AddMicrosoftLoggerObservable(
+                    serviceProvider.GetRequiredService<ILoggerFactory>());
+            })
+#endif
             .LogToTrace()
-            .UsePlatformDetect()
-            .UseDependencyInjection(AppServices.Configure);
+            .UsePlatformDetect();
 }
