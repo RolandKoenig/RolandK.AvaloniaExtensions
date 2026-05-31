@@ -1,0 +1,20 @@
+﻿{
+  "solution": {
+    "path": "RolandK.AvaloniaExtensions.slnx",
+    "projects": [
+      "src\\RolandK.AvaloniaExtensions.DependencyInjection.Tests\\RolandK.AvaloniaExtensions.DependencyInjection.Tests.csproj",
+      "src\\RolandK.AvaloniaExtensions.DependencyInjection\\RolandK.AvaloniaExtensions.DependencyInjection.csproj",
+      "src\\RolandK.AvaloniaExtensions.ExceptionHandling\\RolandK.AvaloniaExtensions.ExceptionHandling.csproj",
+      "src\\RolandK.AvaloniaExtensions.ResponsiveControls.Tests\\RolandK.AvaloniaExtensions.ResponsiveControls.Tests.csproj",
+      "src\\RolandK.AvaloniaExtensions.ResponsiveControls\\RolandK.AvaloniaExtensions.ResponsiveControls.csproj",
+      "src\\RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer\\RolandK.AvaloniaExtensions.TestAppDesktop.ExceptionViewer.csproj",
+      "src\\RolandK.AvaloniaExtensions.TestAppDesktop.Tests\\RolandK.AvaloniaExtensions.TestAppDesktop.Tests.csproj",
+      "src\\RolandK.AvaloniaExtensions.TestAppDesktop\\RolandK.AvaloniaExtensions.TestAppDesktop.csproj",
+      "src\\RolandK.AvaloniaExtensions.TestAppMobile.Desktop\\RolandK.AvaloniaExtensions.TestAppMobile.Desktop.csproj",
+      "src\\RolandK.AvaloniaExtensions.TestAppMobile.Tests\\RolandK.AvaloniaExtensions.TestAppMobile.Tests.csproj",
+      "src\\RolandK.AvaloniaExtensions.TestAppMobile\\RolandK.AvaloniaExtensions.TestAppMobile.csproj",
+      "src\\RolandK.AvaloniaExtensions.Tests\\RolandK.AvaloniaExtensions.Tests.csproj",
+      "src\\RolandK.AvaloniaExtensions\\RolandK.AvaloniaExtensions.csproj"
+    ]
+  }
+}

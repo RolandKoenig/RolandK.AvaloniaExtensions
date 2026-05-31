@@ -1,1 +1,1 @@
-dotnet restore "../../RolandK.AvaloniaExtensions.slnx"
+dotnet restore "../../RolandK.AvaloniaExtensions.desktop.slnf"

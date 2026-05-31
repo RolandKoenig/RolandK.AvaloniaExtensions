@@ -2,7 +2,7 @@ param(
     [string]$Version
 )
 
-$argList = @("build", "-c", "Release", "../../RolandK.AvaloniaExtensions.slnx")
+$argList = @("build", "-c", "Release", "../../RolandK.AvaloniaExtensions.desktop.slnf")
 if (![string]::IsNullOrWhiteSpace($Version)) {
     $argList += "/p:Version=$Version"
 }
