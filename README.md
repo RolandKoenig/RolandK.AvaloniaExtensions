@@ -288,12 +288,12 @@ The method GlobalErrorReporting.ShowGlobalExceptionDialogAsync opens following m
 ![Unhandled exception dialog](assets/screenshots/unhandled-exception-dialog.png)
 
 ## Global error handling for unhandled exceptions
-One draw back for Avalonia is that is does not offer something similar to 
-[Application.DispatcherUnhandledException](https://learn.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception)
-in WPF. Therefore, you have little change to react anyhow on errors which you never expected
-to happen. The only way you can handle these kind of exceptions is to wrap the entry point
-of your application with a global try-catch. In order to show an error dialog in this case
-I have the following solution.
+You can handle unhandled exceptions catched on Dispatcher level using Dispatcher.UnhandledException
+event. Nevertheless, there are also cases where this mechanism does not trigger 
+correctly - then, the Avalonia applications throws the exception up to the main entry point. 
+As a last line of defence, we can handle this kind of exceptions by wrapping the entry point
+of your application with a global try-catch. But what to do in the catch? Just logging? 
+To show an error dialog in this case I have the following solution.
 
 Add nuget package [RolandK.AvaloniaExtensions.ErrorHandling](https://www.nuget.org/packages/RolandK.AvaloniaExtensions.ExceptionHandling)
 
