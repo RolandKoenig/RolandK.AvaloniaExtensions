@@ -12,6 +12,12 @@
         ExtendClientAreaToDecorationsHint="True"
         DataContext="{ext:CreateUsingDependencyInjection {x:Type local:MainWindowViewModel}}"
         d:DataContext="{x:Static local:MainWindowViewModel.DesignViewModel}">
+    <Window.Styles>
+        <Style Selector="WindowDrawnDecorations /template/ Panel#PART_TitleTextPanel > TextBlock">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+    </Window.Styles>
+    
     <ext:MainWindowFrame FullAppZoom="{Binding FullAppZoom}">
         <ext:MainWindowFrame.CustomTitleArea>
             <TextBlock Text="{Binding Path=Title}" />
